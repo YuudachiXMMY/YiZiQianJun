@@ -1,4 +1,5 @@
 ﻿
 ##
 label start:
-    
+    "aaa"
+    return

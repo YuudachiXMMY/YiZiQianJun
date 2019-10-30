@@ -1,0 +1,14 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/screens.rpy", line 797: style property zoom is not known.
+    zoom 1.5
+        ^
+
+File "game/screens.rpy", line 801: style property zoom is not known.
+    zoom 1.5
+        ^
+
+Ren'Py Version: Ren'Py 7.3.4.596
+Mon Oct 28 22:04:21 2019

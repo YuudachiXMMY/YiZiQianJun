@@ -5,6 +5,48 @@
 init offset = -1
 
 
+image start_idle:
+    zoom 1.5
+    "gui/main_screen/字_start.png"
+
+image start_hover:
+    zoom 1.5
+    "gui/main_screen/字_start选中.png"
+
+image load_idle:
+    zoom 1.5
+    "gui/main_screen/字_load.png"
+
+image load_hover:
+    zoom 1.5
+    "gui/main_screen/字_load选中.png"
+
+image option_idle:
+    zoom 1.5
+    "gui/main_screen/字_option.png"
+
+image option_hover:
+    zoom 1.5
+    "gui/main_screen/字_option选中.png"
+
+image gallery_idle:
+    zoom 1.5
+    "gui/main_screen/字_gallery.png"
+
+image gallery_hover:
+    zoom 1.5
+    "gui/main_screen/字_gallery选中.png"
+
+image return_idle:
+    zoom 1.5
+    "gui/buttons/按钮_返回_未选.png"
+
+image return_hover:
+    zoom 1.5
+    "gui/buttons/按钮_返回_选中.png"
+
+
+
 ################################################################################
 ## Styles
 ################################################################################
@@ -291,6 +333,41 @@ style quick_button_text:
 
 screen navigation():
 
+    if main_menu:
+
+        add "gui/main_screen/back_ground.png" zoom 0.71
+        add "gui/main_screen/封面_02.png" ypos 520 zoom 1.5
+        add "gui/main_screen/封面_05.png" align(1.0,1.0) pos(1920,1080) zoom 1.5
+
+        imagebutton:
+            top_padding -65
+            pos( -15 , 550)
+            idle "start_idle"
+            hover "start_hover"
+            action ShowMenu("start")
+
+        imagebutton:
+            top_padding -65
+            pos( -10 , 650)
+            idle "load_idle"
+            hover "load_hover"
+            action ShowMenu("load")
+
+        imagebutton:
+            top_padding -65
+            pos( -5 , 750)
+            idle "option_idle"
+            hover "option_hover"
+            action ShowMenu("preferences")
+
+        imagebutton:
+            top_padding -65
+            pos( 0 , 850)
+            idle "gallery_idle"
+            hover "gallery_hover"
+            action ShowMenu("gallery")
+
+screen temp():
     vbox:
         style_prefix "navigation"
 
@@ -357,9 +434,9 @@ screen main_menu():
     ## This ensures that any other menu screen is replaced.
     tag menu
 
-    style_prefix "main_menu"
-
-    add gui.main_menu_background
+    add "gui/main_screen/back_ground.png" zoom 0.71
+    add "gui/main_screen/封面_02.png"
+    add "gui/main_screen/封面_05.png"
 
     ## This empty frame darkens the main menu.
     frame:
@@ -368,16 +445,6 @@ screen main_menu():
     ## The use statement includes another screen inside this one. The actual
     ## contents of the main menu are in the navigation screen.
     use navigation
-
-    if gui.show_name:
-
-        vbox:
-            text "[config.name!t]":
-                style "main_menu_title"
-
-            text "[config.version]":
-                style "main_menu_version"
-
 
 style main_menu_frame is empty
 style main_menu_vbox is vbox
@@ -424,7 +491,7 @@ screen game_menu(title, scroll=None, yinitial=0.0):
     if main_menu:
         add gui.main_menu_background
     else:
-        add gui.game_menu_background
+        add "main_screen/saving/通用底纹_大图底纹.png" zoom 1.67
 
     frame:
         style "game_menu_outer_frame"
@@ -586,106 +653,90 @@ style about_label_text:
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#save https://
 ## www.renpy.org/doc/html/screen_special.html#load
-
 screen save():
 
+    # This ensures that any other menu screen is replaced.
     tag menu
 
-    use file_slots(_("Save"))
-
+    use saves_slot(_("Save"))
 
 screen load():
 
+    # This ensures that any other menu screen is replaced.
     tag menu
 
-    use file_slots(_("Load"))
+    use saves_slot(_("Load"))
+
+screen saves_load_confirm(i):
+    modal True
+    zorder 200
+    frame:
+        add "gui/main_screen/saving/读取进度底图.png" align(0.5,0.5) pos(960,540)
+
+        imagebutton:
+            pos(700,700)
+            idle "gui/main_screen/saving/确定_未选.png"
+            hover "gui/main_screen/saving/确定_选中.png"
+            action FileAction(i)
+
+        imagebutton:
+            pos(500,500)
+            idle "gui/main_screen/saving/取消_未选.png"
+            hover "gui/main_screen/saving/取消_选中.png"
+            action Return()
 
 
-screen file_slots(title):
+screen saves_slot(title):
+    tag menu
+    frame:
+        add "gui/main_screen/saving/存档底纹_大图.png" zoom 1.5
+        add "gui/buttons/滚动条.png" zoom 1.5 yalign 0.5 pos(1750 , 540)
 
-    default page_name_value = FilePageNameInputValue(pattern=_("Page {}"), auto=_("Automatic saves"), quick=_("Quick saves"))
+        imagebutton:
+            yalign 0.5
+            pos(1728 , 540)
+            idle "return_idle"
+            hover "return_hover"
+            action Return()
 
-    use game_menu(title):
+        grid 3 2:
+            style_prefix "slot"
+            align(0.5,0.45)
+            xspacing 50
+            yspacing 70
 
-        fixed:
+            # Display ten file slots, numbered 1 - 10.
+            for i in range(1, 7):
 
-            ## This ensures the input will get the enter event before any of the
-            ## buttons do.
-            order_reverse True
+                # Each file slot is a button.
+                button:
+                    action FileAction(i)
+                    add "gui/main_screen/saving/存档底纹_中间.png" align(0.5,0) zoom 1.61
+                    add FileScreenshot(i) align(0.5,0) zoom 1.1
+                    text FileTime(i, format=_("{#file_time}%Y-%B-%d, %H:%M"), empty=_("empty slot")):
+                        color "#fff" xalign 0.5 ypos 280
+                    text FileSaveName(i)
+                    key "save_delete" action FileDelete(i)
 
-            ## The page name, which can be edited by clicking on a button.
-            button:
-                style "page_label"
 
-                key_events True
-                xalign 0.5
-                action page_name_value.Toggle()
+        # The buttons at the top allow the user to pick a
+        # page of files.
+        hbox:
+            yalign 1.0
+            xalign 0.5
+            textbutton _("<<")action FilePagePrevious()
+            textbutton _("A") action FilePage("auto")
 
-                input:
-                    style "page_label_text"
-                    value page_name_value
+            for i in range(1, 5):
+                textbutton str(i) action FilePage(i)
 
-            ## The grid of file slots.
-            grid gui.file_slot_cols gui.file_slot_rows:
-                style_prefix "slot"
-
-                xalign 0.5
-                yalign 0.5
-
-                spacing gui.slot_spacing
-
-                for i in range(gui.file_slot_cols * gui.file_slot_rows):
-
-                    $ slot = i + 1
-
-                    button:
-                        action FileAction(slot)
-
-                        has vbox
-
-                        add FileScreenshot(slot) xalign 0.5
-
-                        text FileTime(slot, format=_("{#file_time}%A, %B %d %Y, %H:%M"), empty=_("empty slot")):
-                            style "slot_time_text"
-
-                        text FileSaveName(slot):
-                            style "slot_name_text"
-
-                        key "save_delete" action FileDelete(slot)
-
-            ## Buttons to access other pages.
-            hbox:
-                style_prefix "page"
-
-                xalign 0.5
-                yalign 1.0
-
-                spacing gui.page_spacing
-
-                textbutton _("<") action FilePagePrevious()
-
-                if config.has_autosave:
-                    textbutton _("{#auto_page}A") action FilePage("auto")
-
-                if config.has_quicksave:
-                    textbutton _("{#quick_page}Q") action FilePage("quick")
-
-                ## range(1, 10) gives the numbers from 1 to 9.
-                for page in range(1, 10):
-                    textbutton "[page]" action FilePage(page)
-
-                textbutton _(">") action FilePageNext()
+            textbutton _(">>") action FilePageNext()
 
 
 style page_label is gui_label
 style page_label_text is gui_label_text
 style page_button is gui_button
 style page_button_text is gui_button_text
-
-style slot_button is gui_button
-style slot_button_text is gui_button_text
-style slot_time_text is slot_button_text
-style slot_name_text is slot_button_text
 
 style page_label:
     xpadding 75
@@ -702,11 +753,18 @@ style page_button:
 style page_button_text:
     properties gui.button_text_properties("page_button")
 
+style slot_button is gui_button
+style slot_button_text is gui_button_text
+style slot_time_text is slot_button_text
+style slot_name_text is slot_button_text
+
 style slot_button:
+    xmaximum 470 ymaximum 360
     properties gui.button_properties("slot_button")
 
 style slot_button_text:
     properties gui.button_text_properties("slot_button")
+
 
 
 ## Preferences screen ##########################################################
@@ -719,6 +777,60 @@ style slot_button_text:
 screen preferences():
 
     tag menu
+
+    frame:
+
+        add "gui/main_screen/preferences/设置2.jpg" pos(-10,-10) zoom 1.5
+
+        style_prefix "pb"
+
+        bar value Preference("music volume") pos(620,380)
+
+        bar value Preference("sound volume") pos(620,480)
+
+        bar value Preference("text speed") pos(620,580)
+
+        bar value Preference("auto-forward time") pos(620,680)
+
+
+style pb_slider:
+    xsize 1100
+
+style pb_button:
+    yalign 0.5
+
+style pb_vbox:
+    xsize 675
+
+# PC
+style pb:
+    ysize 38
+    base_bar Frame("gui/slider/horizontal_[prefix_]bar.png", Borders(6,6,6,6), tile=False)
+    thumb "gui/slider/horizontal_[prefix_]thumb.png"
+
+style pb_pref_slider:
+    variant "small"
+    xsize 900
+
+# Phone
+style pb:
+    variant "small"
+    ysize 39
+    base_bar Frame("gui/phone/slider/horizontal_[prefix_]bar.png",Borders(6,6,6,6), tile=False)
+    thumb "gui/phone/slider/horizontal_[prefix_]thumb.png"
+
+style pb_pref_vbox:
+    variant "small"
+    xsize None
+
+style slider_label is pref_label
+style slider_label_text is pref_label_text
+style slider_slider is gui_slider
+style slider_button is gui_button
+style slider_button_text is gui_button_text
+style slider_pref_vbox is pref_vbox
+
+screen temp_preferences():
 
     use game_menu(_("Preferences"), scroll="viewport"):
 

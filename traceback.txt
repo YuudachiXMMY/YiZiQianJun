@@ -1,0 +1,40 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+After initialization, but before game start.
+  File "renpy/common/00start.rpy", line 82, in _init_language
+    renpy.change_language(language)
+  File "game/screens.rpy", line 808, in <module>
+    base_bar Frame("gui/slider/horizontal_[prefix_]bar.png", Borders(6,6,6,6), tile=false)
+NameError: name 'false' is not defined
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\bootstrap.py", line 316, in bootstrap
+    renpy.main.main()
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\main.py", line 574, in main
+    run(restart)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\main.py", line 71, in run
+    renpy.translation.init_translation()
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\translation\__init__.py", line 558, in init_translation
+    renpy.store._init_language()  # @UndefinedVariable
+  File "renpy/common/00start.rpy", line 82, in _init_language
+    renpy.change_language(language)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\translation\__init__.py", line 638, in change_language
+    new_change_language(tl, language)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\translation\__init__.py", line 604, in new_change_language
+    i.apply()
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 2553, in apply
+    value = renpy.python.py_eval(expr)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 2039, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 2032, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/screens.rpy", line 808, in <module>
+    base_bar Frame("gui/slider/horizontal_[prefix_]bar.png", Borders(6,6,6,6), tile=false)
+NameError: name 'false' is not defined
+
+Windows-8-6.2.9200
+Ren'Py 7.3.4.596
+YiZiQianJun 1.0
+Tue Oct 29 16:44:27 2019
