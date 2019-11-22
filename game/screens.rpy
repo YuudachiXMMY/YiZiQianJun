@@ -4,48 +4,7 @@
 
 init offset = -1
 
-
-image start_idle:
-    zoom 1.5
-    "gui/main_screen/字_start.png"
-
-image start_hover:
-    zoom 1.5
-    "gui/main_screen/字_start选中.png"
-
-image load_idle:
-    zoom 1.5
-    "gui/main_screen/字_load.png"
-
-image load_hover:
-    zoom 1.5
-    "gui/main_screen/字_load选中.png"
-
-image option_idle:
-    zoom 1.5
-    "gui/main_screen/字_option.png"
-
-image option_hover:
-    zoom 1.5
-    "gui/main_screen/字_option选中.png"
-
-image gallery_idle:
-    zoom 1.5
-    "gui/main_screen/字_gallery.png"
-
-image gallery_hover:
-    zoom 1.5
-    "gui/main_screen/字_gallery选中.png"
-
-image return_idle:
-    zoom 1.5
-    "gui/buttons/按钮_返回_未选.png"
-
-image return_hover:
-    zoom 1.5
-    "gui/buttons/按钮_返回_选中.png"
-
-
+default persistent.Round1 = False
 
 ################################################################################
 ## Styles
@@ -330,42 +289,85 @@ style quick_button_text:
 ##
 ## This screen is included in the main and game menus, and provides navigation
 ## to other menus, and to start the game.
-
-screen navigation():
-
+screen main_menu_diy:
+    tag menu
     if main_menu:
 
-        add "gui/main_screen/back_ground.png" zoom 0.71
+        add "gui/main_screen/back_ground.png" zoom 0.71 at trans_navi_TO_mainmenu_diy_back_ground
         add "gui/main_screen/封面_02.png" ypos 520 zoom 1.5
         add "gui/main_screen/封面_05.png" align(1.0,1.0) pos(1920,1080) zoom 1.5
 
         imagebutton:
+            at trans_navi_TO_mainmenu_diy_button1
             top_padding -65
-            pos( -15 , 550)
+            ypos 550
             idle "start_idle"
             hover "start_hover"
             action ShowMenu("start")
 
         imagebutton:
+            at trans_navi_TO_mainmenu_diy_button2
             top_padding -65
-            pos( -10 , 650)
+            ypos 650
             idle "load_idle"
             hover "load_hover"
             action ShowMenu("load")
 
         imagebutton:
+            at trans_navi_TO_mainmenu_diy_button3
             top_padding -65
-            pos( -5 , 750)
+            ypos 750
             idle "option_idle"
             hover "option_hover"
             action ShowMenu("preferences")
 
         imagebutton:
+            at trans_navi_TO_mainmenu_diy_button4
             top_padding -65
-            pos( 0 , 850)
+            ypos 850
             idle "gallery_idle"
             hover "gallery_hover"
-            action ShowMenu("gallery")
+            action ShowMenu("cg_gallery")
+
+screen navigation():
+
+    if main_menu:
+        imagebutton:
+            idle "back_ground"
+            action ShowMenu("main_menu_diy")
+
+        # add "gui/main_screen/back_ground.png" zoom 0.71
+        # add "gui/main_screen/封面_02.png" ypos 520 zoom 1.5
+        # add "gui/main_screen/封面_05.png" align(1.0,1.0) pos(1920,1080) zoom 1.5
+
+        # imagebutton:
+        #     at tran1
+        #     top_padding -65
+        #     pos( -15 , 550)
+        #     idle "start_idle"
+        #     hover "start_hover"
+        #     action ShowMenu("start")
+
+        # imagebutton:
+        #     top_padding -65
+        #     pos( -10 , 650)
+        #     idle "load_idle"
+        #     hover "load_hover"
+        #     action ShowMenu("load")
+
+        # imagebutton:
+        #     top_padding -65
+        #     pos( -5 , 750)
+        #     idle "option_idle"
+        #     hover "option_hover"
+        #     action ShowMenu("preferences")
+
+        # imagebutton:
+        #     top_padding -65
+        #     pos( 0 , 850)
+        #     idle "gallery_idle"
+        #     hover "gallery_hover"
+        #     action ShowMenu("gallery")
 
 screen temp():
     vbox:
@@ -491,7 +493,7 @@ screen game_menu(title, scroll=None, yinitial=0.0):
     if main_menu:
         add gui.main_menu_background
     else:
-        add "main_screen/saving/通用底纹_大图底纹.png" zoom 1.67
+        add "main_screen/saving/通用底纹_大图底纹.png"
 
     frame:
         style "game_menu_outer_frame"
@@ -689,7 +691,7 @@ screen saves_load_confirm(i):
 screen saves_slot(title):
     tag menu
     frame:
-        add "gui/main_screen/saving/存档底纹_大图.png" zoom 1.5
+        add "gui/main_screen/saving/存档底纹_大图.png"
         add "gui/buttons/滚动条.png" zoom 1.5 yalign 0.5 pos(1750 , 540)
 
         imagebutton:
@@ -725,10 +727,17 @@ screen saves_slot(title):
             yalign 1.0
             xalign 0.5
             textbutton _("<<")action FilePagePrevious()
-            textbutton _("A") action FilePage("auto")
+            imagebutton auto "gui/main_screen/saving/num/0_%s.png" action FilePage("auto")
+            # textbutton _("A") action FilePage("auto")
+            # imagebutton auto "gui/main_screen/saving/num/1_%s.png" action FilePage(1)
+            # imagebutton auto "gui/main_screen/saving/num/2_%s.png" action FilePage(2)
+            # imagebutton auto "gui/main_screen/saving/num/3_%s.png" action FilePage(3)
+            # imagebutton auto "gui/main_screen/saving/num/4_%s.png" action FilePage(4)
+            # imagebutton auto "gui/main_screen/saving/num/5_%s.png" action FilePage(5)
 
-            for i in range(1, 5):
-                textbutton str(i) action FilePage(i)
+            for i in range(1, 6):
+                imagebutton auto "gui/main_screen/saving/num/" + str(i) + "_%s.png" action FilePage(i)
+                # textbutton str(i) action FilePage(i)
 
             textbutton _(">>") action FilePageNext()
 
@@ -773,62 +782,72 @@ style slot_button_text:
 ## themselves.
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#preferences
+screen delete_all_confirm():
+    modal True
+    add "gui/main_screen/preferences/弹出框_03.png" align(0.5,0.5) zoom 1.7
+
+    imagebutton:
+        align(0.6,0.6)
+        idle "cancel_idle"
+        hover "cancel_hover"
+        action Hide("delete_all_confirm", transition=Dissolve(0.5))
+
+    imagebutton:
+        align(0.4,0.6)
+        idle "yes_idle"
+        hover "yes_hover"
+        action SetVariable("persistent.Round1",False), Hide("delete_all_confirm", transition=Dissolve(0.5)), Return()
 
 screen preferences():
-
     tag menu
-
     frame:
 
-        add "gui/main_screen/preferences/设置2.jpg" pos(-10,-10) zoom 1.5
+        add "gui/main_screen/preferences/设置2.png"
+        #add "gui/buttons/滚动条.png" zoom 1.5 yalign 0.5 pos(1750 , 540)
+
+        imagebutton:
+            pos(1715 , 210)
+            idle "delete_idle"
+            hover "delete_hover"
+            action Show("delete_all_confirm", transition=Dissolve(0.5))
+            # action SetVariable("persistent.Round1",False)
+
+        imagebutton:
+            pos(1715 , 780)
+            idle "return_idle"
+            hover "return_hover"
+            action Return()
 
         style_prefix "pb"
 
-        bar value Preference("music volume") pos(620,380)
+        bar value Preference("music volume") ypos 390
 
-        bar value Preference("sound volume") pos(620,480)
+        bar value Preference("sound volume") ypos 510
 
-        bar value Preference("text speed") pos(620,580)
+        bar value Preference("text speed") ypos 630
 
-        bar value Preference("auto-forward time") pos(620,680)
-
-
-style pb_slider:
-    xsize 1100
-
-style pb_button:
-    yalign 0.5
-
-style pb_vbox:
-    xsize 675
-
+        bar value Preference("auto-forward time") ypos 750
 # PC
-style pb:
-    ysize 38
-    base_bar Frame("gui/slider/horizontal_[prefix_]bar.png", Borders(6,6,6,6), tile=False)
-    thumb "gui/slider/horizontal_[prefix_]thumb.png"
-
-style pb_pref_slider:
-    variant "small"
-    xsize 900
+style pb_slider:
+    xpos 660
+    xsize 1000 ysize 50
+    left_bar "horizontal_left_bar"
+    right_bar "horizontal_right_bar"
+    thumb "thumb_idle"
 
 # Phone
-style pb:
+style pb_slider:
     variant "small"
-    ysize 39
-    base_bar Frame("gui/phone/slider/horizontal_[prefix_]bar.png",Borders(6,6,6,6), tile=False)
-    thumb "gui/phone/slider/horizontal_[prefix_]thumb.png"
+    left_bar "horizontal_left_bar"
+    right_bar "horizontal_right_bar"
+    thumb "thumb_idle"
 
-style pb_pref_vbox:
-    variant "small"
-    xsize None
-
-style slider_label is pref_label
-style slider_label_text is pref_label_text
-style slider_slider is gui_slider
-style slider_button is gui_button
-style slider_button_text is gui_button_text
-style slider_pref_vbox is pref_vbox
+# style slider_label is pref_label
+# style slider_label_text is pref_label_text
+# style slider_slider is gui_slider
+# style slider_button is gui_button
+# style slider_button_text is gui_button_text
+# style slider_pref_vbox is pref_vbox
 
 screen temp_preferences():
 
@@ -1628,3 +1647,212 @@ style slider_pref_vbox:
 style slider_pref_slider:
     variant "small"
     xsize 900
+
+
+###################################################
+##Gallery
+screen gallery_navigation:
+
+    if renpy.get_screen("cg_indi") or renpy.get_screen("cg_achievement") or renpy.get_screen("cg_relationship") or renpy.get_screen("cg_relationship_help") or renpy.get_screen("cg_gallery") or renpy.get_screen("cg_materials"):
+        zorder 100
+
+        imagebutton:
+            pos ( 110 , 180)
+            idle "gui/gallery/button_frame.png"
+            action ShowMenu("cg_indi")
+        imagebutton:
+            pos ( 110 , 330)
+            idle "gui/gallery/button_frame.png"
+            action ShowMenu("cg_achievement")
+        imagebutton:
+            pos ( 110 , 480)
+            idle "gui/gallery/button_frame.png"
+            action ShowMenu("cg_relationship")
+        imagebutton:
+            pos ( 110 , 630)
+            idle "gui/gallery/button_frame.png"
+            action ShowMenu("cg_gallery")
+        imagebutton:
+            pos ( 110 , 780)
+            idle "gui/gallery/button_frame.png"
+            action ShowMenu("cg_materials")
+
+        imagebutton:
+            yalign 0.5
+            pos(1728 , 540)
+            idle "return_idle"
+            hover "return_hover"
+            action ShowMenu("main_menu_diy")
+            
+screen cg_indi:
+    tag menu
+
+    #on "show" action ShowMenu("gallery_navigation")
+
+    add "gui/gallery/indi/bg.png"
+    add "gui/gallery/indi/title.png" pos(0,0)
+
+    add "cg_indi_prop" pos(365 , 50)
+
+    use gallery_navigation
+
+
+screen cg_achievement:
+
+    pass
+
+screen cg_relationship:
+    tag menu
+
+    #on "show" action ShowMenu("gallery_navigation")
+
+    add "gui/gallery/relation/bg.png"
+
+    use gallery_navigation
+
+screen cg_relationship_help(cha , name_lock , lock , val):
+
+    if lock == false:
+        add "gui/gallery/relation/cha_lock.png"
+    else:
+        add "gui/gallery/relation/" + cha + ".png"
+        if name_lock:
+            pass
+        else:
+            pass
+
+screen cg_gallery:
+    tag menu
+
+    #on "show" action ShowMenu("gallery_navigation")
+    
+    add "gui/gallery/cg/bg.png"
+
+    use gallery_navigation
+
+    # grid 3 3:
+    #     pass
+
+screen cg_materials:
+
+    pass
+
+########################################################
+##
+transform trans_navi_TO_mainmenu_diy_back_ground:
+    alpha 0.7
+    linear 1.5 alpha 1.0
+
+transform trans_navi_TO_mainmenu_diy_comp:
+    alpha 0.0
+    linear 1.5 alpha 1.0
+
+# transform trans_navi_TO_mainmenu_diy_:
+
+transform trans_navi_TO_mainmenu_diy_button1:
+    alpha 0.0 xpos -100
+    linear 1.5 alpha 1.0 xpos -15
+
+transform trans_navi_TO_mainmenu_diy_button2:
+    alpha 0.0 xpos -100
+    linear 1.5 alpha 1.0 xpos -10
+
+transform trans_navi_TO_mainmenu_diy_button3:
+    alpha 0.0 xpos -100
+    linear 1.5 alpha 1.0 xpos -5
+
+transform trans_navi_TO_mainmenu_diy_button4:
+    alpha 0.0 xpos -100
+    linear 1.5 alpha 1.0 xpos 0
+
+##
+image back_ground:
+    zoom 0.71 alpha 0.67
+    "gui/main_screen/back_ground.png"
+    linear 2.0 alpha 1.0
+    linear 2.0 alpha 0.67
+    repeat
+
+##
+image start_idle:
+    zoom 1.5
+    "gui/main_screen/字_start.png"
+
+image start_hover:
+    zoom 1.5
+    "gui/main_screen/字_start选中.png"
+
+image load_idle:
+    zoom 1.5
+    "gui/main_screen/字_load.png"
+
+image load_hover:
+    zoom 1.5
+    "gui/main_screen/字_load选中.png"
+
+image option_idle:
+    zoom 1.5
+    "gui/main_screen/字_option.png"
+
+image option_hover:
+    zoom 1.5
+    "gui/main_screen/字_option选中.png"
+
+image gallery_idle:
+    zoom 1.5
+    "gui/main_screen/字_gallery.png"
+
+image gallery_hover:
+    zoom 1.5
+    "gui/main_screen/字_gallery选中.png"
+
+image yes_idle:
+    zoom 1.5
+    "gui/main_screen/saving/确定_未选.png"
+
+image yes_hover:
+    zoom 1.5
+    "gui/main_screen/saving/确定_选中.png"
+
+image cancel_idle:
+    zoom 1.5
+    "gui/main_screen/saving/取消_未选.png"
+
+image cancel_hover:
+    zoom 1.5
+    "gui/main_screen/saving/取消_选中.png"
+
+image return_idle:
+    zoom 1.5
+    "gui/buttons/按钮_返回_未选.png"
+
+image return_hover:
+    zoom 1.5
+    "gui/buttons/按钮_返回_选中.png"
+
+image delete_idle:
+    zoom 1.5
+    "gui/buttons/按钮_垃圾桶_未选.png"
+
+image delete_hover:
+    zoom 1.5
+    "gui/buttons/按钮_垃圾桶_选中.png"
+
+image thumb_idle:
+    zoom 1.5
+    "gui/slider/horizontal_idle_thumb.png"
+
+image horizontal_left_bar:
+    yzoom 1.5
+    xzoom 2.5
+    "gui/slider/horizontal_left_bar.png"
+
+image horizontal_right_bar:
+    yzoom 1.5
+    xzoom 2.5
+    "gui/slider/horizontal_right_bar.png"
+
+image cg_indi_prop:
+    zoom 1.5
+    "gui/gallery/indi/prop.png"
+##

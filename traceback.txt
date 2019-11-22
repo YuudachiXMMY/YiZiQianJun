@@ -1,40 +1,59 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-After initialization, but before game start.
-  File "renpy/common/00start.rpy", line 82, in _init_language
-    renpy.change_language(language)
-  File "game/screens.rpy", line 808, in <module>
-    base_bar Frame("gui/slider/horizontal_[prefix_]bar.png", Borders(6,6,6,6), tile=false)
-NameError: name 'false' is not defined
+While running game code:
+  File "game/screens.rpy", line 1654, in execute
+    screen gallery_navigation:
+  File "game/screens.rpy", line 1654, in keywords
+    screen gallery_navigation:
+  File "game/screens.rpy", line 1656, in keywords
+    if cg_indi or cg_achievement or cg_relationship or cg_relationship_help or cg_gallery or cg_materials:
+NameError: name 'cg_indi' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\bootstrap.py", line 316, in bootstrap
-    renpy.main.main()
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\main.py", line 574, in main
-    run(restart)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\main.py", line 71, in run
-    renpy.translation.init_translation()
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\translation\__init__.py", line 558, in init_translation
-    renpy.store._init_language()  # @UndefinedVariable
-  File "renpy/common/00start.rpy", line 82, in _init_language
-    renpy.change_language(language)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\translation\__init__.py", line 638, in change_language
-    new_change_language(tl, language)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\translation\__init__.py", line 604, in new_change_language
-    i.apply()
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 2553, in apply
-    value = renpy.python.py_eval(expr)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 2039, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 2032, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "game/screens.rpy", line 808, in <module>
-    base_bar Frame("gui/slider/horizontal_[prefix_]bar.png", Borders(6,6,6,6), tile=false)
-NameError: name 'false' is not defined
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
+    python hide:
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 914, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 2008, in py_exec_bytecode
+    exec bytecode in globals, locals
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in <module>
+    python hide:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 35, in _execute_python_hide
+    ui.interact()
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ui.py", line 297, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 2702, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, **kwargs)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3094, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 430, in visit_all
+    callback(self)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3094, in <lambda>
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 440, in per_interact
+    self.update()
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 625, in update
+    self.screen.function(**self.scope)
+  File "game/screens.rpy", line 1654, in execute
+    screen gallery_navigation:
+  File "game/screens.rpy", line 1654, in keywords
+    screen gallery_navigation:
+  File "game/screens.rpy", line 1656, in keywords
+    if cg_indi or cg_achievement or cg_relationship or cg_relationship_help or cg_gallery or cg_materials:
+  File "<screen language>", line 1656, in <module>
+NameError: name 'cg_indi' is not defined
 
 Windows-8-6.2.9200
 Ren'Py 7.3.4.596
 YiZiQianJun 1.0
-Tue Oct 29 16:44:27 2019
+Fri Nov 22 11:08:24 2019
