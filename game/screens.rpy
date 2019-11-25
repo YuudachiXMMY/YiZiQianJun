@@ -1690,9 +1690,11 @@ screen cg_indi:
     #on "show" action ShowMenu("gallery_navigation")
 
     add "gui/gallery/indi/bg.png"
-    add "gui/gallery/indi/title.png" pos(0,0)
-
     add "cg_indi_prop" pos(365 , 50)
+    add "cg_indi_title" pos(265 , 70)
+
+    # grid 2 3:
+    #     text _("")
 
     use gallery_navigation
 
@@ -1855,4 +1857,8 @@ image horizontal_right_bar:
 image cg_indi_prop:
     zoom 1.5
     "gui/gallery/indi/prop.png"
+
+image cg_indi_title:
+    zoom 1.5
+    "gui/gallery/indi/title.png" 
 ##

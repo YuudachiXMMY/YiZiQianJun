@@ -81,4 +81,8 @@ image horizontal_right_bar:
 image cg_indi_prop:
     zoom 1.5
     "gui/gallery/indi/prop.png"
+
+image cg_indi_title:
+    zoom 1.5
+    "gui/gallery/indi/title.png" 
 ##
