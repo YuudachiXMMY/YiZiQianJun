@@ -1,5 +1,45 @@
 
-## Screen
+## 图片与动画 #####################################################################
+##
+
+## 动画
+transform trans_navi_TO_mainmenu_diy_back_ground:
+    alpha 0.7
+    linear 1.5 alpha 1.0
+
+transform trans_navi_TO_mainmenu_diy_comp:
+    alpha 0.0
+    linear 1.5 alpha 1.0
+
+# transform trans_navi_TO_mainmenu_diy_:
+
+transform trans_navi_TO_mainmenu_diy_button1:
+    alpha 0.0 xpos -100
+    linear 1.5 alpha 1.0 xpos -15
+
+transform trans_navi_TO_mainmenu_diy_button2:
+    alpha 0.0 xpos -100
+    linear 1.5 alpha 1.0 xpos -10
+
+transform trans_navi_TO_mainmenu_diy_button3:
+    alpha 0.0 xpos -100
+    linear 1.5 alpha 1.0 xpos -5
+
+transform trans_navi_TO_mainmenu_diy_button4:
+    alpha 0.0 xpos -100
+    linear 1.5 alpha 1.0 xpos 0
+
+
+## 背景
+image back_ground:
+    zoom 0.71 alpha 0.67
+    "gui/main_screen/back_ground.png"
+    linear 2.0 alpha 1.0
+    linear 2.0 alpha 0.67
+    repeat
+
+
+## GUI
 image start_idle:
     zoom 1.5
     "gui/main_screen/字_start.png"
@@ -84,5 +124,20 @@ image cg_indi_prop:
 
 image cg_indi_title:
     zoom 1.5
-    "gui/gallery/indi/title.png" 
-##
+    "gui/gallery/indi/title.png"
+
+image previous_idle:
+    zoom 1.5
+    "gui/buttons/按钮_后退_未选.png"
+
+image previous_hover:
+    zoom 1.5
+    "gui/buttons/按钮_后退_选中.png"
+
+image next_idle:
+    zoom 1.5
+    "gui/buttons/按钮_前进_未选.png"
+
+image next_hover:
+    zoom 1.5
+    "gui/buttons/按钮_前进_选中.png"

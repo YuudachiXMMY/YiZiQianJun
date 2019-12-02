@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/screens.rpy", line 1697: Line is indented, but the preceding grid statement does not expect a block. Please check this line's indentation.
-    text _("")
-    ^
+File "game/screens.rpy", line 764: screen expects a non-empty block.
+    screen delete_all_confirm():
+                                ^
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Fri Nov 22 13:53:44 2019
+Mon Dec 02 10:43:39 2019
