@@ -692,7 +692,6 @@ style slot_button_text:
 screen preferences():
 
     tag menu
-
     
     frame:
 
@@ -1188,6 +1187,106 @@ style notify_frame:
 
 style notify_text:
     properties gui.text_properties("notify")
+
+
+
+## Gallery ####################################################################
+##
+
+screen gallery_navigation:
+
+    if renpy.get_screen("cg_indi") or renpy.get_screen("cg_achievement") or renpy.get_screen("cg_relationship") or renpy.get_screen("cg_relationship_help") or renpy.get_screen("cg_gallery") or renpy.get_screen("cg_materials"):
+        
+        zorder 100
+
+        imagebutton:
+            pos ( 110 , 180)
+            idle "gui/gallery/button_frame.png"
+            action ShowMenu("cg_indi")
+        imagebutton:
+            pos ( 110 , 330)
+            idle "gui/gallery/button_frame.png"
+            action ShowMenu("cg_achievement")
+        imagebutton:
+            pos ( 110 , 480)
+            idle "gui/gallery/button_frame.png"
+            action ShowMenu("cg_relationship")
+        imagebutton:
+            pos ( 110 , 630)
+            idle "gui/gallery/button_frame.png"
+            action ShowMenu("cg_gallery")
+        imagebutton:
+            pos ( 110 , 780)
+            idle "gui/gallery/button_frame.png"
+            action ShowMenu("cg_materials")
+
+        imagebutton:
+            yalign 0.5
+            pos(1728 , 540)
+            idle "return_idle"
+            hover "return_hover"
+            action ShowMenu("main_menu_actual")
+
+
+screen cg_indi:
+
+    tag menu
+
+    #on "show" action ShowMenu("gallery_navigation")
+
+    add "gui/gallery/indi/bg.png"
+    add "cg_indi_prop" pos(365 , 50)
+    add "cg_indi_title" pos(265 , 70)
+
+    # grid 2 3:
+    #     text _("")
+
+    use gallery_navigation
+
+
+screen cg_achievement:
+    pass
+
+
+screen cg_relationship:
+    
+    tag menu
+
+    #on "show" action ShowMenu("gallery_navigation")
+
+    add "gui/gallery/relation/bg.png"
+
+    use gallery_navigation
+
+
+screen cg_relationship_help(cha , name_lock , lock , val):
+
+    if lock == false:
+        add "gui/gallery/relation/cha_lock.png"
+    else:
+        add "gui/gallery/relation/" + cha + ".png"
+        if name_lock:
+            pass
+        else:
+            pass
+
+
+screen cg_gallery:
+
+    tag menu
+
+    #on "show" action ShowMenu("gallery_navigation")
+    
+    add "gui/gallery/cg/bg.png"
+
+    use gallery_navigation
+
+    # grid 3 3:
+    #     pass
+
+
+screen cg_materials:
+    pass
 
 
 ## NVL 模式屏幕 ####################################################################
