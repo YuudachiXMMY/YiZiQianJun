@@ -1251,7 +1251,7 @@ screen cg_achievement:
 screen cg_relationship:
     
     tag menu
-
+    
     #on "show" action ShowMenu("gallery_navigation")
 
     add "gui/gallery/relation/bg.png"
