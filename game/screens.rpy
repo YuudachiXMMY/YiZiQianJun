@@ -114,6 +114,13 @@ screen say(who, what):
     if not renpy.variant("small"):
         add SideImage() xalign 0.0 yalign 1.0
 
+    fixed:
+
+        imagebutton:
+            align(1.0, 1.0)
+            idle "printer_idle"
+            hover "printer_hover"
+            action ShowMenu("cg_indi")
 
 ## 通过 Character 对象使名称框可用于样式化。
 init python:
@@ -131,10 +138,11 @@ style namebox_label is say_label
 style window:
     xalign 0.5
     xfill True
+    xsize 1760
     yalign gui.textbox_yalign
     ysize gui.textbox_height
 
-    background Image("gui/textbox.png", xalign=0.5, yalign=1.0)
+    background "textbox"
 
 style namebox:
     xpos gui.name_xpos
@@ -241,20 +249,78 @@ screen quick_menu():
 
     if quick_menu:
 
-        hbox:
-            style_prefix "quick"
+        on "show" action Show("quick_menu_info")
 
-            xalign 0.5
-            yalign 1.0
+        imagebutton:
+            xalign 0.5 pos(1770, -10)
+            idle "kean_idle"
+            hover "kean_hover"
+            action Show("quick_menu_expand", transition=Dissolve(0.1))
 
-            textbutton _("回退") action Rollback()
-            textbutton _("历史") action ShowMenu('history')
-            textbutton _("快进") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("自动") action Preference("auto-forward", "toggle")
-            textbutton _("保存") action ShowMenu('save')
-            textbutton _("快存") action QuickSave()
-            textbutton _("快读") action QuickLoad()
-            textbutton _("设置") action ShowMenu('preferences')
+
+screen quick_menu_expand():
+
+    zorder 101
+
+    if quick_menu:
+
+        imagebutton:
+            xalign 0.5 pos(1770, 160)
+            idle "kean_save_idle"
+            hover "kean_save_hover"
+            action ShowMenu('save')
+        
+        imagebutton:
+            xalign 0.5 pos(1770, 260)
+            idle "kean_load_idle"
+            hover "kean_load_hover"
+            action ShowMenu('load')
+
+        imagebutton:
+            xalign 0.5 pos(1770, 360)
+            idle "kean_auto_idle"
+            hover "kean_auto_hover"
+            action Preference("auto-forward", "toggle")
+        
+        imagebutton:
+            xalign 0.5 pos(1770, 460)
+            idle "kean_preference_idle"
+            hover "kean_preference_hover"
+            action ShowMenu('preferences')
+
+        imagebutton:
+            xalign 0.5 pos(1770, 560)
+            idle "kean_return_idle"
+            hover "kean_return_hover"
+            action Hide("quick_menu_expand", transition=Dissolve(0.1))
+
+
+screen quick_menu_info():
+
+    zorder 100
+
+    if quick_menu:
+        
+        imagebutton:
+            pos(0, 0)
+            idle "explore_idle"
+            hover "explore_hover"
+            action Show("quick_menu_info_expand")
+
+screen quick_menu_info_expand():
+
+    modal True
+    zorder 101
+
+    if quick_menu:
+
+        imagebutton:
+            xalign 0.5 pos(1770, 560)
+            idle "return_idle"
+            hover "return_hover"
+            action Hide("quick_menu_info_expand", transition=Dissolve(0.5))
+
+
 
 
 ## 此代码确保只要玩家没有明确隐藏界面，就会在游戏中显示“quick_menu”屏幕。
@@ -262,15 +328,6 @@ init python:
     config.overlay_screens.append("quick_menu")
 
 default quick_menu = True
-
-style quick_button is default
-style quick_button_text is button_text
-
-style quick_button:
-    properties gui.button_properties("quick_button")
-
-style quick_button_text:
-    properties gui.button_text_properties("quick_button")
 
 
 ################################################################################
@@ -1193,7 +1250,9 @@ style notify_text:
 ## Gallery ####################################################################
 ##
 
-screen gallery_navigation:
+screen gallery_navigation():
+
+    tag menu
 
     if renpy.get_screen("cg_indi") or renpy.get_screen("cg_achievement") or renpy.get_screen("cg_relationship") or renpy.get_screen("cg_relationship_help") or renpy.get_screen("cg_gallery") or renpy.get_screen("cg_materials"):
         
@@ -1225,14 +1284,13 @@ screen gallery_navigation:
             pos(1728 , 540)
             idle "return_idle"
             hover "return_hover"
-            action ShowMenu("main_menu_actual")
+            action Return()
+            # action ShowMenu("main_menu_actual")
 
 
-screen cg_indi:
+screen cg_indi():
 
     tag menu
-
-    #on "show" action ShowMenu("gallery_navigation")
 
     add "gui/gallery/indi/bg.png"
     add "cg_indi_prop" pos(365 , 50)
@@ -1244,15 +1302,18 @@ screen cg_indi:
     use gallery_navigation
 
 
-screen cg_achievement:
-    pass
+screen cg_achievement():
+
+    tag menu
+
+    text _("Achievement") pos(500, 500) color "#fff"
+
+    use gallery_navigation
 
 
-screen cg_relationship:
+screen cg_relationship():
     
     tag menu
-    
-    #on "show" action ShowMenu("gallery_navigation")
 
     add "gui/gallery/relation/bg.png"
 
@@ -1271,11 +1332,9 @@ screen cg_relationship_help(cha , name_lock , lock , val):
             pass
 
 
-screen cg_gallery:
+screen cg_gallery():
 
     tag menu
-
-    #on "show" action ShowMenu("gallery_navigation")
     
     add "gui/gallery/cg/bg.png"
 
@@ -1285,8 +1344,13 @@ screen cg_gallery:
     #     pass
 
 
-screen cg_materials:
-    pass
+screen cg_materials():
+
+    tag menu
+
+    text _("Materials") pos(500, 500) color "#fff"
+
+    use gallery_navigation
 
 
 ## NVL 模式屏幕 ####################################################################
@@ -1528,8 +1592,8 @@ transform trans_navi_TO_mainmenu_diy_comp:
     alpha 0.0
     linear 1.5 alpha 1.0
 
-# transform trans_navi_TO_mainmenu_diy_:
 
+# transform trans_navi_TO_mainmenu_diy_:
 transform trans_navi_TO_mainmenu_diy_button1:
     alpha 0.0 xpos -100
     linear 1.5 alpha 1.0 xpos -15
@@ -1554,6 +1618,11 @@ image back_ground:
     linear 2.0 alpha 1.0
     linear 2.0 alpha 0.67
     repeat
+
+image textbox:
+    zoom 1.5 xzoom 1.08
+    xalign 0.5 yalign 1.0
+    "gui/textbox.png"
 
 
 ## GUI
@@ -1635,14 +1704,6 @@ image horizontal_right_bar:
     xzoom 2.5
     "gui/slider/horizontal_right_bar.png"
 
-image cg_indi_prop:
-    zoom 1.5
-    "gui/gallery/indi/prop.png"
-
-image cg_indi_title:
-    zoom 1.5
-    "gui/gallery/indi/title.png"
-
 image previous_idle:
     zoom 1.5
     "gui/buttons/按钮_后退_未选.png"
@@ -1658,3 +1719,81 @@ image next_idle:
 image next_hover:
     zoom 1.5
     "gui/buttons/按钮_前进_选中.png"
+
+image printer_idle:
+    zoom 1.5
+    "gui/game_screen/打字机_未选.png"
+
+image printer_hover:
+    zoom 1.5
+    "gui/game_screen/打字机_选中.png"
+
+
+## CG####
+image cg_indi_prop:
+    zoom 1.5
+    "gui/gallery/indi/prop.png"
+
+image cg_indi_title:
+    zoom 1.5
+    "gui/gallery/indi/title.png"
+
+
+## 柯安时报####
+image kean_idle:
+    zoom 1.5
+    "gui/game_screen/柯安时报/按钮_柯安时报.png"
+
+image kean_hover:
+    zoom 1.5
+    "gui/game_screen/柯安时报/按钮_柯安时报1.png"
+
+image kean_save_idle:
+    zoom 1.5
+    "gui/game_screen/柯安时报/按钮_存档.png"
+
+image kean_save_hover:
+    zoom 1.5
+    "gui/game_screen/柯安时报/按钮_存档1.png"
+
+image kean_load_idle:
+    zoom 1.5
+    "gui/game_screen/柯安时报/按钮_读取.png"
+
+image kean_load_hover:
+    zoom 1.5
+    "gui/game_screen/柯安时报/按钮_读取1.png"
+
+image kean_auto_idle:
+    zoom 1.5
+    "gui/game_screen/柯安时报/按钮_自动.png"
+
+image kean_auto_hover:
+    zoom 1.5
+    "gui/game_screen/柯安时报/按钮_自动1.png"
+
+image kean_preference_idle:
+    zoom 1.5
+    "gui/game_screen/柯安时报/按钮_设置.png"
+
+image kean_preference_hover:
+    zoom 1.5
+    "gui/game_screen/柯安时报/按钮_设置1.png"
+
+image kean_return_idle:
+    zoom 1.5
+    "gui/game_screen/柯安时报/按钮_返回.png"
+
+image kean_return_hover:
+    zoom 1.5
+    "gui/game_screen/柯安时报/按钮_返回1.png"
+
+
+## 探索点数
+image explore_idle:
+    zoom 1.5
+    "gui/game_screen/探索点/探索点数未选.png"
+
+image explore_hover:
+    zoom 1.5
+    "gui/game_screen/探索点/探索点数选中.png"

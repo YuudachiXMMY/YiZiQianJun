@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/screens.rpy", line 764: screen expects a non-empty block.
-    screen delete_all_confirm():
-                                ^
+File "game/script.rpy", line 13: invalid syntax
+        (0, 0),u"images/oej/side/欧尔佳.png":
+    
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Mon Dec 02 10:43:39 2019
+Mon Dec 02 20:37:12 2019

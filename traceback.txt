@@ -1,42 +1,40 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "renpy/common/00start.rpy", line 212, in script call
-    call _load_reload_game from _call__load_reload_game_1
-  File "renpy/common/00keymap.rpy", line 456, in script
-    python hide:
-  File "renpy/common/00keymap.rpy", line 456, in <module>
-    python hide:
-  File "renpy/common/00keymap.rpy", line 466, in _execute_python_hide
-    renpy.load("_reload-2")
-Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
+TypeError: unbound method get_tooltip() must be called with Return instance as first argument (got nothing instead)
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "renpy/common/00start.rpy", line 212, in script call
-    call _load_reload_game from _call__load_reload_game_1
-  File "renpy/common/00keymap.rpy", line 456, in script
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
     python hide:
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 914, in execute
     renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 2028, in py_exec_bytecode
     exec bytecode in globals, locals
-  File "renpy/common/00keymap.rpy", line 456, in <module>
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in <module>
     python hide:
-  File "renpy/common/00keymap.rpy", line 466, in _execute_python_hide
-    renpy.load("_reload-2")
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\loadsave.py", line 770, in load
-    log.unfreeze(roots, label="_after_load")
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 1983, in unfreeze
-    self.rollback(0, force=True, label=label, greedy=greedy, on_load=True)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 1815, in rollback
-    self.load_failed()
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 1733, in load_failed
-    raise Exception("Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?")
-Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
+  File "renpy/common/_layout/screen_main_menu.rpym", line 35, in _execute_python_hide
+    ui.interact()
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ui.py", line 297, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 2702, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, **kwargs)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3515, in interact_core
+    rv = renpy.display.focus.mouse_handler(ev, x, y)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\focus.py", line 407, in mouse_handler
+    return change_focus(new_focus, default=default)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\focus.py", line 362, in change_focus
+    set_focused(current, newfocus.arg, newfocus.screen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\focus.py", line 109, in set_focused
+    new_tooltip = widget._get_tooltip()
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\behavior.py", line 749, in _get_tooltip
+    return get_tooltip(self.action)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\behavior.py", line 373, in get_tooltip
+    return func()
+TypeError: unbound method get_tooltip() must be called with Return instance as first argument (got nothing instead)
 
 Windows-8-6.2.9200
 Ren'Py 7.3.5.606
 YiZiQianJun 1.0
-Mon Dec 02 10:52:30 2019
+Mon Dec 02 20:32:00 2019
