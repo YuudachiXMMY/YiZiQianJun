@@ -27,6 +27,7 @@ transform trans_navi_TO_mainmenu_diy_button3:
 transform trans_navi_TO_mainmenu_diy_button4:
     alpha 0.0 xpos -100
     linear 1.5 alpha 1.0 xpos 0
+    
 
 
 ## 背景
