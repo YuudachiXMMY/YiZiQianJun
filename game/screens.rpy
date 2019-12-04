@@ -1292,7 +1292,11 @@ screen cg_indi():
 
     tag menu
 
-    add "gui/gallery/indi/bg.png"
+    add "gui/gallery/background.png"
+    
+
+    text _("Indi") pos(500, 500) color "#fff"
+
     add "cg_indi_prop" pos(365 , 50)
     add "cg_indi_title" pos(265 , 70)
 
@@ -1306,6 +1310,8 @@ screen cg_achievement():
 
     tag menu
 
+    add "gui/gallery/background.png"
+
     text _("Achievement") pos(500, 500) color "#fff"
 
     use gallery_navigation
@@ -1315,7 +1321,9 @@ screen cg_relationship():
     
     tag menu
 
-    add "gui/gallery/relation/bg.png"
+    add "gui/gallery/background.png"
+
+    text _("Relationship") pos(500, 500) color "#fff"
 
     use gallery_navigation
 
@@ -1335,8 +1343,10 @@ screen cg_relationship_help(cha , name_lock , lock , val):
 screen cg_gallery():
 
     tag menu
-    
-    add "gui/gallery/cg/bg.png"
+
+    add "gui/gallery/background.png"
+
+    text _("Gallery") pos(500, 500) color "#fff"
 
     use gallery_navigation
 
@@ -1347,6 +1357,8 @@ screen cg_gallery():
 screen cg_materials():
 
     tag menu
+
+    add "gui/gallery/background.png"
 
     text _("Materials") pos(500, 500) color "#fff"
 
