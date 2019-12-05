@@ -1292,9 +1292,8 @@ screen cg_indi():
 
     tag menu
 
-    add "gui/gallery/background.png"
+    add "gui/gallery/background.png" zoom 1.5
     
-
     text _("Indi") pos(500, 500) color "#fff"
 
     add "cg_indi_prop" pos(365 , 50)
@@ -1310,7 +1309,7 @@ screen cg_achievement():
 
     tag menu
 
-    add "gui/gallery/background.png"
+    add "gui/gallery/background.png" zoom 1.5
 
     text _("Achievement") pos(500, 500) color "#fff"
 
@@ -1321,7 +1320,7 @@ screen cg_relationship():
     
     tag menu
 
-    add "gui/gallery/background.png"
+    add "gui/gallery/background.png" zoom 1.5
 
     text _("Relationship") pos(500, 500) color "#fff"
 
@@ -1344,7 +1343,7 @@ screen cg_gallery():
 
     tag menu
 
-    add "gui/gallery/background.png"
+    add "gui/gallery/background.png" zoom 1.5
 
     text _("Gallery") pos(500, 500) color "#fff"
 
@@ -1358,7 +1357,7 @@ screen cg_materials():
 
     tag menu
 
-    add "gui/gallery/background.png"
+    add "gui/gallery/background.png" zoom 1.5
 
     text _("Materials") pos(500, 500) color "#fff"
 
