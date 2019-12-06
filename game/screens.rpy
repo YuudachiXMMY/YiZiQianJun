@@ -117,9 +117,10 @@ screen say(who, what):
 
 
     ## 如果有侧边图像，会将其显示在文本之上。请不要在手机界面下显示这个，因为没
-    ## 有空间。
-    if not renpy.variant("small"):
-        add SideImage() xalign 0.0 yalign 1.0
+    # ## 有空间。
+    # if not renpy.variant("small"):
+    #     add SideImage() xalign 0.0 yalign 1.0
+    add SideImage() zoom 0.8 xpos -80 xalign 0.0 yalign 0.6
 
     fixed:
 
@@ -153,6 +154,17 @@ style window:
 
 style namebox:
     xpos gui.name_xpos
+    xanchor gui.name_xalign
+    xsize gui.namebox_width
+    ypos gui.name_ypos
+    ysize gui.namebox_height
+
+    background Frame("gui/namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+    padding gui.namebox_borders.padding
+
+style namebox:
+    variant "small"
+    xpos 600
     xanchor gui.name_xalign
     xsize gui.namebox_width
     ypos gui.name_ypos
@@ -314,6 +326,9 @@ screen quick_menu_info():
             hover "explore_hover"
             action Show("quick_menu_info_expand")
 
+        text _("")
+
+
 screen quick_menu_info_expand():
 
     modal True
@@ -328,13 +343,46 @@ screen quick_menu_info_expand():
             action Hide("quick_menu_info_expand", transition=Dissolve(0.5))
 
 
-
-
 ## 此代码确保只要玩家没有明确隐藏界面，就会在游戏中显示“quick_menu”屏幕。
 init python:
     config.overlay_screens.append("quick_menu")
 
 default quick_menu = True
+
+
+################################################################################
+## 移动设备界面
+################################################################################
+
+## 由于鼠标可能不存在，我们将快捷菜单替换为更容易触摸且按钮更少更大的版本。
+screen quick_menu():
+    variant "touch"
+
+    zorder 100
+
+    if quick_menu:
+
+        on "show" action Show("quick_menu_info")
+
+        imagebutton:
+            xalign 0.5 pos(1770, -10)
+            idle "kean_idle"
+            hover "kean_hover"
+            action Show("quick_menu_expand", transition=Dissolve(0.1))
+
+
+screen quick_menu_info():
+    variant "touch"
+
+    zorder 100
+
+    if quick_menu:
+        
+        imagebutton:
+            pos(0, 0)
+            idle "explore_idle"
+            hover "explore_hover"
+            action Show("quick_menu_info_expand")
 
 
 ################################################################################
@@ -1338,8 +1386,6 @@ screen cg_relationship():
 
     fixed:
 
-        ##amend test
-
         pos(400, 210)
         
         use cg_relationship_detail(u"德怀特")
@@ -1505,33 +1551,34 @@ style nvl_button_text:
 ## 移动设备界面
 ################################################################################
 
-style pref_vbox:
-    variant "medium"
-    xsize 675
+# style pref_vbox:
+#     variant "medium"
+#     xsize 675
 
-## 由于鼠标可能不存在，我们将快捷菜单替换为更容易触摸且按钮更少更大的版本。
-screen quick_menu():
-    variant "touch"
+# ## 由于鼠标可能不存在，我们将快捷菜单替换为更容易触摸且按钮更少更大的版本。
+# screen quick_menu():
+#     variant "touch"
 
-    zorder 100
+#     zorder 100
 
-    if quick_menu:
+#     if quick_menu:
 
-        hbox:
-            style_prefix "quick"
+#         hbox:
+#             style_prefix "quick"
 
-            xalign 0.5
-            yalign 1.0
+#             xalign 0.5
+#             yalign 1.0
 
-            textbutton _("回退") action Rollback()
-            textbutton _("快进") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("自动") action Preference("auto-forward", "toggle")
-            textbutton _("菜单") action ShowMenu()
+#             textbutton _("回退") action Rollback()
+#             textbutton _("快进") action Skip() alternate Skip(fast=True, confirm=True)
+#             textbutton _("自动") action Preference("auto-forward", "toggle")
+#             textbutton _("菜单") action ShowMenu()
 
 
 style window:
     variant "small"
-    background "gui/phone/textbox.png"
+    # background "gui/phone/textbox.png"
+    background "textbox_phone"
 
 style radio_button:
     variant "small"
@@ -1651,6 +1698,11 @@ image back_ground:
 
 image textbox:
     zoom 1.5 xzoom 1.08
+    xalign 0.5 yalign 1.0
+    "gui/textbox.png"
+
+image textbox_phone:
+    xzoom 1.6 yzoom 2.1
     xalign 0.5 yalign 1.0
     "gui/textbox.png"
 

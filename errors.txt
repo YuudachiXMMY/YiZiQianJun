@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/screens.rpy", line 13: invalid syntax
-    {"dht_xpos": 35, "kly_xpos": 35*2+180, "ln_xpos": 35*3+180*2, "zwe_xpos": 35*4+180*3, "pxs_xpos": 35*5+180*4, "ld_xpos": , "alt_xpos": , "lwsd_xpos":}
-                                                                                                                              ^
+File "game/screens.rpy", line 167: style property xpos500 is not known.
+    xpos500
+           ^
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Fri Dec 06 00:27:35 2019
+Fri Dec 06 13:03:40 2019

@@ -1,39 +1,34 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/screens.rpy", line 1323, in execute
-    screen cg_relationship():
-  File "game/screens.rpy", line 1323, in execute
-    screen cg_relationship():
-  File "game/screens.rpy", line 1339, in execute
-    fixed:
-  File "game/screens.rpy", line 1344, in execute
-    use cg_relationship_detail(u"克莱因")
-  File "game/screens.rpy", line 1353, in execute
-    screen cg_relationship_detail(cha, lock):
-  File "game/screens.rpy", line 1353, in execute
-    screen cg_relationship_detail(cha, lock):
-  File "game/screens.rpy", line 1357, in execute
-    if cha_list_love[cha]!=0:
-  File "game/screens.rpy", line 1361, in execute
-    
-TypeError: coercing to Unicode: need string or buffer, int found
+  File "game/script.rpy", line 35, in script
+    oej normal "您已创建一个新的 Ren'Py 游戏。"
+  File "renpy/common/000window.rpy", line 98, in _window_auto_callback
+    _window_show()
+  File "renpy/common/000window.rpy", line 60, in _window_show
+    renpy.with_statement(trans)
+  File "renpy/common/00action_control.rpy", line 126, in __call__
+    renpy.show_screen(self.screen, *self.args, **self.kwargs)
+Exception: Screen quick_menu_info is not known.
+
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
-    python hide:
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 914, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 2028, in py_exec_bytecode
-    exec bytecode in globals, locals
-  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in <module>
-    python hide:
-  File "renpy/common/_layout/screen_main_menu.rpym", line 35, in _execute_python_hide
-    ui.interact()
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ui.py", line 297, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "game/script.rpy", line 35, in script
+    oej normal "您已创建一个新的 Ren'Py 游戏。"
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 671, in execute
+    statement_name("say")
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 45, in statement_name
+    i(name)
+  File "renpy/common/000window.rpy", line 98, in _window_auto_callback
+    _window_show()
+  File "renpy/common/000window.rpy", line 60, in _window_show
+    renpy.with_statement(trans)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\exports.py", line 1601, in with_statement
+    return renpy.game.interface.do_with(trans, paired, clear=clear)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 2251, in do_with
+    clear=clear)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 2702, in interact
     repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, **kwargs)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3094, in interact_core
@@ -52,28 +47,20 @@ Full traceback:
     root_widget.visit_all(lambda i : i.per_interact())
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 440, in per_interact
     self.update()
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 625, in update
-    self.screen.function(**self.scope)
-  File "game/screens.rpy", line 1323, in execute
-    screen cg_relationship():
-  File "game/screens.rpy", line 1323, in execute
-    screen cg_relationship():
-  File "game/screens.rpy", line 1339, in execute
-    fixed:
-  File "game/screens.rpy", line 1344, in execute
-    use cg_relationship_detail(u"克莱因")
-  File "game/screens.rpy", line 1353, in execute
-    screen cg_relationship_detail(cha, lock):
-  File "game/screens.rpy", line 1353, in execute
-    screen cg_relationship_detail(cha, lock):
-  File "game/screens.rpy", line 1357, in execute
-    if cha_list_love[cha]!=0:
-  File "game/screens.rpy", line 1361, in execute
-    
-  File "<screen language>", line 1361, in <module>
-TypeError: coercing to Unicode: need string or buffer, int found
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 650, in update
+    i.set_transform_event(self.current_transform_event)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\behavior.py", line 2211, in set_transform_event
+    run(self.action)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\behavior.py", line 320, in run
+    return action(*args, **kwargs)
+  File "renpy/common/00action_control.rpy", line 126, in __call__
+    renpy.show_screen(self.screen, *self.args, **self.kwargs)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 1107, in show_screen
+    raise Exception("Screen %s is not known.\n" % (name[0],))
+Exception: Screen quick_menu_info is not known.
+
 
 Windows-8-6.2.9200
 Ren'Py 7.3.5.606
 YiZiQianJun 1.0
-Fri Dec 06 00:34:07 2019
+Fri Dec 06 13:04:06 2019
