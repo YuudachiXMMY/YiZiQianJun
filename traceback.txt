@@ -1,7 +1,23 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-TypeError: unbound method get_tooltip() must be called with Return instance as first argument (got nothing instead)
+  File "game/screens.rpy", line 1323, in execute
+    screen cg_relationship():
+  File "game/screens.rpy", line 1323, in execute
+    screen cg_relationship():
+  File "game/screens.rpy", line 1339, in execute
+    fixed:
+  File "game/screens.rpy", line 1344, in execute
+    use cg_relationship_detail(u"克莱因")
+  File "game/screens.rpy", line 1353, in execute
+    screen cg_relationship_detail(cha, lock):
+  File "game/screens.rpy", line 1353, in execute
+    screen cg_relationship_detail(cha, lock):
+  File "game/screens.rpy", line 1357, in execute
+    if cha_list_love[cha]!=0:
+  File "game/screens.rpy", line 1361, in execute
+    
+TypeError: coercing to Unicode: need string or buffer, int found
 
 -- Full Traceback ------------------------------------------------------------
 
@@ -20,21 +36,44 @@ Full traceback:
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 2702, in interact
     repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, **kwargs)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3515, in interact_core
-    rv = renpy.display.focus.mouse_handler(ev, x, y)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\focus.py", line 407, in mouse_handler
-    return change_focus(new_focus, default=default)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\focus.py", line 362, in change_focus
-    set_focused(current, newfocus.arg, newfocus.screen)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\focus.py", line 109, in set_focused
-    new_tooltip = widget._get_tooltip()
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\behavior.py", line 749, in _get_tooltip
-    return get_tooltip(self.action)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\behavior.py", line 373, in get_tooltip
-    return func()
-TypeError: unbound method get_tooltip() must be called with Return instance as first argument (got nothing instead)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3094, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 430, in visit_all
+    callback(self)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3094, in <lambda>
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 440, in per_interact
+    self.update()
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 625, in update
+    self.screen.function(**self.scope)
+  File "game/screens.rpy", line 1323, in execute
+    screen cg_relationship():
+  File "game/screens.rpy", line 1323, in execute
+    screen cg_relationship():
+  File "game/screens.rpy", line 1339, in execute
+    fixed:
+  File "game/screens.rpy", line 1344, in execute
+    use cg_relationship_detail(u"克莱因")
+  File "game/screens.rpy", line 1353, in execute
+    screen cg_relationship_detail(cha, lock):
+  File "game/screens.rpy", line 1353, in execute
+    screen cg_relationship_detail(cha, lock):
+  File "game/screens.rpy", line 1357, in execute
+    if cha_list_love[cha]!=0:
+  File "game/screens.rpy", line 1361, in execute
+    
+  File "<screen language>", line 1361, in <module>
+TypeError: coercing to Unicode: need string or buffer, int found
 
 Windows-8-6.2.9200
 Ren'Py 7.3.5.606
 YiZiQianJun 1.0
-Mon Dec 02 20:32:00 2019
+Fri Dec 06 00:34:07 2019
