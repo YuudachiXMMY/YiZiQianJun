@@ -1338,6 +1338,8 @@ screen cg_relationship():
 
     fixed:
 
+        ##amend test
+
         pos(400, 210)
         
         use cg_relationship_detail(u"德怀特")
