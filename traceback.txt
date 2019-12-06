@@ -1,7 +1,23 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While loading <'Image' u'gui/gallery/background.png'>:
-IOError: Couldn't find file 'gui/gallery/background.png'.
+While running game code:
+  File "game/screens.rpy", line 1323, in execute
+    screen cg_relationship():
+  File "game/screens.rpy", line 1323, in execute
+    screen cg_relationship():
+  File "game/screens.rpy", line 1339, in execute
+    fixed:
+  File "game/screens.rpy", line 1344, in execute
+    use cg_relationship_detail(u"克莱因")
+  File "game/screens.rpy", line 1353, in execute
+    screen cg_relationship_detail(cha, lock):
+  File "game/screens.rpy", line 1353, in execute
+    screen cg_relationship_detail(cha, lock):
+  File "game/screens.rpy", line 1357, in execute
+    if cha_list_love[cha]!=0:
+  File "game/screens.rpy", line 1361, in execute
+    
+TypeError: coercing to Unicode: need string or buffer, int found
 
 -- Full Traceback ------------------------------------------------------------
 
@@ -20,61 +36,44 @@ Full traceback:
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 2702, in interact
     repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, **kwargs)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3194, in interact_core
-    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 2094, in draw_screen
-    renpy.config.screen_height,
-  File "renpy/display/render.pyx", line 490, in renpy.display.render.render_screen (gen\renpy.display.render.c:6805)
-    rv = render(root, width, height, st, st)
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 722, in render
-    surf = render(child, width, height, cst, cat)
-  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen\renpy.display.render.c:4075)
-    cpdef render(d, object widtho, object heighto, double st, double at):
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\transition.py", line 361, in render
-    top = render(self.new_widget, width, height, st, at)
-  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen\renpy.display.render.c:4075)
-    cpdef render(d, object widtho, object heighto, double st, double at):
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 722, in render
-    surf = render(child, width, height, cst, cat)
-  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen\renpy.display.render.c:4075)
-    cpdef render(d, object widtho, object heighto, double st, double at):
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 722, in render
-    surf = render(child, width, height, cst, cat)
-  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen\renpy.display.render.c:4075)
-    cpdef render(d, object widtho, object heighto, double st, double at):
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 675, in render
-    child = renpy.display.render.render(self.child, w, h, st, at)
-  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen\renpy.display.render.c:4075)
-    cpdef render(d, object widtho, object heighto, double st, double at):
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 722, in render
-    surf = render(child, width, height, cst, cat)
-  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen\renpy.display.render.c:4075)
-    cpdef render(d, object widtho, object heighto, double st, double at):
-  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
-    rv = d.render(widtho, heighto, st, at)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\im.py", line 583, in render
-    return cache.get(self, render=True)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\im.py", line 266, in get
-    surf = image.load()
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\im.py", line 628, in load
-    surf = renpy.display.pgrender.load_image(renpy.loader.load(self.filename), self.filename)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\loader.py", line 576, in load
-    raise IOError("Couldn't find file '%s'." % name)
-IOError: Couldn't find file 'gui/gallery/background.png'.
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3094, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 430, in visit_all
+    callback(self)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3094, in <lambda>
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 440, in per_interact
+    self.update()
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 625, in update
+    self.screen.function(**self.scope)
+  File "game/screens.rpy", line 1323, in execute
+    screen cg_relationship():
+  File "game/screens.rpy", line 1323, in execute
+    screen cg_relationship():
+  File "game/screens.rpy", line 1339, in execute
+    fixed:
+  File "game/screens.rpy", line 1344, in execute
+    use cg_relationship_detail(u"克莱因")
+  File "game/screens.rpy", line 1353, in execute
+    screen cg_relationship_detail(cha, lock):
+  File "game/screens.rpy", line 1353, in execute
+    screen cg_relationship_detail(cha, lock):
+  File "game/screens.rpy", line 1357, in execute
+    if cha_list_love[cha]!=0:
+  File "game/screens.rpy", line 1361, in execute
+    
+  File "<screen language>", line 1361, in <module>
+TypeError: coercing to Unicode: need string or buffer, int found
 
 Windows-8-6.2.9200
 Ren'Py 7.3.5.606
 YiZiQianJun 1.0
-Wed Dec 04 20:11:31 2019
+Fri Dec 06 00:34:07 2019

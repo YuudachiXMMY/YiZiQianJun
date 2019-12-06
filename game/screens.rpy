@@ -6,6 +6,13 @@ init offset = -1
 
 default persistent.Round1 = False
 
+define cha_list = {"德怀特": "dht", "克莱因": "kly", "林奈": "ln", "泽维尔": "zwe", "西尔斯": "pxs", "里德": "ld", "阿莱特": "alt", "列文斯顿": "lwsd"}
+define cha_list_love = {"德怀特": 0, "克莱因": 55, "林奈": 55, "泽维尔": 55, "西尔斯": 55, "里德": "ld", "阿莱特": 55, "列文斯顿": 55}
+
+define dht_info = {}
+
+define relation_datail = {"dht_xpos": 35, "kly_xpos": 35*2+180, "ln_xpos": 35*3+180*2, "zwe_xpos": 35*4+180*3, "pxs_xpos": 35*5+180*4, "ld_xpos": 35*6+180*5, "alt_xpos": 35*7+180*6, "lwsd_xpos":35*8+180*7}
+
 ################################################################################
 ## 样式
 ################################################################################
@@ -651,19 +658,19 @@ screen file_slots(title):
         add "gui/buttons/滚动条.png" zoom 1.5 yalign 0.5 pos(1750, 540)
 
         imagebutton:
-            pos(1728, 240)
+            pos(1720, 600)
             idle "previous_idle"
             hover "previous_hover"
             action FilePagePrevious()
 
         imagebutton:
-            pos(1728, 390)
+            pos(1720, 720)
             idle "next_idle"
             hover "next_hover"
             action FilePageNext(max=4, auto=False, quick=False)
 
         imagebutton:
-            pos(1728, 540)
+            pos(1720, 240)
             idle "return_idle"
             hover "return_hover"
             action Return()
@@ -755,13 +762,13 @@ screen preferences():
         add "gui/main_screen/preferences/设置2.png"
 
         imagebutton:
-            pos(1715, 210)
+            pos(1720, 230)
             idle "delete_idle"
             hover "delete_hover"
             action Show("delete_all_confirm_first", transition=Dissolve(0.5))
 
         imagebutton:
-            pos(1715, 780)
+            pos(1720, 660)
             idle "return_idle"
             hover "return_hover"
             action Return()
@@ -1258,30 +1265,31 @@ screen gallery_navigation():
         
         zorder 100
 
+        add "gui/buttons/滚动条.png" zoom 1.5 yalign 0.5 pos(1750, 540)
+
         imagebutton:
-            pos ( 110 , 180)
+            pos(110, 180)
             idle "gui/gallery/button_frame.png"
             action ShowMenu("cg_indi")
         imagebutton:
-            pos ( 110 , 330)
+            pos(110, 330)
             idle "gui/gallery/button_frame.png"
             action ShowMenu("cg_achievement")
         imagebutton:
-            pos ( 110 , 480)
+            pos(110, 480)
             idle "gui/gallery/button_frame.png"
             action ShowMenu("cg_relationship")
         imagebutton:
-            pos ( 110 , 630)
+            pos(110, 630)
             idle "gui/gallery/button_frame.png"
             action ShowMenu("cg_gallery")
         imagebutton:
-            pos ( 110 , 780)
+            pos(110, 780)
             idle "gui/gallery/button_frame.png"
             action ShowMenu("cg_materials")
 
         imagebutton:
-            yalign 0.5
-            pos(1728 , 540)
+            pos(1730, 240)
             idle "return_idle"
             hover "return_hover"
             action Return()
@@ -1293,11 +1301,9 @@ screen cg_indi():
     tag menu
 
     add "gui/gallery/background.png" zoom 1.5
-    
-    text _("Indi") pos(500, 500) color "#fff"
 
-    add "cg_indi_prop" pos(365 , 50)
-    add "cg_indi_title" pos(265 , 70)
+    add "cg_indi_prop" pos(365, 50)
+    add "cg_indi_title" pos(265, 70)
 
     # grid 2 3:
     #     text _("")
@@ -1311,8 +1317,6 @@ screen cg_achievement():
 
     add "gui/gallery/background.png" zoom 1.5
 
-    text _("Achievement") pos(500, 500) color "#fff"
-
     use gallery_navigation
 
 
@@ -1322,30 +1326,45 @@ screen cg_relationship():
 
     add "gui/gallery/background.png" zoom 1.5
 
-    text _("Relationship") pos(500, 500) color "#fff"
+    add "cg_indi_title" pos(265, 70)
+
+    # hbox:
+
+    #     pos(400, 210)
+
+    #     for i in range(1, 7):
+            
+    #         add "gui/gallery/relation/cha_lock.png" zoom 1.4 xpos i*35
+
+    fixed:
+
+        pos(400, 210)
+        
+        use cg_relationship_detail(u"德怀特")
+        use cg_relationship_detail(u"克莱因")
+        use cg_relationship_detail(u"林奈")
+        use cg_relationship_detail(u"泽维尔")
+        use cg_relationship_detail(u"西尔斯")
+        use cg_relationship_detail(u"里德")
 
     use gallery_navigation
 
 
-screen cg_relationship_help(cha , name_lock , lock , val):
+screen cg_relationship_detail(cha):
 
-    if lock == false:
-        add "gui/gallery/relation/cha_lock.png"
-    else:
-        add "gui/gallery/relation/" + cha + ".png"
-        if name_lock:
-            pass
-        else:
-            pass
+    add "gui/gallery/relation/cha_lock.png" zoom 1.4 xpos relation_datail[""+cha_list[cha]+"_xpos"]
 
+    if cha_list_love[cha]!=0:
+        
+        add "gui/gallery/relation/角色_"+cha+".png" zoom 1.4 xpos relation_datail[""+cha_list[cha]+"_xpos"]
+
+        text _("55") color "#fff" size 50 ypos 580 xpos relation_datail[""+cha_list[cha]+"_xpos"]+85
 
 screen cg_gallery():
 
     tag menu
 
     add "gui/gallery/background.png" zoom 1.5
-
-    text _("Gallery") pos(500, 500) color "#fff"
 
     use gallery_navigation
 
@@ -1358,8 +1377,6 @@ screen cg_materials():
     tag menu
 
     add "gui/gallery/background.png" zoom 1.5
-
-    text _("Materials") pos(500, 500) color "#fff"
 
     use gallery_navigation
 
