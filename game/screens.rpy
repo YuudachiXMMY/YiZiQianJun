@@ -6,6 +6,9 @@ init offset = -1
 
 default persistent.Round1 = False
 
+default explore_point = 10
+default explore_money = 100
+
 define cha_list = {"德怀特": "dht", "克莱因": "kly", "林奈": "ln", "泽维尔": "zwe", "西尔斯": "pxs", "里德": "ld", "阿莱特": "alt", "列文斯顿": "lwsd"}
 define cha_list_love = {"德怀特": 0, "克莱因": 55, "林奈": 55, "泽维尔": 55, "西尔斯": 55, "里德": "ld", "阿莱特": 55, "列文斯顿": 55}
 
@@ -153,7 +156,7 @@ style window:
     background "textbox"
 
 style namebox:
-    xpos gui.name_xpos
+    xpos gui.name_xpos-60
     xanchor gui.name_xalign
     xsize gui.namebox_width
     ypos gui.name_ypos
@@ -164,7 +167,7 @@ style namebox:
 
 style namebox:
     variant "small"
-    xpos 600
+    xpos 600-60
     xanchor gui.name_xalign
     xsize gui.namebox_width
     ypos gui.name_ypos
@@ -326,7 +329,12 @@ screen quick_menu_info():
             hover "explore_hover"
             action Show("quick_menu_info_expand")
 
-        text _("")
+        text _("[explore_point]"):
+            size 45 xpos 475 ypos 95 bold True
+        text _("$"):
+            size 40 yalign 0.5 xpos 220 ypos 53 bold True
+        text _("[explore_money]"):
+            size 40 xalign 1.0 yalign 0.5 xpos 320 ypos 53 color "#fff" bold True
 
 
 screen quick_menu_info_expand():
@@ -371,18 +379,25 @@ screen quick_menu():
             action Show("quick_menu_expand", transition=Dissolve(0.1))
 
 
-screen quick_menu_info():
-    variant "touch"
+# screen quick_menu_info():
+#     variant "touch"
 
-    zorder 100
+#     zorder 100
 
-    if quick_menu:
+#     if quick_menu:
         
-        imagebutton:
-            pos(0, 0)
-            idle "explore_idle"
-            hover "explore_hover"
-            action Show("quick_menu_info_expand")
+#         imagebutton:
+#             pos(0, 0)
+#             idle "explore_idle"
+#             hover "explore_hover"
+#             action Show("quick_menu_info_expand")
+
+#         text _("[explore_point]"):
+#             size 45 xpos 475 ypos 95 bold True
+#         text _("$"):
+#             size 40 yalign 0.5 xpos 220 ypos 53 bold True
+#         text _("[explore_money]"):
+#             size 40 xalign 1.0 yalign 0.5 xpos 320 ypos 53 color "#fff" bold True
 
 
 ################################################################################

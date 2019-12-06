@@ -7,10 +7,15 @@ While running game code:
     _window_show()
   File "renpy/common/000window.rpy", line 60, in _window_show
     renpy.with_statement(trans)
-  File "renpy/common/00action_control.rpy", line 126, in __call__
-    renpy.show_screen(self.screen, *self.args, **self.kwargs)
-Exception: Screen quick_menu_info is not known.
-
+  File "game/screens.rpy", line 360, in execute
+    screen quick_menu():
+  File "game/screens.rpy", line 360, in execute
+    screen quick_menu():
+  File "game/screens.rpy", line 365, in execute
+    if quick_menu:
+  File "game/screens.rpy", line 375, in execute
+    text _(explore_point) xpos 200
+Exception: Cannot display 10 as text.
 
 -- Full Traceback ------------------------------------------------------------
 
@@ -47,20 +52,21 @@ Full traceback:
     root_widget.visit_all(lambda i : i.per_interact())
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 440, in per_interact
     self.update()
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 650, in update
-    i.set_transform_event(self.current_transform_event)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\behavior.py", line 2211, in set_transform_event
-    run(self.action)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\behavior.py", line 320, in run
-    return action(*args, **kwargs)
-  File "renpy/common/00action_control.rpy", line 126, in __call__
-    renpy.show_screen(self.screen, *self.args, **self.kwargs)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 1107, in show_screen
-    raise Exception("Screen %s is not known.\n" % (name[0],))
-Exception: Screen quick_menu_info is not known.
-
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 625, in update
+    self.screen.function(**self.scope)
+  File "game/screens.rpy", line 360, in execute
+    screen quick_menu():
+  File "game/screens.rpy", line 360, in execute
+    screen quick_menu():
+  File "game/screens.rpy", line 365, in execute
+    if quick_menu:
+  File "game/screens.rpy", line 375, in execute
+    text _(explore_point) xpos 200
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\text\text.py", line 1471, in __init__
+    raise Exception("Cannot display {0!r} as text.".format(i))
+Exception: Cannot display 10 as text.
 
 Windows-8-6.2.9200
 Ren'Py 7.3.5.606
 YiZiQianJun 1.0
-Fri Dec 06 13:04:06 2019
+Fri Dec 06 13:21:53 2019
