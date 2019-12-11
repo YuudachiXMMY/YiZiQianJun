@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/screens.rpy", line 392: Line is indented, but the preceding idle statement does not expect a block. Please check this line's indentation.
-    "explore_hover"
-    ^
+File "game/screens.rpy", line 420: expected 'word' not found.
+    use 
+        ^
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Fri Dec 06 14:03:58 2019
+Wed Dec 11 12:16:17 2019

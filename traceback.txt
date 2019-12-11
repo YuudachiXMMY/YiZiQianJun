@@ -3,43 +3,29 @@
 While running game code:
   File "game/script.rpy", line 35, in script
     oej normal "您已创建一个新的 Ren'Py 游戏。"
-  File "renpy/common/000window.rpy", line 98, in _window_auto_callback
-    _window_show()
-  File "renpy/common/000window.rpy", line 60, in _window_show
-    renpy.with_statement(trans)
-  File "game/screens.rpy", line 360, in execute
-    screen quick_menu():
-  File "game/screens.rpy", line 360, in execute
-    screen quick_menu():
-  File "game/screens.rpy", line 365, in execute
-    if quick_menu:
-  File "game/screens.rpy", line 375, in execute
-    text _(explore_point) xpos 200
-Exception: Cannot display 10 as text.
+Exception: Required parameter month has no value.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
   File "game/script.rpy", line 35, in script
     oej normal "您已创建一个新的 Ren'Py 游戏。"
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 671, in execute
-    statement_name("say")
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 45, in statement_name
-    i(name)
-  File "renpy/common/000window.rpy", line 98, in _window_auto_callback
-    _window_show()
-  File "renpy/common/000window.rpy", line 60, in _window_show
-    renpy.with_statement(trans)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\exports.py", line 1601, in with_statement
-    return renpy.game.interface.do_with(trans, paired, clear=clear)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 2251, in do_with
-    clear=clear)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 708, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\exports.py", line 1345, in say
+    who(what, *args, **kwargs)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\character.py", line 1142, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, **display_args)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\character.py", line 842, in do_display
+    **display_args)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\character.py", line 591, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ui.py", line 297, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 2702, in interact
     repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, **kwargs)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3094, in interact_core
     root_widget.visit_all(lambda i : i.per_interact())
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
-    d.visit_all(callback, seen)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
     d.visit_all(callback, seen)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
@@ -54,19 +40,13 @@ Full traceback:
     self.update()
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 625, in update
     self.screen.function(**self.scope)
-  File "game/screens.rpy", line 360, in execute
-    screen quick_menu():
-  File "game/screens.rpy", line 360, in execute
-    screen quick_menu():
-  File "game/screens.rpy", line 365, in execute
-    if quick_menu:
-  File "game/screens.rpy", line 375, in execute
-    text _(explore_point) xpos 200
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\text\text.py", line 1471, in __init__
-    raise Exception("Cannot display {0!r} as text.".format(i))
-Exception: Cannot display 10 as text.
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 158, in apply_arguments
+    return parameters.apply(args, kwargs, ignore_errors)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 122, in apply
+    raise Exception("Required parameter %s has no value." % name)
+Exception: Required parameter month has no value.
 
 Windows-8-6.2.9200
 Ren'Py 7.3.5.606
 YiZiQianJun 1.0
-Fri Dec 06 13:21:53 2019
+Wed Dec 11 12:11:49 2019
