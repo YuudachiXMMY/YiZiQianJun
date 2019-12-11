@@ -6,12 +6,45 @@ init offset = -1
 
 default persistent.Round1 = False
 
+default explore_point = 10
+define explore_money = 1234
+
+
+## cha_info ####
 define cha_list = {"德怀特": "dht", "克莱因": "kly", "林奈": "ln", "泽维尔": "zwe", "西尔斯": "pxs", "里德": "ld", "阿莱特": "alt", "列文斯顿": "lwsd"}
 define cha_list_love = {"德怀特": 0, "克莱因": 55, "林奈": 55, "泽维尔": 55, "西尔斯": 55, "里德": "ld", "阿莱特": 55, "列文斯顿": 55}
 
 define dht_info = {}
 
 define relation_datail = {"dht_xpos": 35, "kly_xpos": 35*2+180, "ln_xpos": 35*3+180*2, "zwe_xpos": 35*4+180*3, "pxs_xpos": 35*5+180*4, "ld_xpos": 35*6+180*5, "alt_xpos": 35*7+180*6, "lwsd_xpos":35*8+180*7}
+
+
+## shop_news info ####
+define march_0_1982 = {}
+define march_1_1982 = {}
+define april_0_1982 = {}
+define april_1_1982 = {}
+define may_0_1982 = {}
+define may_1_1982 = {}
+define june_0_1982 = {}
+define june_1_1982 = {}
+define july_0_1982 = {}
+define july_1_1982 = {}
+define august_0_1982 = {}
+define august_1_1982 = {}
+define september_0_1982 = {}
+define september_1_1982 = {}
+define october_0_1982 = {}
+define october_1_1982 = {}
+define november_0_1982 = {}
+define november_1_1982 = {}
+define december_0_1982 = {}
+define december_1_1982 = {}
+define january_0_1983 = {}
+define january_1_1983 = {}
+define february_0_1983 = {}
+define february_1_1983 = {}
+
 
 ################################################################################
 ## 样式
@@ -117,9 +150,10 @@ screen say(who, what):
 
 
     ## 如果有侧边图像，会将其显示在文本之上。请不要在手机界面下显示这个，因为没
-    ## 有空间。
-    if not renpy.variant("small"):
-        add SideImage() xalign 0.0 yalign 1.0
+    # ## 有空间。
+    # if not renpy.variant("small"):
+    #     add SideImage() xalign 0.0 yalign 1.0
+    add SideImage() zoom 0.8 xpos -80 xalign 0.0 yalign 0.6
 
     fixed:
 
@@ -152,7 +186,18 @@ style window:
     background "textbox"
 
 style namebox:
-    xpos gui.name_xpos
+    xpos gui.name_xpos-60
+    xanchor gui.name_xalign
+    xsize gui.namebox_width
+    ypos gui.name_ypos
+    ysize gui.namebox_height
+
+    background Frame("gui/namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+    padding gui.namebox_borders.padding
+
+style namebox:
+    variant "small"
+    xpos 600-60
     xanchor gui.name_xalign
     xsize gui.namebox_width
     ypos gui.name_ypos
@@ -301,7 +346,6 @@ screen quick_menu_expand():
             hover "kean_return_hover"
             action Hide("quick_menu_expand", transition=Dissolve(0.1))
 
-
 screen quick_menu_info():
 
     zorder 100
@@ -312,22 +356,14 @@ screen quick_menu_info():
             pos(0, 0)
             idle "explore_idle"
             hover "explore_hover"
-            action Show("quick_menu_info_expand")
+            action Show("shop_news_month_1")
 
-screen quick_menu_info_expand():
-
-    modal True
-    zorder 101
-
-    if quick_menu:
-
-        imagebutton:
-            xalign 0.5 pos(1770, 560)
-            idle "return_idle"
-            hover "return_hover"
-            action Hide("quick_menu_info_expand", transition=Dissolve(0.5))
-
-
+        text _("[explore_point]"):
+            size 45 xpos 475 ypos 95 bold True
+        text _("$"):
+            size 40 yalign 0.5 xpos 200 ypos 55 bold True
+        text _("[explore_money]"):
+            size 40 xalign 1.0 yalign 0.5 xpos 330 ypos 55 color "#fff" bold True
 
 
 ## 此代码确保只要玩家没有明确隐藏界面，就会在游戏中显示“quick_menu”屏幕。
@@ -335,6 +371,149 @@ init python:
     config.overlay_screens.append("quick_menu")
 
 default quick_menu = True
+
+
+## 商店界面 ####################################################################
+##
+
+screen shop():
+
+    zorder 101
+
+    if renpy.get_screen("shop_news_month_1") or renpy.get_screen("shop_news_month_2"):
+        
+        imagebutton:
+            xpos 110 yalign 0.3
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_1")
+        imagebutton:
+            xpos 110 yalign 0.4
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_1")
+        imagebutton:
+            xpos 110 yalign 0.5
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_1")
+        imagebutton:
+            xpos 110 yalign 0.6
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_1")
+
+
+## 商店界面 - 报纸 ####################################################################
+##
+
+## 报纸 月份1
+screen shop_news_month_1():
+
+    zorder 102
+    modal True
+
+    add "gui/game_screen/报纸/已购买目录_月份底图.png" zoom 1.5 xalign 0.7 yalign 0.4
+    add "gui/game_screen/报纸/上级界面已购买目录_月份报纸1.jpg" zoom 1.5 xalign 0.45 yalign 0.5
+    add "gui/buttons/滚动条.png" zoom 1.5 yalign 0.5 xpos(1700)
+
+    imagebutton:
+        pos(500, 300)
+        idle "gui/gallery/button_frame.png"
+        action Show("shop_news_month_overview", month=march_0_1982, transition=Dissolve(0.5))
+
+
+    fixed:
+        imagebutton:
+            pos(1680, 720)
+            idle "previous_idle"
+            hover "previous_hover"
+            action Hide("shop_news_month_1"), Show("shop_news_month_2")
+
+        imagebutton:
+            pos(1680, 240)
+            idle "return_idle"
+            hover "return_hover"
+            action Hide("shop_news_month_1", transition=Dissolve(0.5))
+
+        use shop
+
+
+## 报纸 月份2
+screen shop_news_month_2():
+
+    zorder 102
+    modal True
+
+    add "gui/game_screen/报纸/已购买目录_月份底图.png" zoom 1.5 xalign 0.7 yalign 0.4
+    add "gui/game_screen/报纸/已购买目录_月份报纸2.jpg" zoom 1.5 xalign 0.45 ypos 222
+    add "gui/buttons/滚动条.png" zoom 1.5 yalign 0.5 xpos(1700)
+
+
+    fixed:
+        imagebutton:
+            pos(1680, 600)
+            idle "next_idle"
+            hover "next_hover"
+            action Hide("shop_news_month_2"), Show("shop_news_month_1")
+            
+        imagebutton:
+            pos(1680, 240)
+            idle "return_idle"
+            hover "return_hover"
+            action Hide("shop_news_month_2", transition=Dissolve(0.5))
+
+        use shop
+
+
+## 某月报纸
+screen shop_news_month_overview(month):
+
+    zorder 103
+    modal True
+    
+    add "gui/game_screen/报纸/下级界面报纸查阅-_底图.png" zoom 1.5 xalign 0.7 yalign 0.4
+
+    imagebutton:
+        pos(1680, 240)
+        idle "return_idle"
+        hover "return_hover"
+        action Hide("shop_news_month_overview", transition=Dissolve(0.5))
+
+
+screen shop_news_detail():
+
+    tag menu
+    zorder 104
+
+    add "gui/game_screen/报纸/显示窗.png" zoom 1.5 align(0.5, 0.5)
+
+    ## 透明背景按钮 返回
+    imagebutton:
+        idle "gui/transparent_background.png"
+        action Hide("shop_news_month_overview", transition=Dissolve(0.5))
+
+
+## 商店界面 - 杂志 ####################################################################
+##
+
+
+
+################################################################################
+## 移动设备界面
+################################################################################
+
+## 由于鼠标可能不存在，我们将快捷菜单替换为更容易触摸且按钮更少更大的版本。
+screen quick_menu():
+    variant "touch"
+
+    zorder 100
+
+    if quick_menu:
+
+        on "show" action Show("quick_menu_info")
+
+        imagebutton:
+            xalign 0.5 pos(1770, -10)
+            idle "kean_idle"
+            hover "kean_hover"
+            action Show("quick_menu_expand", transition=Dissolve(0.1))
 
 
 ################################################################################
@@ -1296,6 +1475,7 @@ screen gallery_navigation():
             # action ShowMenu("main_menu_actual")
 
 
+## 个人档案
 screen cg_indi():
 
     tag menu
@@ -1311,6 +1491,7 @@ screen cg_indi():
     use gallery_navigation
 
 
+## 记者手册
 screen cg_achievement():
 
     tag menu
@@ -1320,6 +1501,7 @@ screen cg_achievement():
     use gallery_navigation
 
 
+## 人际关系
 screen cg_relationship():
     
     tag menu
@@ -1350,6 +1532,7 @@ screen cg_relationship():
     use gallery_navigation
 
 
+## 人际关系 框架
 screen cg_relationship_detail(cha):
 
     add "gui/gallery/relation/cha_lock.png" zoom 1.4 xpos relation_datail[""+cha_list[cha]+"_xpos"]
@@ -1360,6 +1543,8 @@ screen cg_relationship_detail(cha):
 
         text _("55") color "#fff" size 50 ypos 580 xpos relation_datail[""+cha_list[cha]+"_xpos"]+85
 
+
+## 相册回忆
 screen cg_gallery():
 
     tag menu
@@ -1372,6 +1557,7 @@ screen cg_gallery():
     #     pass
 
 
+## 写作素材
 screen cg_materials():
 
     tag menu
@@ -1503,33 +1689,34 @@ style nvl_button_text:
 ## 移动设备界面
 ################################################################################
 
-style pref_vbox:
-    variant "medium"
-    xsize 675
+# style pref_vbox:
+#     variant "medium"
+#     xsize 675
 
-## 由于鼠标可能不存在，我们将快捷菜单替换为更容易触摸且按钮更少更大的版本。
-screen quick_menu():
-    variant "touch"
+# ## 由于鼠标可能不存在，我们将快捷菜单替换为更容易触摸且按钮更少更大的版本。
+# screen quick_menu():
+#     variant "touch"
 
-    zorder 100
+#     zorder 100
 
-    if quick_menu:
+#     if quick_menu:
 
-        hbox:
-            style_prefix "quick"
+#         hbox:
+#             style_prefix "quick"
 
-            xalign 0.5
-            yalign 1.0
+#             xalign 0.5
+#             yalign 1.0
 
-            textbutton _("回退") action Rollback()
-            textbutton _("快进") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("自动") action Preference("auto-forward", "toggle")
-            textbutton _("菜单") action ShowMenu()
+#             textbutton _("回退") action Rollback()
+#             textbutton _("快进") action Skip() alternate Skip(fast=True, confirm=True)
+#             textbutton _("自动") action Preference("auto-forward", "toggle")
+#             textbutton _("菜单") action ShowMenu()
 
 
 style window:
     variant "small"
-    background "gui/phone/textbox.png"
+    # background "gui/phone/textbox.png"
+    background "textbox_phone"
 
 style radio_button:
     variant "small"
@@ -1649,6 +1836,11 @@ image back_ground:
 
 image textbox:
     zoom 1.5 xzoom 1.08
+    xalign 0.5 yalign 1.0
+    "gui/textbox.png"
+
+image textbox_phone:
+    xzoom 1.6 yzoom 2.1
     xalign 0.5 yalign 1.0
     "gui/textbox.png"
 
@@ -1825,3 +2017,6 @@ image explore_idle:
 image explore_hover:
     zoom 1.5
     "gui/game_screen/探索点/探索点数选中.png"
+
+
+## 商店界面
