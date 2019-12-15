@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/screens.rpy", line 420: expected 'word' not found.
-    use 
-        ^
+File "game/screens.rpy", line 759: screen expects a non-empty block.
+    screen shop_shop_subscribe(page):
+                                     ^
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Wed Dec 11 12:16:17 2019
+Sat Dec 14 11:21:23 2019

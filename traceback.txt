@@ -3,7 +3,17 @@
 While running game code:
   File "game/script.rpy", line 35, in script
     oej normal "您已创建一个新的 Ren'Py 游戏。"
-Exception: Required parameter month has no value.
+  File "game/screens.rpy", line 627, in execute
+    screen shop_shop_page1():
+  File "game/screens.rpy", line 627, in execute
+    screen shop_shop_page1():
+  File "game/screens.rpy", line 637, in execute
+    fixed:
+  File "game/screens.rpy", line 639, in execute
+    on "show" action Show("shop_shop_subscribe", page=shop_shop_page1)
+  File "game/screens.rpy", line 639, in keywords
+    on "show" action Show("shop_shop_subscribe", page=shop_shop_page1)
+NameError: name 'shop_shop_page1' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
@@ -32,6 +42,8 @@ Full traceback:
     d.visit_all(callback, seen)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
     d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 430, in visit_all
     callback(self)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3094, in <lambda>
@@ -40,13 +52,20 @@ Full traceback:
     self.update()
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 625, in update
     self.screen.function(**self.scope)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 158, in apply_arguments
-    return parameters.apply(args, kwargs, ignore_errors)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 122, in apply
-    raise Exception("Required parameter %s has no value." % name)
-Exception: Required parameter month has no value.
+  File "game/screens.rpy", line 627, in execute
+    screen shop_shop_page1():
+  File "game/screens.rpy", line 627, in execute
+    screen shop_shop_page1():
+  File "game/screens.rpy", line 637, in execute
+    fixed:
+  File "game/screens.rpy", line 639, in execute
+    on "show" action Show("shop_shop_subscribe", page=shop_shop_page1)
+  File "game/screens.rpy", line 639, in keywords
+    on "show" action Show("shop_shop_subscribe", page=shop_shop_page1)
+  File "<screen language>", line 639, in <module>
+NameError: name 'shop_shop_page1' is not defined
 
 Windows-8-6.2.9200
 Ren'Py 7.3.5.606
 YiZiQianJun 1.0
-Wed Dec 11 12:11:49 2019
+Sat Dec 14 11:25:21 2019

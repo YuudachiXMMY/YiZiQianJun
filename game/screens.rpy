@@ -9,6 +9,9 @@ default persistent.Round1 = False
 default explore_point = 10
 define explore_money = 1234
 
+## Channel Volume
+# define persistent.ChannelVol = store.MixerValue("music").get_adjustment().value
+
 
 ## cha_info ####
 define cha_list = {"德怀特": "dht", "克莱因": "kly", "林奈": "ln", "泽维尔": "zwe", "西尔斯": "pxs", "里德": "ld", "阿莱特": "alt", "列文斯顿": "lwsd"}
@@ -159,8 +162,7 @@ screen say(who, what):
 
         imagebutton:
             align(1.0, 1.0)
-            idle "printer_idle"
-            hover "printer_hover"
+            auto "printer_%s"
             action ShowMenu("cg_indi")
 
 ## 通过 Character 对象使名称框可用于样式化。
@@ -271,7 +273,6 @@ screen choice(items):
 ## 文字说明。
 define config.narrator_menu = True
 
-
 style choice_vbox is vbox
 style choice_button is button
 style choice_button_text is button_text
@@ -305,8 +306,7 @@ screen quick_menu():
 
         imagebutton:
             xalign 0.5 pos(1770, -10)
-            idle "kean_idle"
-            hover "kean_hover"
+            auto "kean_%s"
             action Show("quick_menu_expand", transition=Dissolve(0.1))
 
 
@@ -318,32 +318,27 @@ screen quick_menu_expand():
 
         imagebutton:
             xalign 0.5 pos(1770, 160)
-            idle "kean_save_idle"
-            hover "kean_save_hover"
+            auto "kean_save_%s"
             action ShowMenu('save')
         
         imagebutton:
             xalign 0.5 pos(1770, 260)
-            idle "kean_load_idle"
-            hover "kean_load_hover"
+            auto "kean_load_%s"
             action ShowMenu('load')
 
         imagebutton:
             xalign 0.5 pos(1770, 360)
-            idle "kean_auto_idle"
-            hover "kean_auto_hover"
+            auto "kean_auto_%s"
             action Preference("auto-forward", "toggle")
         
         imagebutton:
             xalign 0.5 pos(1770, 460)
-            idle "kean_preference_idle"
-            hover "kean_preference_hover"
+            auto "kean_preference_%s"
             action ShowMenu('preferences')
 
         imagebutton:
             xalign 0.5 pos(1770, 560)
-            idle "kean_return_idle"
-            hover "kean_return_hover"
+            auto "kean_return_%s"
             action Hide("quick_menu_expand", transition=Dissolve(0.1))
 
 screen quick_menu_info():
@@ -354,8 +349,7 @@ screen quick_menu_info():
         
         imagebutton:
             pos(0, 0)
-            idle "explore_idle"
-            hover "explore_hover"
+            auto "explore_%s"
             action Show("shop_news_month_1")
 
         text _("[explore_point]"):
@@ -380,24 +374,27 @@ screen shop():
 
     zorder 101
 
-    if renpy.get_screen("shop_news_month_1") or renpy.get_screen("shop_news_month_2"):
-        
-        imagebutton:
-            xpos 110 yalign 0.3
-            idle "gui/gallery/button_frame.png"
-            action Show("shop_news_month_1")
-        imagebutton:
-            xpos 110 yalign 0.4
-            idle "gui/gallery/button_frame.png"
-            action Show("shop_news_month_1")
-        imagebutton:
-            xpos 110 yalign 0.5
-            idle "gui/gallery/button_frame.png"
-            action Show("shop_news_month_1")
-        imagebutton:
-            xpos 110 yalign 0.6
-            idle "gui/gallery/button_frame.png"
-            action Show("shop_news_month_1")
+    if renpy.get_screen("shop_news_month_1") or renpy.get_screen("shop_news_month_2") or renpy.get_screen("shop_mag") or renpy.get_screen("shop_letter") or renpy.get_screen("shop_shop_page1") or renpy.get_screen("shop_shop_page2") or renpy.get_screen("shop_shop_page3") or renpy.get_screen("shop_shop_page4"):
+
+        fixed:
+            xpos -1635
+            
+            imagebutton:
+                yalign 0.3
+                idle "gui/gallery/button_frame.png"
+                action Show("shop_news_month_1", transition=Dissolve(0.5))
+            imagebutton:
+                yalign 0.4
+                idle "gui/gallery/button_frame.png"
+                action Show("shop_mag", transition=Dissolve(0.5))
+            imagebutton:
+                yalign 0.5
+                idle "gui/gallery/button_frame.png"
+                action Show("shop_letter", transition=Dissolve(0.5))
+            imagebutton:
+                yalign 0.6
+                idle "gui/gallery/button_frame.png"
+                action Show("shop_shop_page1", transition=Dissolve(0.5))
 
 
 ## 商店界面 - 报纸 ####################################################################
@@ -406,30 +403,31 @@ screen shop():
 ## 报纸 月份1
 screen shop_news_month_1():
 
+    tag shop
+
     zorder 102
     modal True
 
     add "gui/game_screen/报纸/已购买目录_月份底图.png" zoom 1.5 xalign 0.7 yalign 0.4
     add "gui/game_screen/报纸/上级界面已购买目录_月份报纸1.jpg" zoom 1.5 xalign 0.45 yalign 0.5
-    add "gui/buttons/滚动条.png" zoom 1.5 yalign 0.5 xpos(1700)
+    add "gui/buttons/滚动条.png" zoom 1.5 ypos 110 xpos(1685)
 
     imagebutton:
         pos(500, 300)
         idle "gui/gallery/button_frame.png"
         action Show("shop_news_month_overview", month=march_0_1982, transition=Dissolve(0.5))
 
-
     fixed:
-        imagebutton:
-            pos(1680, 720)
-            idle "previous_idle"
-            hover "previous_hover"
-            action Hide("shop_news_month_1"), Show("shop_news_month_2")
+        xpos 1665
 
         imagebutton:
-            pos(1680, 240)
-            idle "return_idle"
-            hover "return_hover"
+            ypos 610
+            auto "next_%s"
+            action Hide("shop_news_month_1"), Show("shop_news_month_2", transition=Dissolve(0.5))
+
+        imagebutton:
+            ypos 200
+            auto "return_%s"
             action Hide("shop_news_month_1", transition=Dissolve(0.5))
 
         use shop
@@ -438,25 +436,27 @@ screen shop_news_month_1():
 ## 报纸 月份2
 screen shop_news_month_2():
 
+    tag shop
+
     zorder 102
     modal True
 
     add "gui/game_screen/报纸/已购买目录_月份底图.png" zoom 1.5 xalign 0.7 yalign 0.4
     add "gui/game_screen/报纸/已购买目录_月份报纸2.jpg" zoom 1.5 xalign 0.45 ypos 222
-    add "gui/buttons/滚动条.png" zoom 1.5 yalign 0.5 xpos(1700)
+    add "gui/buttons/滚动条.png" zoom 1.5 ypos 110 xpos(1685)
 
 
     fixed:
+        xpos 1665
+
         imagebutton:
-            pos(1680, 600)
-            idle "next_idle"
-            hover "next_hover"
-            action Hide("shop_news_month_2"), Show("shop_news_month_1")
+            ypos 745
+            auto "previous_%s"
+            action Hide("shop_news_month_2"), Show("shop_news_month_1", transition=Dissolve(0.5))
             
         imagebutton:
-            pos(1680, 240)
-            idle "return_idle"
-            hover "return_hover"
+            ypos 200
+            auto "return_%s"
             action Hide("shop_news_month_2", transition=Dissolve(0.5))
 
         use shop
@@ -471,15 +471,13 @@ screen shop_news_month_overview(month):
     add "gui/game_screen/报纸/下级界面报纸查阅-_底图.png" zoom 1.5 xalign 0.7 yalign 0.4
 
     imagebutton:
-        pos(1680, 240)
-        idle "return_idle"
-        hover "return_hover"
+        pos(1665, 200)
+        auto "return_%s"
         action Hide("shop_news_month_overview", transition=Dissolve(0.5))
 
 
 screen shop_news_detail():
 
-    tag menu
     zorder 104
 
     add "gui/game_screen/报纸/显示窗.png" zoom 1.5 align(0.5, 0.5)
@@ -493,8 +491,285 @@ screen shop_news_detail():
 ## 商店界面 - 杂志 ####################################################################
 ##
 
+screen shop_mag():
+
+    tag shop
+
+    zorder 102
+    modal True
+
+    add "gui/game_screen/杂志/对话框5-杂志查阅-切_03.png" zoom 1.5 xalign 0.7 yalign 0.4
+    add "gui/game_screen/杂志/已购买目录_月份杂志.jpg" zoom 1.5 xalign 0.45 yalign 0.5
+
+    imagebutton:
+        pos(500, 300)
+        idle "gui/gallery/button_frame.png"
+        action Show("shop_mag_detail", book=march_0_1982, transition=Dissolve(0.5))
+
+    fixed:
+        xpos 1665
+            
+        imagebutton:
+            ypos 200
+            auto "return_%s"
+            action Hide("shop_mag", transition=Dissolve(0.5))
+
+        use shop
 
 
+screen shop_mag_detail(book):
+
+    zorder 103
+    modal True
+
+    add "gui/game_screen/杂志/对话框5-杂志查阅-切_03.png" zoom 1.5 xalign 0.7 yalign 0.4
+
+    add "gui/game_screen/杂志/杂志内容/杂志查阅_一字千钧.jpg" zoom 1.5 xpos 350 yalign 0.5
+
+    fixed:
+        xpos 1665
+
+        imagebutton:
+            ypos 610
+            auto "next_%s"
+            action None
+
+        imagebutton:
+            ypos 745
+            auto "previous_%s"
+            action None
+        
+        imagebutton:
+            ypos 200
+            auto "return_%s"
+            action Hide("shop_mag_detail", transition=Dissolve(0.5))
+
+
+## 商店界面 - 信件 ####################################################################
+##
+
+screen shop_letter():
+
+    tag shop
+
+    zorder 103
+    modal True
+
+    add "gui/game_screen/信件/回复信件_05.png" zoom 1.5 xalign 0.7 yalign 0.4
+    add "gui/buttons/滚动条.png" zoom 1.5 ypos 110 xpos(1685)
+
+    imagebutton:
+        pos(500, 300)
+        idle "gui/gallery/button_frame.png"
+        action Show("shop_letter_detail", letter=march_0_1982, transition=Dissolve(0.5))
+
+    fixed:
+        xpos 1665
+
+        imagebutton:
+            ypos 610
+            auto "next_%s"
+            action None
+
+        imagebutton:
+            ypos 745
+            auto "previous_%s"
+            action None
+            
+        imagebutton:
+            ypos 200
+            auto "return_%s"
+            action Hide("shop_letter", transition=Dissolve(0.5))
+
+        use shop
+
+
+screen shop_letter_detail(letter):
+    
+    tag shop_letter
+
+    zorder 103
+    modal True
+
+    add "gui/game_screen/信件/回复信件_1.png" zoom 1.5 xalign 0.7 yalign 0.4
+
+    fixed:
+        ypos 880
+        
+        imagebutton:
+            xpos 1400
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_letter_detail_reply", letter=march_0_1982, transition=Dissolve(0.5))
+
+        imagebutton:
+            xpos 1200
+            idle "gui/gallery/button_frame.png"
+            action Hide("shop_letter_detail", transition=Dissolve(0.5))
+
+
+screen shop_letter_detail_reply(letter):
+
+    tag shop_letter
+
+    zorder 104
+    modal True
+
+    add "gui/game_screen/信件/回复信件_03.png" zoom 1.5 xalign 0.7 yalign 0.4
+
+    fixed:
+        imagebutton:
+            xpos 850 yalign 0.85
+            auto "shop_letter_detail_reply_%s"
+            action Hide("shop_letter_detail_reply", transition=Dissolve(0.5))
+
+
+## 商店界面 - 邮购 ####################################################################
+##
+
+## 杂志1
+screen shop_shop_page1():
+
+    tag shop
+
+    zorder 102
+    modal True
+
+    add "gui/game_screen/邮购/邮购商店_底图.png" zoom 1.5 xalign 0.7 yalign 0.4
+    add "gui/game_screen/邮购/邮购商店_杂志1.jpg" zoom 1.5 xalign 0.45 yalign 0.5
+
+    fixed:
+
+        pass
+
+        # on "show" action Show("shop_shop_subscribe", page=shop_shop_page1)
+
+    fixed:
+        xpos 1665
+
+        imagebutton:
+            ypos 610
+            auto "next_%s"
+            action Show("shop_shop_page2", transition=Dissolve(0.5))
+        
+        # imagebutton:
+        #     ypos 745
+        #     auto "previous_%s"
+        #     action None
+
+        imagebutton:
+            ypos 200
+            auto "return_%s"
+            action Hide("shop_shop_page1", transition=Dissolve(0.5))
+
+        use shop
+
+
+## 杂志2
+screen shop_shop_page2():
+
+    tag shop
+
+    zorder 102
+    modal True
+
+    add "gui/game_screen/邮购/邮购商店_底图.png" zoom 1.5 xalign 0.7 yalign 0.4
+    add "gui/game_screen/邮购/邮购商店_杂志2.jpg" zoom 1.5 xalign 0.45 yalign 0.5
+
+    fixed:
+        xpos 1665
+
+        imagebutton:
+            ypos 610
+            auto "next_%s"
+            action Show("shop_shop_page3", transition=Dissolve(0.5))
+
+        imagebutton:
+            xpos 745
+            auto "previous_%s"
+            action Show("shop_shop_page1", transition=Dissolve(0.5))
+
+        imagebutton:
+            ypos 200
+            auto "return_%s"
+            action Hide("shop_shop_page2", transition=Dissolve(0.5))
+
+        use shop
+
+
+## 杂志2
+screen shop_shop_page3():
+
+    tag shop
+
+    zorder 102
+    modal True
+
+    add "gui/game_screen/邮购/邮购商店_底图.png" zoom 1.5 xalign 0.7 yalign 0.4
+    add "gui/game_screen/邮购/邮购商店_杂志3.jpg" zoom 1.5 xalign 0.45 yalign 0.5
+
+    fixed:
+        xpos 1665
+
+        imagebutton:
+            ypos 610
+            auto "next_%s"
+            action Show("shop_shop_page4", transition=Dissolve(0.5))
+
+        imagebutton:
+            ypos 745
+            auto "previous_%s"
+            action Show("shop_shop_page2", transition=Dissolve(0.5))
+
+        imagebutton:
+            ypos 200
+            auto "return_%s"
+            action Hide("shop_shop_page3", transition=Dissolve(0.5))
+
+        use shop
+
+
+## 报纸
+screen shop_shop_page4():
+
+    tag shop
+
+    zorder 102
+    modal True
+
+    add "gui/game_screen/邮购/邮购商店_底图.png" zoom 1.5 xalign 0.7 yalign 0.4
+    add "gui/game_screen/邮购/邮购商店_报纸.jpg" zoom 1.5 xalign 0.45 yalign 0.5
+
+    fixed:
+        xpos 1665
+
+        # imagebutton:
+        #     ypos 610
+        #     auto "next_%s"
+        #     action Show("shop_shop_page3", transition=Dissolve(0.5))
+
+        imagebutton:
+            ypos 745
+            auto "previous_%s"
+            action Show("shop_shop_page3", transition=Dissolve(0.5))
+
+        imagebutton:
+            ypos 200
+            auto "return_%s"
+            action Hide("shop_shop_page4", transition=Dissolve(0.5))
+
+        use shop
+
+
+## 订购
+screen shop_shop_subscribe(page):
+
+    grid 3 2:
+
+        for i in range(0, 6):
+
+            pass
+
+    
 ################################################################################
 ## 移动设备界面
 ################################################################################
@@ -511,8 +786,7 @@ screen quick_menu():
 
         imagebutton:
             xalign 0.5 pos(1770, -10)
-            idle "kean_idle"
-            hover "kean_hover"
+            auto "kean_%s"
             action Show("quick_menu_expand", transition=Dissolve(0.1))
 
 
@@ -580,32 +854,28 @@ screen main_menu_actual():
             at trans_navi_TO_mainmenu_diy_button1
             top_padding -65
             ypos 550
-            idle "start_idle"
-            hover "start_hover"
+            auto "start_%s"
             action Start()
 
         imagebutton:
             at trans_navi_TO_mainmenu_diy_button2
             top_padding -65
             ypos 650
-            idle "load_idle"
-            hover "load_hover"
+            auto "load_%s"
             action ShowMenu("load")
 
         imagebutton:
             at trans_navi_TO_mainmenu_diy_button3
             top_padding -65
             ypos 750
-            idle "option_idle"
-            hover "option_hover"
+            auto "option_%s"
             action ShowMenu("preferences")
 
         imagebutton:
             at trans_navi_TO_mainmenu_diy_button4
             top_padding -65
             ypos 850
-            idle "gallery_idle"
-            hover "gallery_hover"
+            auto "gallery_%s"
             action ShowMenu("cg_gallery")
 
 
@@ -838,20 +1108,17 @@ screen file_slots(title):
 
         imagebutton:
             pos(1720, 600)
-            idle "previous_idle"
-            hover "previous_hover"
+            auto "previous_%s"
             action FilePagePrevious()
 
         imagebutton:
             pos(1720, 720)
-            idle "next_idle"
-            hover "next_hover"
+            auto "next_%s"
             action FilePageNext(max=4, auto=False, quick=False)
 
         imagebutton:
             pos(1720, 240)
-            idle "return_idle"
-            hover "return_hover"
+            auto "return_%s"
             action Return()
 
         grid 3 2:
@@ -942,14 +1209,12 @@ screen preferences():
 
         imagebutton:
             pos(1720, 230)
-            idle "delete_idle"
-            hover "delete_hover"
+            auto "delete_%s"
             action Show("delete_all_confirm_first", transition=Dissolve(0.5))
 
         imagebutton:
             pos(1720, 660)
-            idle "return_idle"
-            hover "return_hover"
+            auto "return_%s"
             action Return()
 
         style_prefix "pb"
@@ -962,6 +1227,18 @@ screen preferences():
 
         bar value Preference("auto-forward time") ypos 750
 
+    fixed:
+
+        if store.MixerValue("music").get_adjustment().value >= 0.5:
+            text _("music!! music_vol>=50%") align(0.5, 0.4) color "#000"
+        else:
+            text _("music_vol<50%") align(0.5, 0.4) color "#000"
+
+        if store.MixerValue("sound").get_adjustment().value >= 0.5:
+            text _("sound!! sound_vol>=50%") align(0.5, 0.55) color "#000"
+        else:
+            text _("sound_vol<50%") align(0.5, 0.55) color "#000"
+
 
 screen delete_all_confirm_first():
 
@@ -972,14 +1249,12 @@ screen delete_all_confirm_first():
 
     imagebutton:
         align(0.4,0.6)
-        idle "yes_idle"
-        hover "yes_hover"
+        auto "yes_%s"
         action Show("delete_all_confirm_second", transition=Dissolve(0.5))
 
     imagebutton:
         align(0.6,0.6)
-        idle "cancel_idle"
-        hover "cancel_hover"
+        auto "cancel_%s"
         action Hide("delete_all_confirm_first", transition=Dissolve(0.5))
 
 screen delete_all_confirm_second():
@@ -991,14 +1266,12 @@ screen delete_all_confirm_second():
 
     imagebutton:
         align(0.4,0.6)
-        idle "yes_idle"
-        hover "yes_hover"
+        auto "yes_%s"
         action Show("delete_all"), Hide("delete_all_confirm_first", transition=Dissolve(0.5)), Hide("delete_all_confirm_second", transition=Dissolve(0.5)), Return()
 
     imagebutton:
         align(0.6,0.6)
-        idle "cancel_idle"
-        hover "cancel_hover"
+        auto "cancel_%s"
         action Hide("delete_all_confirm_first", transition=Dissolve(0.5)), Hide("delete_all_confirm_second", transition=Dissolve(0.5))
 
 screen delete_all():
@@ -1448,29 +1721,33 @@ screen gallery_navigation():
 
         imagebutton:
             pos(110, 180)
-            idle "gui/gallery/button_frame.png"
+            idle "gui/gallery/按钮_个人档案_未选.png"
+            hover "gui/gallery/按钮_个人档案_选中.png"
             action ShowMenu("cg_indi")
         imagebutton:
             pos(110, 330)
-            idle "gui/gallery/button_frame.png"
+            idle "gui/gallery/按钮_记者手册_未选.png"
+            hover "gui/gallery/按钮_记者手册_选中.png"
             action ShowMenu("cg_achievement")
         imagebutton:
             pos(110, 480)
-            idle "gui/gallery/button_frame.png"
+            idle "gui/gallery/按钮_人际关系_未选.png"
+            hover "gui/gallery/按钮_人际关系_选中.png"
             action ShowMenu("cg_relationship")
         imagebutton:
             pos(110, 630)
-            idle "gui/gallery/button_frame.png"
+            idle "gui/gallery/按钮_相册回忆_未选.png"
+            hover "gui/gallery/按钮_相册回忆_选中.png"
             action ShowMenu("cg_gallery")
         imagebutton:
             pos(110, 780)
-            idle "gui/gallery/button_frame.png"
+            idle "gui/gallery/按钮_写作素材_未选.png"
+            hover "gui/gallery/按钮_写作素材_选中.png"
             action ShowMenu("cg_materials")
 
         imagebutton:
             pos(1730, 240)
-            idle "return_idle"
-            hover "return_hover"
+            auto "return_%s"
             action Return()
             # action ShowMenu("main_menu_actual")
 
@@ -1498,6 +1775,8 @@ screen cg_achievement():
 
     add "gui/gallery/background.png" zoom 1.5
 
+    add "cg_achievement_title" pos(265, 70)
+
     use gallery_navigation
 
 
@@ -1508,7 +1787,7 @@ screen cg_relationship():
 
     add "gui/gallery/background.png" zoom 1.5
 
-    add "cg_indi_title" pos(265, 70)
+    add "cg_relationship_title" pos(265, 70)
 
     # hbox:
 
@@ -1551,6 +1830,8 @@ screen cg_gallery():
 
     add "gui/gallery/background.png" zoom 1.5
 
+    add "cg_gallery_title" pos(265, 70)
+
     use gallery_navigation
 
     # grid 3 3:
@@ -1563,6 +1844,8 @@ screen cg_materials():
     tag menu
 
     add "gui/gallery/background.png" zoom 1.5
+
+    add "cg_materials_title" pos(265, 70)
 
     use gallery_navigation
 
@@ -1793,230 +2076,3 @@ style slider_pref_vbox:
 style slider_pref_slider:
     variant "small"
     xsize 900
-
-
-## 图片与动画 #####################################################################
-##
-
-## 动画
-transform trans_navi_TO_mainmenu_diy_back_ground:
-    alpha 0.7
-    linear 1.5 alpha 1.0
-
-transform trans_navi_TO_mainmenu_diy_comp:
-    alpha 0.0
-    linear 1.5 alpha 1.0
-
-
-# transform trans_navi_TO_mainmenu_diy_:
-transform trans_navi_TO_mainmenu_diy_button1:
-    alpha 0.0 xpos -100
-    linear 1.5 alpha 1.0 xpos -15
-
-transform trans_navi_TO_mainmenu_diy_button2:
-    alpha 0.0 xpos -100
-    linear 1.5 alpha 1.0 xpos -10
-
-transform trans_navi_TO_mainmenu_diy_button3:
-    alpha 0.0 xpos -100
-    linear 1.5 alpha 1.0 xpos -5
-
-transform trans_navi_TO_mainmenu_diy_button4:
-    alpha 0.0 xpos -100
-    linear 1.5 alpha 1.0 xpos 0
-
-
-## 背景
-image back_ground:
-    zoom 0.71 alpha 0.67
-    "gui/main_screen/back_ground.png"
-    linear 2.0 alpha 1.0
-    linear 2.0 alpha 0.67
-    repeat
-
-image textbox:
-    zoom 1.5 xzoom 1.08
-    xalign 0.5 yalign 1.0
-    "gui/textbox.png"
-
-image textbox_phone:
-    xzoom 1.6 yzoom 2.1
-    xalign 0.5 yalign 1.0
-    "gui/textbox.png"
-
-
-## GUI
-image start_idle:
-    zoom 1.5
-    "gui/main_screen/字_start.png"
-
-image start_hover:
-    zoom 1.5
-    "gui/main_screen/字_start选中.png"
-
-image load_idle:
-    zoom 1.5
-    "gui/main_screen/字_load.png"
-
-image load_hover:
-    zoom 1.5
-    "gui/main_screen/字_load选中.png"
-
-image option_idle:
-    zoom 1.5
-    "gui/main_screen/字_option.png"
-
-image option_hover:
-    zoom 1.5
-    "gui/main_screen/字_option选中.png"
-
-image gallery_idle:
-    zoom 1.5
-    "gui/main_screen/字_gallery.png"
-
-image gallery_hover:
-    zoom 1.5
-    "gui/main_screen/字_gallery选中.png"
-
-image yes_idle:
-    zoom 1.5
-    "gui/main_screen/saving/确定_未选.png"
-
-image yes_hover:
-    zoom 1.5
-    "gui/main_screen/saving/确定_选中.png"
-
-image cancel_idle:
-    zoom 1.5
-    "gui/main_screen/saving/取消_未选.png"
-
-image cancel_hover:
-    zoom 1.5
-    "gui/main_screen/saving/取消_选中.png"
-
-image return_idle:
-    zoom 1.5
-    "gui/buttons/按钮_返回_未选.png"
-
-image return_hover:
-    zoom 1.5
-    "gui/buttons/按钮_返回_选中.png"
-
-image delete_idle:
-    zoom 1.5
-    "gui/buttons/按钮_垃圾桶_未选.png"
-
-image delete_hover:
-    zoom 1.5
-    "gui/buttons/按钮_垃圾桶_选中.png"
-
-image thumb_idle:
-    zoom 1.5
-    "gui/slider/horizontal_idle_thumb.png"
-
-image horizontal_left_bar:
-    yzoom 1.5
-    xzoom 2.5
-    "gui/slider/horizontal_left_bar.png"
-
-image horizontal_right_bar:
-    yzoom 1.5
-    xzoom 2.5
-    "gui/slider/horizontal_right_bar.png"
-
-image previous_idle:
-    zoom 1.5
-    "gui/buttons/按钮_后退_未选.png"
-
-image previous_hover:
-    zoom 1.5
-    "gui/buttons/按钮_后退_选中.png"
-
-image next_idle:
-    zoom 1.5
-    "gui/buttons/按钮_前进_未选.png"
-
-image next_hover:
-    zoom 1.5
-    "gui/buttons/按钮_前进_选中.png"
-
-image printer_idle:
-    zoom 1.5
-    "gui/game_screen/打字机_未选.png"
-
-image printer_hover:
-    zoom 1.5
-    "gui/game_screen/打字机_选中.png"
-
-
-## CG####
-image cg_indi_prop:
-    zoom 1.5
-    "gui/gallery/indi/prop.png"
-
-image cg_indi_title:
-    zoom 1.5
-    "gui/gallery/indi/title.png"
-
-
-## 柯安时报####
-image kean_idle:
-    zoom 1.5
-    "gui/game_screen/柯安时报/按钮_柯安时报.png"
-
-image kean_hover:
-    zoom 1.5
-    "gui/game_screen/柯安时报/按钮_柯安时报1.png"
-
-image kean_save_idle:
-    zoom 1.5
-    "gui/game_screen/柯安时报/按钮_存档.png"
-
-image kean_save_hover:
-    zoom 1.5
-    "gui/game_screen/柯安时报/按钮_存档1.png"
-
-image kean_load_idle:
-    zoom 1.5
-    "gui/game_screen/柯安时报/按钮_读取.png"
-
-image kean_load_hover:
-    zoom 1.5
-    "gui/game_screen/柯安时报/按钮_读取1.png"
-
-image kean_auto_idle:
-    zoom 1.5
-    "gui/game_screen/柯安时报/按钮_自动.png"
-
-image kean_auto_hover:
-    zoom 1.5
-    "gui/game_screen/柯安时报/按钮_自动1.png"
-
-image kean_preference_idle:
-    zoom 1.5
-    "gui/game_screen/柯安时报/按钮_设置.png"
-
-image kean_preference_hover:
-    zoom 1.5
-    "gui/game_screen/柯安时报/按钮_设置1.png"
-
-image kean_return_idle:
-    zoom 1.5
-    "gui/game_screen/柯安时报/按钮_返回.png"
-
-image kean_return_hover:
-    zoom 1.5
-    "gui/game_screen/柯安时报/按钮_返回1.png"
-
-
-## 探索点数
-image explore_idle:
-    zoom 1.5
-    "gui/game_screen/探索点/探索点数未选.png"
-
-image explore_hover:
-    zoom 1.5
-    "gui/game_screen/探索点/探索点数选中.png"
-
-
-## 商店界面
