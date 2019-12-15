@@ -9,10 +9,6 @@ default persistent.Round1 = False
 default explore_point = 10
 define explore_money = 1234
 
-## Channel Volume
-# define persistent.ChannelVol = store.MixerValue("music").get_adjustment().value
-
-
 ## cha_info ####
 define cha_list = {"德怀特": "dht", "克莱因": "kly", "林奈": "ln", "泽维尔": "zwe", "西尔斯": "pxs", "里德": "ld", "阿莱特": "alt", "列文斯顿": "lwsd"}
 define cha_list_love = {"德怀特": 0, "克莱因": 55, "林奈": 55, "泽维尔": 55, "西尔斯": 55, "里德": "ld", "阿莱特": 55, "列文斯顿": 55}
