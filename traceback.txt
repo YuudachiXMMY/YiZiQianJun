@@ -1,44 +1,42 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "renpy/common/00start.rpy", line 189, in script
-    python:
-  File "renpy/common/00start.rpy", line 189, in script
-    python:
-  File "renpy/common/00start.rpy", line 190, in <module>
-    renpy.execute_default_statement(True)
-  File "game/screens.rpy", line 9, in set_default
-    default explore_point = 10
-Exception: store.explore_point is being given a default a second time.
+  File "renpy/common/00start.rpy", line 212, in script call
+    call _load_reload_game from _call__load_reload_game_1
+  File "renpy/common/00keymap.rpy", line 456, in script
+    python hide:
+  File "renpy/common/00keymap.rpy", line 456, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 466, in _execute_python_hide
+    renpy.load("_reload-2")
+Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\bootstrap.py", line 316, in bootstrap
-    renpy.main.main()
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\main.py", line 578, in main
-    run(restart)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\main.py", line 143, in run
-    renpy.execution.run_context(True)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\execution.py", line 908, in run_context
-    context.run()
-  File "renpy/common/00start.rpy", line 189, in script
-    python:
-  File "renpy/common/00start.rpy", line 189, in script
-    python:
+  File "renpy/common/00start.rpy", line 212, in script call
+    call _load_reload_game from _call__load_reload_game_1
+  File "renpy/common/00keymap.rpy", line 456, in script
+    python hide:
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 914, in execute
     renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 2028, in py_exec_bytecode
     exec bytecode in globals, locals
-  File "renpy/common/00start.rpy", line 190, in <module>
-    renpy.execute_default_statement(True)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\exports.py", line 3495, in execute_default_statement
-    i.set_default(start)
-  File "game/screens.rpy", line 9, in set_default
-    default explore_point = 10
-Exception: store.explore_point is being given a default a second time.
+  File "renpy/common/00keymap.rpy", line 456, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 466, in _execute_python_hide
+    renpy.load("_reload-2")
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\loadsave.py", line 770, in load
+    log.unfreeze(roots, label="_after_load")
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 1983, in unfreeze
+    self.rollback(0, force=True, label=label, greedy=greedy, on_load=True)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 1815, in rollback
+    self.load_failed()
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 1733, in load_failed
+    raise Exception("Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?")
+Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
 
 Windows-8-6.2.9200
 Ren'Py 7.3.5.606
 YiZiQianJun 1.0
-Mon Dec 16 16:43:09 2019
+Mon Dec 16 18:56:25 2019

@@ -305,7 +305,7 @@ screen quick_menu_info():
         imagebutton:
             pos(0, 0)
             auto "explore_%s"
-            action Show("shop_news_month_1")
+            action Show("shop_news_month_1", transition=Dissolve(0.5))
 
         text _("[explore_point]"):
             size 45 xpos 475 ypos 95 bold True
@@ -778,7 +778,7 @@ screen shop_shop_page2():
             action Show("shop_shop_page3", transition=Dissolve(0.5))
 
         imagebutton:
-            xpos 745
+            ypos 745
             auto "previous_%s"
             action Show("shop_shop_page1", transition=Dissolve(0.5))
 
@@ -1313,9 +1313,9 @@ screen preferences():
 
         style_prefix "pb"
 
-        bar value Preference("music volume") ypos 390
+        bar value Preference("music volume") ypos 510
 
-        bar value Preference("sound volume") ypos 510
+        bar value Preference("sound volume") ypos 390
 
         bar value Preference("text speed") ypos 630
 
@@ -1325,14 +1325,14 @@ screen preferences():
     fixed:
 
         if store.MixerValue("music").get_adjustment().value >= 0.5:
-            text _("music!! music_vol>=50%") align(0.5, 0.4) color "#000"
+            text _("music!! music_vol>=50%") align(0.5, 0.55) color "#000"
         else:
-            text _("music_vol<50%") align(0.5, 0.4) color "#000"
+            text _("music_vol<50%") align(0.5, 0.55) color "#000"
 
-        # if store.MixerValue("sound").get_adjustment().value >= 0.5:
-        #     text _("sound!! sound_vol>=50%") align(0.5, 0.55) color "#000"
-        # else:
-        #     text _("sound_vol<50%") align(0.5, 0.55) color "#000"
+        if store.MixerValue("sfx").get_adjustment().value >= 0.5:
+            text _("sound!! sound_vol>=50%") align(0.5, 0.4) color "#000"
+        else:
+            text _("sound_vol<50%") align(0.5, 0.4) color "#000"
 
 
 screen delete_all_confirm_first():
@@ -1359,10 +1359,11 @@ screen delete_all_confirm_second():
     
     add "gui/main_screen/preferences/弹出框_04.png" align(0.5, 0.5) zoom 1.4
 
+    # TODO 1
     imagebutton:
         align(0.4,0.6)
         auto "yes_%s"
-        action Show("delete_all"), Hide("delete_all_confirm_first", transition=Dissolve(0.5)), Hide("delete_all_confirm_second", transition=Dissolve(0.5)), Return()
+        action Show("delete_all"), Hide("delete_all_confirm_first"), Hide("delete_all_confirm_second")
 
     imagebutton:
         align(0.6,0.6)
@@ -1373,7 +1374,7 @@ screen delete_all():
 
     on "show" action SetVariable("persistent.Round1", False)
 
-    timer 5.0 action Hide("delete_all")
+    timer 0.01 action ShowMenu("main_menu")
 
 # PC
 style pb_slider:
@@ -1893,6 +1894,8 @@ screen cg_relationship():
     #         add "gui/gallery/relation/cha_lock.png" zoom 1.4 xpos i*35
 
     fixed:
+        textbutton _("点此减少克莱因好感度") xalign 0.25 yalign 0.65 action SetDict(cha_list_love, "克莱因", cha_list_love["克莱因"]-1)
+        textbutton _("点此增加克莱因好感度") xalign 0.5 yalign 0.65 action SetDict(cha_list_love, "克莱因", cha_list_love["克莱因"]+1)
 
         pos(400, 210)
         
@@ -1915,7 +1918,7 @@ screen cg_relationship_detail(cha):
         
         add "gui/gallery/relation/角色_"+cha+".png" zoom 1.4 xpos relation_datail[""+cha_list[cha]+"_xpos"]
 
-        text _("55") color "#fff" size 50 ypos 580 xpos relation_datail[""+cha_list[cha]+"_xpos"]+85
+        text _(str(cha_list_love[cha])) color "#fff" size 50 ypos 580 xpos relation_datail[""+cha_list[cha]+"_xpos"]+85
 
 
 ## 相册回忆
