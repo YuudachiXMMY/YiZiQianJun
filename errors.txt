@@ -2,10 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/functions.rpy", line 13: invalid syntax
-    def nothing:
-                ^
-    
+File "game/screens.rpy", line 336: u'ypadding' is not a keyword argument or valid child for the grid statement.
+    ypadding 20
+            ^
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Mon Dec 16 16:40:32 2019
+Mon Dec 16 20:30:14 2019

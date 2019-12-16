@@ -300,3 +300,55 @@ image shop_shop_subscribe_idle:
 image shop_shop_subscribe_hover:
     zoom 1.5
     "gui/game_screen/邮购/邮购商店_订阅选中.png"
+
+image shop_news_navi_idle:
+    zoom 1.5
+    "gui/game_screen/杂志查阅_报纸未选中.png"
+
+image shop_news_navi_hover:
+    zoom 1.5
+    "gui/game_screen/杂志查阅_报纸选中.png"
+
+image shop_mag_navi_idle:
+    zoom 1.5
+    "gui/game_screen/杂志查阅_杂志未选中.png"
+
+image shop_mag_navi_hover:
+    zoom 1.5
+    "gui/game_screen/杂志查阅_杂志选中.png"
+
+image shop_letter_navi_idle:
+    zoom 1.5
+    "gui/game_screen/杂志查阅_信件未选中.png"
+
+image shop_letter_navi_hover:
+    zoom 1.5
+    "gui/game_screen/杂志查阅_信件选中.png"
+
+image shop_shop_navi_idle:
+    zoom 1.5
+    "gui/game_screen/杂志查阅_邮购未选中.png"
+
+image shop_shop_navi_hover:
+    zoom 1.5
+    "gui/game_screen/杂志查阅_邮购选中.png"
+
+## shop_shop_detail
+image shop_paper_0_idle:
+    zoom 1.5
+    "gui/game_screen/邮购/点击出现的商品介绍/shop_paper_0.jpg"
+image shop_paper_1_idle:
+    zoom 1.5
+    "gui/game_screen/邮购/点击出现的商品介绍/shop_paper_1.jpg"
+image shop_paper_2_idle:
+    zoom 1.5
+    "gui/game_screen/邮购/点击出现的商品介绍/shop_paper_2.jpg"
+image shop_paper_3_idle:
+    zoom 1.5
+    "gui/game_screen/邮购/点击出现的商品介绍/shop_paper_3.jpg"
+image shop_paper_4_idle:
+    zoom 1.5
+    "gui/game_screen/邮购/点击出现的商品介绍/shop_paper_4.jpg"
+image shop_paper_5_idle:
+    zoom 1.5
+    "gui/game_screen/邮购/点击出现的商品介绍/shop_paper_5.jpg"

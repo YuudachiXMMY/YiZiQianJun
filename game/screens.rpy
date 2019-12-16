@@ -329,27 +329,28 @@ screen shop():
 
     zorder 101
 
-    if renpy.get_screen("shop_news_month_1") or renpy.get_screen("shop_news_month_2") or renpy.get_screen("shop_mag") or renpy.get_screen("shop_letter") or renpy.get_screen("shop_shop_page1") or renpy.get_screen("shop_shop_page2") or renpy.get_screen("shop_shop_page3") or renpy.get_screen("shop_shop_page4"):
+    if renpy.get_screen("shop_news_month_1") or renpy.get_screen("shop_news_month_2") or renpy.get_screen("shop_mag") or renpy.get_screen("shop_letter") or renpy.get_screen("shop_shop_page_news1") or renpy.get_screen("shop_shop_page_news2") or renpy.get_screen("shop_shop_page_news3") or renpy.get_screen("shop_shop_page_paper"):
 
-        fixed:
-            xpos -1635
+        grid 1 4:
+            xpos -1550 yalign 0.5
+            yspacing 20
             
             imagebutton:
                 yalign 0.3
-                idle "gui/gallery/button_frame.png"
+                auto "shop_news_navi_%s"
                 action Show("shop_news_month_1", transition=Dissolve(0.5))
             imagebutton:
                 yalign 0.4
-                idle "gui/gallery/button_frame.png"
+                auto "shop_mag_navi_%s"
                 action Show("shop_mag", transition=Dissolve(0.5))
             imagebutton:
                 yalign 0.5
-                idle "gui/gallery/button_frame.png"
+                auto "shop_letter_navi_%s"
                 action Show("shop_letter", transition=Dissolve(0.5))
             imagebutton:
                 yalign 0.6
-                idle "gui/gallery/button_frame.png"
-                action Show("shop_shop_page1", transition=Dissolve(0.5))
+                auto "shop_shop_navi_%s"
+                action Show("shop_shop_page_paper", transition=Dissolve(0.5))
 
 
 ## 商店界面 - 报纸 ####################################################################
@@ -553,7 +554,7 @@ screen shop_mag():
     zorder 102
     modal True
 
-    add "gui/game_screen/杂志/对话框5-杂志查阅-切_03.png" zoom 1.5 xalign 0.7 yalign 0.4
+    add "gui/game_screen/杂志/杂志查阅光板.png" zoom 1.5 xalign 0.7 yalign 0.4
     add "gui/game_screen/杂志/已购买目录_月份杂志.jpg" zoom 1.5 xalign 0.45 ypos 222
 
     grid 2 6:
@@ -720,110 +721,8 @@ screen shop_letter_detail_reply(letter):
 ## 商店界面 - 邮购 ####################################################################
 ##
 
-## 杂志1
-screen shop_shop_page1():
-
-    tag shop
-
-    zorder 102
-    modal True
-
-    add "gui/game_screen/邮购/邮购商店_底图.png" zoom 1.5 xalign 0.7 yalign 0.4
-    add "gui/game_screen/邮购/邮购商店_杂志1.jpg" zoom 1.5 xalign 0.45 yalign 0.5
-
-    fixed:
-
-        pass
-
-        # on "show" action Show("shop_shop_subscribe", page=shop_shop_page1)
-
-    fixed:
-        xpos 1665
-
-        imagebutton:
-            ypos 610
-            auto "next_%s"
-            action Show("shop_shop_page2", transition=Dissolve(0.5))
-        
-        # imagebutton:
-        #     ypos 745
-        #     auto "previous_%s"
-        #     action None
-
-        imagebutton:
-            ypos 200
-            auto "return_%s"
-            action Hide("shop_shop_page1", transition=Dissolve(0.5))
-
-        use shop
-
-
-## 杂志2
-screen shop_shop_page2():
-
-    tag shop
-
-    zorder 102
-    modal True
-
-    add "gui/game_screen/邮购/邮购商店_底图.png" zoom 1.5 xalign 0.7 yalign 0.4
-    add "gui/game_screen/邮购/邮购商店_杂志2.jpg" zoom 1.5 xalign 0.45 yalign 0.5
-
-    fixed:
-        xpos 1665
-
-        imagebutton:
-            ypos 610
-            auto "next_%s"
-            action Show("shop_shop_page3", transition=Dissolve(0.5))
-
-        imagebutton:
-            ypos 745
-            auto "previous_%s"
-            action Show("shop_shop_page1", transition=Dissolve(0.5))
-
-        imagebutton:
-            ypos 200
-            auto "return_%s"
-            action Hide("shop_shop_page2", transition=Dissolve(0.5))
-
-        use shop
-
-
-## 杂志2
-screen shop_shop_page3():
-
-    tag shop
-
-    zorder 102
-    modal True
-
-    add "gui/game_screen/邮购/邮购商店_底图.png" zoom 1.5 xalign 0.7 yalign 0.4
-    add "gui/game_screen/邮购/邮购商店_杂志3.jpg" zoom 1.5 xalign 0.45 yalign 0.5
-
-    fixed:
-        xpos 1665
-
-        imagebutton:
-            ypos 610
-            auto "next_%s"
-            action Show("shop_shop_page4", transition=Dissolve(0.5))
-
-        imagebutton:
-            ypos 745
-            auto "previous_%s"
-            action Show("shop_shop_page2", transition=Dissolve(0.5))
-
-        imagebutton:
-            ypos 200
-            auto "return_%s"
-            action Hide("shop_shop_page3", transition=Dissolve(0.5))
-
-        use shop
-
-
 ## 报纸
-screen shop_shop_page4():
+screen shop_shop_page_paper():
 
     tag shop
 
@@ -833,35 +732,173 @@ screen shop_shop_page4():
     add "gui/game_screen/邮购/邮购商店_底图.png" zoom 1.5 xalign 0.7 yalign 0.4
     add "gui/game_screen/邮购/邮购商店_报纸.jpg" zoom 1.5 xalign 0.45 yalign 0.5
 
+    use shop_shop_subscribe(page="paper", vol=0)
+
+    fixed:
+        xpos 1665
+
+        imagebutton:
+            ypos 610
+            auto "next_%s"
+            action Show("shop_shop_page_news1", transition=Dissolve(0.5))
+
+        # imagebutton:
+        #     ypos 745
+        #     auto "previous_%s"
+        #     action Show("shop_shop_page_news3", transition=Dissolve(0.5))
+
+        imagebutton:
+            ypos 200
+            auto "return_%s"
+            action Hide("shop_shop_page_paper", transition=Dissolve(0.5))
+
+        use shop
+
+
+## 杂志1
+screen shop_shop_page_news1():
+
+    tag shop
+
+    zorder 102
+    modal True
+
+    add "gui/game_screen/邮购/邮购商店_底图.png" zoom 1.5 xalign 0.7 yalign 0.4
+    add "gui/game_screen/邮购/邮购商店_杂志1.jpg" zoom 1.5 xalign 0.45 yalign 0.5
+
+    use shop_shop_subscribe(page="news", vol=1)
+
+    fixed:
+
+        pass
+
+        # on "show" action Show("shop_shop_subscribe", page=shop_shop_page_news1)
+
+    fixed:
+        xpos 1665
+
+        imagebutton:
+            ypos 610
+            auto "next_%s"
+            action Show("shop_shop_page_news2", transition=Dissolve(0.5))
+        
+        imagebutton:
+            ypos 745
+            auto "previous_%s"
+            action Show("shop_shop_page_paper", transition=Dissolve(0.5))
+
+        imagebutton:
+            ypos 200
+            auto "return_%s"
+            action Hide("shop_shop_page_news1", transition=Dissolve(0.5))
+
+        use shop
+
+
+## 杂志2
+screen shop_shop_page_news2():
+
+    tag shop
+
+    zorder 102
+    modal True
+
+    add "gui/game_screen/邮购/邮购商店_底图.png" zoom 1.5 xalign 0.7 yalign 0.4
+    add "gui/game_screen/邮购/邮购商店_杂志2.jpg" zoom 1.5 xalign 0.45 yalign 0.5
+
+    # TODO 1
+    #差下面三位图片
+    use shop_shop_subscribe(page="news", vol=2)
+
+    fixed:
+        xpos 1665
+
+        imagebutton:
+            ypos 610
+            auto "next_%s"
+            action Show("shop_shop_page_news3", transition=Dissolve(0.5))
+
+        imagebutton:
+            ypos 745
+            auto "previous_%s"
+            action Show("shop_shop_page_news1", transition=Dissolve(0.5))
+
+        imagebutton:
+            ypos 200
+            auto "return_%s"
+            action Hide("shop_shop_page_news2", transition=Dissolve(0.5))
+
+        use shop
+
+
+## 杂志2
+screen shop_shop_page_news3():
+
+    tag shop
+
+    zorder 102
+    modal True
+
+    add "gui/game_screen/邮购/邮购商店_底图.png" zoom 1.5 xalign 0.7 yalign 0.4
+    add "gui/game_screen/邮购/邮购商店_杂志3.jpg" zoom 1.5 xalign 0.45 yalign 0.5
+
+    # TODO 1
+    #差下面三位图片
+    use shop_shop_subscribe(page="news", vol=3)
+
     fixed:
         xpos 1665
 
         # imagebutton:
         #     ypos 610
         #     auto "next_%s"
-        #     action Show("shop_shop_page3", transition=Dissolve(0.5))
+        #     action Show("shop_shop_page_paper", transition=Dissolve(0.5))
 
         imagebutton:
             ypos 745
             auto "previous_%s"
-            action Show("shop_shop_page3", transition=Dissolve(0.5))
+            action Show("shop_shop_page_news2", transition=Dissolve(0.5))
 
         imagebutton:
             ypos 200
             auto "return_%s"
-            action Hide("shop_shop_page4", transition=Dissolve(0.5))
+            action Hide("shop_shop_page_news3", transition=Dissolve(0.5))
 
         use shop
 
 
 ## 订购
-screen shop_shop_subscribe(page):
+screen shop_shop_subscribe(page, vol):
+
+    zorder 103
 
     grid 3 2:
+        xalign 0.575 yalign 0.68
+        yspacing 290
+        xspacing 310
 
         for i in range(0, 6):
 
-            pass
+            imagebutton:
+                auto "shop_shop_subscribe_%s"
+                action Show("shop_shop_subscribe_detail", content=page, num=i, vol=vol, transition=Dissolve(0.5))
+
+
+## 订购 展开
+screen shop_shop_subscribe_detail(content, num, vol):
+
+    zorder 104
+    modal True
+
+    add "gui/game_screen/邮购/点击出现的商品介绍/商品-杂志介绍_底图.png" zoom 1.5 align(0.5, 0.5)
+    # if vol==0:
+    #     add "gui/game_screen/邮购/点击出现的商品介绍/shop_"+str(content)+"_"+str(num)+".jpg" zoom 1.5 align(0.5, 0.5)
+    # else:
+    add "gui/game_screen/邮购/点击出现的商品介绍/shop_"+str(content)+"_"+str(vol)+"_"+str(num)+".jpg" zoom 1.5 align(0.5, 0.5)
+    
+    imagebutton:
+        idle "gui/transparent_background.png"
+        action Hide("shop_shop_subscribe_detail", transition=Dissolve(0.5))
 
     
 ################################################################################
@@ -1359,7 +1396,6 @@ screen delete_all_confirm_second():
     
     add "gui/main_screen/preferences/弹出框_04.png" align(0.5, 0.5) zoom 1.4
 
-    # TODO 1
     imagebutton:
         align(0.4,0.6)
         auto "yes_%s"
