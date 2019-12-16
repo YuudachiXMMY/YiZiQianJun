@@ -1,71 +1,44 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 35, in script
-    oej normal "您已创建一个新的 Ren'Py 游戏。"
-  File "game/screens.rpy", line 627, in execute
-    screen shop_shop_page1():
-  File "game/screens.rpy", line 627, in execute
-    screen shop_shop_page1():
-  File "game/screens.rpy", line 637, in execute
-    fixed:
-  File "game/screens.rpy", line 639, in execute
-    on "show" action Show("shop_shop_subscribe", page=shop_shop_page1)
-  File "game/screens.rpy", line 639, in keywords
-    on "show" action Show("shop_shop_subscribe", page=shop_shop_page1)
-NameError: name 'shop_shop_page1' is not defined
+  File "renpy/common/00start.rpy", line 189, in script
+    python:
+  File "renpy/common/00start.rpy", line 189, in script
+    python:
+  File "renpy/common/00start.rpy", line 190, in <module>
+    renpy.execute_default_statement(True)
+  File "game/screens.rpy", line 9, in set_default
+    default explore_point = 10
+Exception: store.explore_point is being given a default a second time.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 35, in script
-    oej normal "您已创建一个新的 Ren'Py 游戏。"
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 708, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\exports.py", line 1345, in say
-    who(what, *args, **kwargs)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\character.py", line 1142, in __call__
-    self.do_display(who, what, cb_args=self.cb_args, **display_args)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\character.py", line 842, in do_display
-    **display_args)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\character.py", line 591, in display_say
-    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ui.py", line 297, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 2702, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, **kwargs)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3094, in interact_core
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
-    d.visit_all(callback, seen)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
-    d.visit_all(callback, seen)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
-    d.visit_all(callback, seen)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
-    d.visit_all(callback, seen)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 430, in visit_all
-    callback(self)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3094, in <lambda>
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 440, in per_interact
-    self.update()
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 625, in update
-    self.screen.function(**self.scope)
-  File "game/screens.rpy", line 627, in execute
-    screen shop_shop_page1():
-  File "game/screens.rpy", line 627, in execute
-    screen shop_shop_page1():
-  File "game/screens.rpy", line 637, in execute
-    fixed:
-  File "game/screens.rpy", line 639, in execute
-    on "show" action Show("shop_shop_subscribe", page=shop_shop_page1)
-  File "game/screens.rpy", line 639, in keywords
-    on "show" action Show("shop_shop_subscribe", page=shop_shop_page1)
-  File "<screen language>", line 639, in <module>
-NameError: name 'shop_shop_page1' is not defined
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\bootstrap.py", line 316, in bootstrap
+    renpy.main.main()
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\main.py", line 578, in main
+    run(restart)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\main.py", line 143, in run
+    renpy.execution.run_context(True)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\execution.py", line 908, in run_context
+    context.run()
+  File "renpy/common/00start.rpy", line 189, in script
+    python:
+  File "renpy/common/00start.rpy", line 189, in script
+    python:
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 914, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 2028, in py_exec_bytecode
+    exec bytecode in globals, locals
+  File "renpy/common/00start.rpy", line 190, in <module>
+    renpy.execute_default_statement(True)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\exports.py", line 3495, in execute_default_statement
+    i.set_default(start)
+  File "game/screens.rpy", line 9, in set_default
+    default explore_point = 10
+Exception: store.explore_point is being given a default a second time.
 
 Windows-8-6.2.9200
 Ren'Py 7.3.5.606
 YiZiQianJun 1.0
-Sat Dec 14 11:25:21 2019
+Mon Dec 16 16:43:09 2019

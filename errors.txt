@@ -2,9 +2,10 @@
 errors listed below, and try again.
 
 
-File "game/screens.rpy", line 759: screen expects a non-empty block.
-    screen shop_shop_subscribe(page):
-                                     ^
+File "game/functions.rpy", line 13: invalid syntax
+    def nothing:
+                ^
+    
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Sat Dec 14 11:21:23 2019
+Mon Dec 16 16:40:32 2019

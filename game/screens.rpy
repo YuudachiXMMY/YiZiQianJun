@@ -4,47 +4,6 @@
 
 init offset = -1
 
-default persistent.Round1 = False
-
-default explore_point = 10
-define explore_money = 1234
-
-## cha_info ####
-define cha_list = {"德怀特": "dht", "克莱因": "kly", "林奈": "ln", "泽维尔": "zwe", "西尔斯": "pxs", "里德": "ld", "阿莱特": "alt", "列文斯顿": "lwsd"}
-define cha_list_love = {"德怀特": 0, "克莱因": 55, "林奈": 55, "泽维尔": 55, "西尔斯": 55, "里德": "ld", "阿莱特": 55, "列文斯顿": 55}
-
-define dht_info = {}
-
-define relation_datail = {"dht_xpos": 35, "kly_xpos": 35*2+180, "ln_xpos": 35*3+180*2, "zwe_xpos": 35*4+180*3, "pxs_xpos": 35*5+180*4, "ld_xpos": 35*6+180*5, "alt_xpos": 35*7+180*6, "lwsd_xpos":35*8+180*7}
-
-
-## shop_news info ####
-define march_0_1982 = {}
-define march_1_1982 = {}
-define april_0_1982 = {}
-define april_1_1982 = {}
-define may_0_1982 = {}
-define may_1_1982 = {}
-define june_0_1982 = {}
-define june_1_1982 = {}
-define july_0_1982 = {}
-define july_1_1982 = {}
-define august_0_1982 = {}
-define august_1_1982 = {}
-define september_0_1982 = {}
-define september_1_1982 = {}
-define october_0_1982 = {}
-define october_1_1982 = {}
-define november_0_1982 = {}
-define november_1_1982 = {}
-define december_0_1982 = {}
-define december_1_1982 = {}
-define january_0_1983 = {}
-define january_1_1983 = {}
-define february_0_1983 = {}
-define february_1_1983 = {}
-
-
 ################################################################################
 ## 样式
 ################################################################################
@@ -408,10 +367,73 @@ screen shop_news_month_1():
     add "gui/game_screen/报纸/上级界面已购买目录_月份报纸1.jpg" zoom 1.5 xalign 0.45 yalign 0.5
     add "gui/buttons/滚动条.png" zoom 1.5 ypos 110 xpos(1685)
 
-    imagebutton:
-        pos(500, 300)
-        idle "gui/gallery/button_frame.png"
-        action Show("shop_news_month_overview", month=march_0_1982, transition=Dissolve(0.5))
+    grid 2 8:
+        xpos 480 ypos 200
+        yspacing 7 xspacing 330
+
+        ## 三月
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=march_0_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=march_1_1982, transition=Dissolve(0.5))
+
+        ## 四月
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=april_0_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=april_1_1982, transition=Dissolve(0.5))
+
+        ## 五月
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=may_0_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=may_1_1982, transition=Dissolve(0.5))
+
+        ## 六月
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=june_0_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=june_1_1982, transition=Dissolve(0.5))
+
+        ## 七月
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=july_0_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=july_1_1982, transition=Dissolve(0.5))
+
+        ## 八月
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=august_0_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=august_1_1982, transition=Dissolve(0.5))
+        
+        ## 九月
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=september_0_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=september_1_1982, transition=Dissolve(0.5))
+
+        ## 十月
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=october_0_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=october_1_1982, transition=Dissolve(0.5))
 
     fixed:
         xpos 1665
@@ -441,6 +463,41 @@ screen shop_news_month_2():
     add "gui/game_screen/报纸/已购买目录_月份报纸2.jpg" zoom 1.5 xalign 0.45 ypos 222
     add "gui/buttons/滚动条.png" zoom 1.5 ypos 110 xpos(1685)
 
+    grid 2 4:
+        xpos 480 ypos 200
+        yspacing 7 xspacing 330
+        
+        ## 十一月
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=november_0_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=november_1_1982, transition=Dissolve(0.5))
+        
+        ## 十二月
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=december_0_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=december_1_1982, transition=Dissolve(0.5))
+        
+        ## 一月
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=january_0_1983, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=january_1_1983, transition=Dissolve(0.5))
+
+        ## 二月
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=february_0_1983, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_news_month_overview", month=february_1_1983, transition=Dissolve(0.5))
 
     fixed:
         xpos 1665
@@ -465,6 +522,8 @@ screen shop_news_month_overview(month):
     modal True
     
     add "gui/game_screen/报纸/下级界面报纸查阅-_底图.png" zoom 1.5 xalign 0.7 yalign 0.4
+
+    text _(""+month) align(0.5, 0.4)
 
     imagebutton:
         pos(1665, 200)
@@ -495,12 +554,49 @@ screen shop_mag():
     modal True
 
     add "gui/game_screen/杂志/对话框5-杂志查阅-切_03.png" zoom 1.5 xalign 0.7 yalign 0.4
-    add "gui/game_screen/杂志/已购买目录_月份杂志.jpg" zoom 1.5 xalign 0.45 yalign 0.5
+    add "gui/game_screen/杂志/已购买目录_月份杂志.jpg" zoom 1.5 xalign 0.45 ypos 222
 
-    imagebutton:
-        pos(500, 300)
-        idle "gui/gallery/button_frame.png"
-        action Show("shop_mag_detail", book=march_0_1982, transition=Dissolve(0.5))
+    grid 2 6:
+        xpos 480 ypos 200
+        yspacing 7 xspacing 330
+
+        ## 月份
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_mag_detail", book=march_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_mag_detail", book=april_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_mag_detail", book=may_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_mag_detail", book=june_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_mag_detail", book=july_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_mag_detail", book=august_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_mag_detail", book=september_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_mag_detail", book=october_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_mag_detail", book=november_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_mag_detail", book=december_1982, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_mag_detail", book=january_1983, transition=Dissolve(0.5))
+        imagebutton:
+            idle "gui/gallery/button_frame.png"
+            action Show("shop_mag_detail", book=february_1983, transition=Dissolve(0.5))
 
     fixed:
         xpos 1665
@@ -521,6 +617,8 @@ screen shop_mag_detail(book):
     add "gui/game_screen/杂志/对话框5-杂志查阅-切_03.png" zoom 1.5 xalign 0.7 yalign 0.4
 
     add "gui/game_screen/杂志/杂志内容/杂志查阅_一字千钧.jpg" zoom 1.5 xpos 350 yalign 0.5
+
+    text _(""+book) align(0.5, 0.5)
 
     fixed:
         xpos 1665
@@ -1223,6 +1321,7 @@ screen preferences():
 
         bar value Preference("auto-forward time") ypos 750
 
+    # 彩蛋
     fixed:
 
         if store.MixerValue("music").get_adjustment().value >= 0.5:
@@ -1230,10 +1329,10 @@ screen preferences():
         else:
             text _("music_vol<50%") align(0.5, 0.4) color "#000"
 
-        if store.MixerValue("sound").get_adjustment().value >= 0.5:
-            text _("sound!! sound_vol>=50%") align(0.5, 0.55) color "#000"
-        else:
-            text _("sound_vol<50%") align(0.5, 0.55) color "#000"
+        # if store.MixerValue("sound").get_adjustment().value >= 0.5:
+        #     text _("sound!! sound_vol>=50%") align(0.5, 0.55) color "#000"
+        # else:
+        #     text _("sound_vol<50%") align(0.5, 0.55) color "#000"
 
 
 screen delete_all_confirm_first():
