@@ -2,9 +2,13 @@
 errors listed below, and try again.
 
 
-File "game/screens.rpy", line 336: u'ypadding' is not a keyword argument or valid child for the grid statement.
-    ypadding 20
+File "game/screens.rpy", line 1940: u'xpadding' is not a keyword argument or valid child for the hbox statement.
+    xpadding 20
+            ^
+
+File "game/screens.rpy", line 1967: u'xpadding' is not a keyword argument or valid child for the hbox statement.
+    xpadding 20
             ^
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Mon Dec 16 20:30:14 2019
+Tue Dec 17 20:44:36 2019

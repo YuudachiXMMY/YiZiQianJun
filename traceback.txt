@@ -1,25 +1,21 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While loading <'Image' u'gui/game_screen/\u90ae\u8d2d/\u70b9\u51fb\u51fa\u73b0\u7684\u5546\u54c1\u4ecb\u7ecd/shop_paper_0.jpg'>:
-  File "game/script.rpy", line 35, in script
-    oej normal "您已创建一个新的 Ren'Py 游戏。"
-IOError: Couldn't find file 'gui/game_screen/邮购/点击出现的商品介绍/shop_paper_0.jpg'.
+While loading <'Image' u'gui/gallery/relation/\u89d2\u8272_null1.png'>:
+IOError: Couldn't find file 'gui/gallery/relation/角色_null1.png'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 35, in script
-    oej normal "您已创建一个新的 Ren'Py 游戏。"
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 708, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\exports.py", line 1345, in say
-    who(what, *args, **kwargs)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\character.py", line 1142, in __call__
-    self.do_display(who, what, cb_args=self.cb_args, **display_args)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\character.py", line 842, in do_display
-    **display_args)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\character.py", line 591, in display_say
-    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
+    python hide:
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 914, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 2028, in py_exec_bytecode
+    exec bytecode in globals, locals
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in <module>
+    python hide:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 35, in _execute_python_hide
+    ui.interact()
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\ui.py", line 297, in interact
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 2702, in interact
@@ -68,6 +64,12 @@ Full traceback:
     cpdef render(d, object widtho, object heighto, double st, double at):
   File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
     rv = d.render(widtho, heighto, st, at)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 722, in render
+    surf = render(child, width, height, cst, cat)
+  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen\renpy.display.render.c:4075)
+    cpdef render(d, object widtho, object heighto, double st, double at):
+  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
+    rv = d.render(widtho, heighto, st, at)
   File "accelerator.pyx", line 110, in renpy.display.accelerator.transform_render
   File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen\renpy.display.render.c:3520)
     rv = d.render(widtho, heighto, st, at)
@@ -79,9 +81,9 @@ Full traceback:
     surf = renpy.display.pgrender.load_image(renpy.loader.load(self.filename), self.filename)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\loader.py", line 576, in load
     raise IOError("Couldn't find file '%s'." % name)
-IOError: Couldn't find file 'gui/game_screen/邮购/点击出现的商品介绍/shop_paper_0.jpg'.
+IOError: Couldn't find file 'gui/gallery/relation/角色_null1.png'.
 
 Windows-8-6.2.9200
 Ren'Py 7.3.5.606
 YiZiQianJun 1.0
-Mon Dec 16 21:13:11 2019
+Tue Dec 17 21:17:22 2019
