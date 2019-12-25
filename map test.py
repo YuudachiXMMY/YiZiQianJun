@@ -1,7 +1,7 @@
 # Pinky!今天14:42
 # No, for is still part of screen language, but you can use it to look at python things.
 
-def a233:
+
     grid 12 2:
         transpose True
         for stuff in ship_cargo:

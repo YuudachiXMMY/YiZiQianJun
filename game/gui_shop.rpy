@@ -133,7 +133,8 @@ screen shop_news_month_1():
             auto "return_%s"
             action Hide("shop_news_month_1", transition=Dissolve(0.5))
 
-        use shop
+        if not renpy.get_screen("game_main"):
+            use shop
 
 ## 报纸 月份2
 screen shop_news_month_2():
@@ -196,7 +197,8 @@ screen shop_news_month_2():
             auto "return_%s"
             action Hide("shop_news_month_2", transition=Dissolve(0.5))
 
-        use shop
+        if not renpy.get_screen("game_main"):
+            use shop
 
 ## 某月报纸
 screen shop_news_month_overview(month):

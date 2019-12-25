@@ -2,13 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/screens.rpy", line 1940: u'xpadding' is not a keyword argument or valid child for the hbox statement.
-    xpadding 20
-            ^
-
-File "game/screens.rpy", line 1967: u'xpadding' is not a keyword argument or valid child for the hbox statement.
-    xpadding 20
-            ^
+File "game/game_map.rpy", line 11: expected ':' not found.
+    init python -3:
+                ^
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Tue Dec 17 20:44:36 2019
+Wed Dec 25 22:18:21 2019

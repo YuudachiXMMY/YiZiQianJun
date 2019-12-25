@@ -12,7 +12,8 @@ screen gallery_navigation():
 
     tag menu
 
-    if renpy.get_screen("cg_indi") or renpy.get_screen("cg_achievement") or renpy.get_screen("cg_relationship") or renpy.get_screen("cg_relationship_extends") or renpy.get_screen("cg_gallery") or renpy.get_screen("cg_materials"):
+    if renpy.get_screen(["cg_indi", "cg_achievement", "cg_relationship",
+                        "cg_relationship_extends", "cg_gallery", "cg_materials"]):
         
         zorder 100
 
