@@ -36,7 +36,9 @@ label start:
 
     "nothin"
 
-    call screen game_main
+    $ dic = {}
+
+    call screen game_map_main(dic)
 
     oej normal "当您完善了故事、图片和音乐之后，您就可以向全世界发布了！"
 

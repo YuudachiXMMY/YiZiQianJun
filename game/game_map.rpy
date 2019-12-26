@@ -9,39 +9,69 @@ init offset = -2
 ################################################################################
 
 init -3 python:
+
+    import random
+
     class GameMap_ObjLocation:
 
-        point = 0
+        obj_type = ""
         times = 0
+        hot = 0
         requirement = ""
         obj_action = ""
         position = [0, 0]
 
-        def __init__(self, point, times, requirement, obj_action, position):
-            self.point = point
-            self.times = times
-            self.requirement = requirement
-            self.obj_action = obj_action
-            self.position = position
+        def __init__(self, obj_type, times, hot,
+                    requirement, obj_action, position):
+            if obj_type == "police":
+                self.obj_type = "building"
+                # self.obj_action = Show("game_map_police", transition=Dissolve(0.5))
+            else:
+                self.obj_type = obj_type
+                self.times = 5
+                self.hot = hot
+                self.requirement = requirement
+                self.obj_action = obj_action
+                self.position = position
 
     class GameMap_Creator:
 
-        def __init__(self, lst):
+        def __init__(self, dic):
             matrix = [
-                [ "police" , null , "home" , null , null , "news" , null]
-                [ null , null , null , null , null , null , null]
-                [ null , null , "fountain" , null , null , null , null]
-                [ "shop" , null , null , "interview" , null , null , "rich"]
+                [ "police" , None , "home" , None , None , "news" , None],
+                [ None , None , None , None , None , None , None],
+                [ None , None , "fountain" , None , None , None , None],
+                [ "shop" , None , None , "interview" , None , None , "rich"]
             ]
+            # 随机生成新闻
+            for i in range(dic):
+                col = random.randint(0, 6)
+                row = random.randint(0, 3)
+                while matrix[row][col] != None:
+                    col = random.randint(0, 6)
+                    row = random.randint(0, 3)
+                # 二次检查
+                if matrix[row][col] != None:
+                    matrix[row][col] = GameMap_ObjLocation("news", dic[i]["times"], dic[i]["hot"],
+                                                            dic[i]["requirement"], dic[i]["obj_action"], dic[i]["position"])
+            
+            self.matrix = matrix
 
-            for i in range(lst):
+
+        def toList(self):
+            lst = []
+            for i in range(len(self.matrix)):
+                for j in range(len(self.matrix[0])):
+                    lst.append(self.matrix[i][j])
+            return lst
 
 
 ################################################################################
 ## 棋盘界面
 ################################################################################
 
-screen game_main(lst):
+# 主
+screen game_map_main(dic):
 
     fixed:
 
@@ -66,14 +96,18 @@ screen game_main(lst):
         # 玩家位置
         add "gui/game_screen/棋盘/indi.png" zoom 1.5
 
-        # grid 7 4:
-        #     for point in game_map_list_rand:
-        #         if point != Null:
-        #             fixed:
-        #                 pass
-        #         else:
-        #             fixed:
-        #                 pass
+        grid 7 4:
+            for i in GameMap_Creator(dic).toList:
+                if i.obj_type == None:
+                    fixed:
+                        pass
+                else:
+                    fixed:
+                        pass
+
+# 简介
+screen game_map_detail():
+    pass
 
 
 ################################################################################

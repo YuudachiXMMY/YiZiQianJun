@@ -172,6 +172,10 @@ image cg_relationship_title:
     zoom 1.5
     "gui/gallery/relation/title.png"
 
+image cg_relationship_cha_lock:
+    zoom 1.4
+    "gui/gallery/relation/cha_lock.png"
+
 image cg_gallery_title:
     zoom 1.5
     "gui/gallery/cg/title.png"

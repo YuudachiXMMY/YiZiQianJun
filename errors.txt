@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/game_map.rpy", line 11: expected ':' not found.
-    init python -3:
-                ^
+File "game/gui_gallery.rpy", line 138: u'size' is not a keyword argument or valid child for the frame statement.
+    size(182, 663)
+        ^
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Wed Dec 25 22:18:21 2019
+Thu Dec 26 13:17:31 2019

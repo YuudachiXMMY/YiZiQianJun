@@ -101,18 +101,34 @@ screen cg_relationship():
 
     add "cg_relationship_title" pos(265, 70)
 
-    textbutton _("点此减少克莱因好感度") xalign 0.25 yalign 0.65 action SetDict(cha_list_love, "克莱因", cha_list_love["克莱因"]-1)
-    textbutton _("点此增加克莱因好感度") xalign 0.5 yalign 0.65 action SetDict(cha_list_love, "克莱因", cha_list_love["克莱因"]+1)
+    textbutton _("点此减少克莱因好感度") xalign 0.25 yalign 0.87 action SetDict(cha_list_love, "克莱因", cha_list_love["克莱因"]-1)
+    textbutton _("点此增加克莱因好感度") xalign 0.5 yalign 0.87 action SetDict(cha_list_love, "克莱因", cha_list_love["克莱因"]+1)
 
-    fixed:
+    grid 6 1:
         pos(400, 210)
+        xspacing 35
+        
+        for i in [u"阿莱特", u"西尔斯", u"林奈", u"泽维尔", u"克莱因", u"里德"]:
+            frame:
+                xsize 182
+                ysize 663
+                if i==None:
+                    background None
+                    add "gui/gallery/relation/角色_null.png" zoom 1.4
+                else:
+                    background None
+                    add "gui/gallery/relation/角色_"+i+".png" zoom 1.4
+                    text _(str(cha_list_love[i])) color "#fff" size 50 yalign 0.99 xalign 0.7
+    # 旧版
+    # fixed:
+    #     pos(400, 210)
 
-        use cg_relationship_detail(u"阿莱特")
-        use cg_relationship_detail(u"西尔斯")
-        use cg_relationship_detail(u"林奈")
-        use cg_relationship_detail(u"泽维尔")
-        use cg_relationship_detail(u"克莱因")
-        use cg_relationship_detail(u"里德")
+    #     use cg_relationship_detail(u"阿莱特")
+    #     use cg_relationship_detail(u"西尔斯")
+    #     use cg_relationship_detail(u"林奈")
+    #     use cg_relationship_detail(u"泽维尔")
+    #     use cg_relationship_detail(u"克莱因")
+    #     use cg_relationship_detail(u"里德")
     
     use gallery_navigation
 
@@ -129,15 +145,21 @@ screen cg_relationship_extends():
 
     add "cg_relationship_title" pos(265, 70)
 
-    fixed:
+    grid 6 1:
         pos(400, 210)
+        xspacing 35
         
-        use cg_relationship_detail(u"列文斯顿")
-        use cg_relationship_detail(u"德怀特")
-        use cg_relationship_detail(u"null1")
-        use cg_relationship_detail(u"null2")
-        use cg_relationship_detail(u"null3")
-        use cg_relationship_detail(u"null4")
+        for i in [u"列文斯顿", u"德怀特", None, None, None, None]:
+            frame:
+                xsize 182
+                ysize 663
+                if i==None:
+                    background None
+                    add "gui/gallery/relation/角色_null.png" zoom 1.4
+                else:
+                    background None
+                    add "gui/gallery/relation/角色_"+i+".png" zoom 1.4
+                    text _(str(cha_list_love[i])) color "#fff" size 50 yalign 0.97 xalign 0.7
     
     use gallery_navigation
 
@@ -148,24 +170,27 @@ screen cg_relationship_extends():
 
 
 ################################################################################
-## 人际关系 框架
+## 人际关系 框架 - 旧版
 ##
 
-screen cg_relationship_detail(cha):
+# screen cg_relationship_detail(cha):
 
-    add "gui/gallery/relation/cha_lock.png" zoom 1.4 xpos relation_datail[""+str(cha)+"_xpos"]
+#     add "gui/gallery/relation/cha_lock.png" zoom 1.4 xpos relation_datail[""+str(cha)+"_xpos"]
+    
+#     if cha=="null1" or cha=="null2" or cha=="null3" or cha=="null4":
+#         add "gui/gallery/relation/角色_null.png" zoom 1.4 xpos relation_datail[""+str(cha)+"_xpos"]
+#     else:
+#         add "gui/gallery/relation/角色_"+cha+".png" zoom 1.4 xpos relation_datail[""+str(cha)+"_xpos"]
+
+#     text _(str(cha_list_love[cha])) color "#fff" size 50 ypos 580 xpos relation_datail[""+str(cha)+"_xpos"]+85
+
+#     # add "gui/gallery/relation/cha_lock.png" zoom 1.4
+
+#     # if cha!=u"null" and cha_list_love[cha]!=0:
         
-    add "gui/gallery/relation/角色_"+cha+".png" zoom 1.4 xpos relation_datail[""+str(cha)+"_xpos"]
+#     #     add "gui/gallery/relation/角色_"+cha+".png" zoom 1.4
 
-    text _(str(cha_list_love[cha])) color "#fff" size 50 ypos 580 xpos relation_datail[""+str(cha)+"_xpos"]+85
-
-    # add "gui/gallery/relation/cha_lock.png" zoom 1.4
-
-    # if cha!=u"null" and cha_list_love[cha]!=0:
-        
-    #     add "gui/gallery/relation/角色_"+cha+".png" zoom 1.4
-
-    #     text _(str(cha_list_love[cha])) color "#fff" size 50 ypos 580
+#     #     text _(str(cha_list_love[cha])) color "#fff" size 50 ypos 580
 
 
 ################################################################################
