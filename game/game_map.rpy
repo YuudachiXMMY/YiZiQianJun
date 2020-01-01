@@ -33,13 +33,11 @@ screen game_map_main(lst):
         text _("[explore_money]"):
             size 40 xalign 1.0 yalign 0.5 xpos 330 ypos 55 color "#fff" bold True
 
+        # For Testing
         text _("[palyer_currpos]"):
             size 40 xalign 0.5 yalign 0.1 color "#fff" bold True
 
-        # # 玩家位置
-        # add "gui/game_screen/棋盘/indi.png" zoom 1.5
-
-        # 干死移动
+        # 干死移动控制
         imagebutton:
             xalign 0.87 yalign 0.85
             auto "map_gui_movebutton_%s"
@@ -50,16 +48,14 @@ screen game_map_main(lst):
             xspacing 0 yspacing 40
             
             for i in game_map_list:
-                frame:
-                    background None
-                    imagebutton:
-                        auto str(i.obj_type)+"_smallbutton_%s"
-                        if i.obj_type=="news":
-                            action Show("game_map_news", lst=lst, hot=i.hot, explore_point=i.explore_point, times=i.times, transition=Dissolve(0.5))
-                        elif i.obj_type!="None":
-                            action Show("game_map_building_detail", lst=lst, type=i.obj_type, transition=Dissolve(0.5))
-                        else:
-                            action NullAction()
+                imagebutton:
+                    auto str(i.obj_type)+"_smallbutton_%s"
+                    if i.obj_type=="news":
+                        action Show("game_map_news", lst=lst, hot=i.hot, explore_point=i.explore_point, times=i.times, transition=Dissolve(0.5))
+                    elif i.obj_type!="None":
+                        action Show("game_map_building_detail", lst=lst, type=i.obj_type, transition=Dissolve(0.5))
+                    else:
+                        action NullAction()
 
 # News简介
 screen game_map_news(lst, hot, explore_point, times):
@@ -92,7 +88,7 @@ screen game_map_news(lst, hot, explore_point, times):
                 for i in range(hot):
                     add "gui/game_screen/棋盘/专栏裁切_22.png" zoom 1.5
 
-            # 干死移动
+            # 干死移动控制
             imagebutton:
                 xalign 0.87 yalign 0.85
                 auto "map_gui_movebutton_%s"
@@ -119,7 +115,7 @@ screen game_map_building_detail(lst, type):
             text _(str(game_map_building_shortdescription[type])):
                 xmaximum 50 size 40 bold True
 
-        # 干死移动
+        # 干死移动控制
         imagebutton:
             xalign 0.87 yalign 0.85
             auto "map_gui_movebutton_%s"
@@ -137,16 +133,12 @@ screen game_map_movecontrol(lst):
             xspacing 0 yspacing 40
             
             for i in game_map_list:
-                frame:
-                    background None
+                imagebutton:
+                    auto str(i.obj_type)+"_smallbutton_%s"
                     if i.obj_type=="news":
-                        imagebutton:
-                            auto str(i.obj_type)+"_smallbutton_%s"
-                            action SetVariable("palyer_currpos", i.position), SetVariable("explore_point", explore_point - i.explore_point - abs(palyer_currpos[0]-i.position[0]) - abs(palyer_currpos[1]-i.position[1])), SetVariable("player_newsgrade", player_newsgrade+1), Function(resetNews, dic=game_map_list, position=i.position), Hide("game_map_movecontrol")
+                        action SetVariable("palyer_currpos", i.position), SetVariable("explore_point", explore_point - i.explore_point - abs(palyer_currpos[0]-i.position[0]) - abs(palyer_currpos[1]-i.position[1])), SetVariable("player_newsgrade", player_newsgrade+1), Function(resetNews, dic=game_map_list, position=i.position), Hide("game_map_movecontrol")
                     else:
-                        imagebutton:
-                            auto str(i.obj_type)+"_smallbutton_%s"
-                            action SetVariable("palyer_currpos", i.position), SetVariable("explore_point", explore_point - abs(palyer_currpos[0]-i.position[0]) - abs(palyer_currpos[1]-i.position[1])), Hide("game_map_movecontrol")
+                        action SetVariable("palyer_currpos", i.position), SetVariable("explore_point", explore_point - abs(palyer_currpos[0]-i.position[0]) - abs(palyer_currpos[1]-i.position[1])), Hide("game_map_movecontrol")
 
 
 ################################################################################
