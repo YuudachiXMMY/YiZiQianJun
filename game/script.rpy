@@ -44,9 +44,10 @@ label start:
     
     $ game_map = GameMap_Creator(dic)
     $ game_map_list = game_map.toList()
+    $ palyer_currpos = [2,6]
 
     call screen game_map_main(game_map_list)
-
+    
     # 此处为游戏结尾。
 
     return

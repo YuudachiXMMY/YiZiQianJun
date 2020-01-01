@@ -17,6 +17,39 @@ image map_gui_movebutton_hover:
     zoom 1.5
     "gui/game_screen/棋盘/报纸裁切_288.png"
 
+# Map GUI
+image map_gui_overwork_idle:
+    zoom 1.5
+    "gui/game_screen/棋盘/加班_未选.png"
+
+image map_gui_overwork_hover:
+    zoom 1.5
+    "gui/game_screen/棋盘/加班_选中.png"
+
+image map_gui_endwork_idle:
+    zoom 1.5
+    "gui/game_screen/棋盘/下班_未选.png"
+
+image map_gui_endwork_hover:
+    zoom 1.5
+    "gui/game_screen/棋盘/下班_选中.png"
+
+image map_gui_publicnews_hover:
+    zoom 1.5
+    "gui/game_screen/棋盘/1发表_未选.png"
+
+image map_gui_publicnews_idle:
+    zoom 1.5
+    "gui/game_screen/棋盘/1发表_选中.png"
+
+image map_gui_deletenews_hover:
+    zoom 1.5
+    "gui/game_screen/棋盘/废弃_未选.png"
+
+image map_gui_publicnews_idle:
+    zoom 1.5
+    "gui/game_screen/棋盘/废弃__选中.png"
+
 # Map SmallButton
 image news_smallbutton_idle:
     zoom 1.5

@@ -8,6 +8,8 @@ init offset = -2
 ## Game_Map 数据
 ################################################################################
 
+define game_map_randomevent_None = ["randomEvent_1", "randomEvent_2", "randomEvent_3"]
+
 define game_map_building_shortdescription = {   "police":u"警察局是了解警务新闻的最好去处。犯罪新闻永远是给读者提供刺激的法宝，谁不想成为下一个名侦探呢！",
                                                 "home":u"甜蜜的家，在这里可以做很多事情，尽情地享受生活吧！",
                                                 "news_shop":u"报社所在处，在这里可以向同事们讨教工作上的难题，练习写作提高表达能力。",
@@ -44,6 +46,9 @@ init -3 python:
     
     def resetNews(dic, position):
         dic[position[0]*7+position[1]] = GameMap_ObjLocation( {"obj_type":"None", "times":99999, "hot":0, "requirement":None, "pos":[position[0], position[1]], "explore_point":-1})
+
+    def resetRandomevent_None(set, inde):
+        pass
 
 init -99 python:
 
@@ -100,8 +105,8 @@ init -99 python:
             for i in range(len(dic)):
                 col = random.randint(0, 6)
                 row = random.randint(0, 3)
-                # default palyer_currpos = [2,6]
-                while self.matrix[row][col] != None or (row==2 and col==6):
+                # avoid buildings and player current position
+                while self.matrix[row][col] != None or (row==palyer_currpos[0] and col==palyer_currpos[1]):
                     col = random.randint(0, 6)
                     row = random.randint(0, 3)
                 # # 二次检查

@@ -1,18 +1,38 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 48, in script
+  File "game/randomEvents.rpy", line 3, in script
     call screen game_map_main(game_map_list)
   File "renpy/common/000statements.rpy", line 531, in execute_call_screen
     store._return = renpy.call_screen(name, *args, **kwargs)
-  File "renpy/common/00action_other.rpy", line 537, in __call__
-    rv = self.callable(*self.args, **self.kwargs)
-TypeError: 'unicode' object is not callable
+  File "game/game_map.rpy", line 144, in execute
+    screen game_map_movecontrol(lst):
+  File "game/game_map.rpy", line 144, in execute
+    screen game_map_movecontrol(lst):
+  File "game/game_map.rpy", line 148, in execute
+    if renpy.get_screen("game_map_main") and player_newsgrade!=5:
+  File "game/game_map.rpy", line 150, in execute
+    grid 7 4:
+  File "game/game_map.rpy", line 154, in execute
+    for i in game_map_list:
+  File "game/game_map.rpy", line 155, in execute
+    frame:
+  File "game/game_map.rpy", line 158, in execute
+    if i.position[0]==palyer_currpos[0] and i.position[1]==palyer_currpos[1]:
+  File "game/game_map.rpy", line 161, in execute
+    imagebutton:
+  File "game/game_map.rpy", line 161, in keywords
+    imagebutton:
+  File "game/game_map.rpy", line 163, in keywords
+    if i.obj_type=="news":
+  File "game/game_map.rpy", line 166, in keywords
+    elif i.obj_type=="None":
+IndexError: list index out of range
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 48, in script
+  File "game/randomEvents.rpy", line 3, in script
     call screen game_map_main(game_map_list)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 1949, in execute
     self.call("execute")
@@ -28,37 +48,52 @@ Full traceback:
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 2702, in interact
     repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, **kwargs)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3518, in interact_core
-    rv = root_widget.event(ev, x, y, 0)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 998, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\transition.py", line 47, in event
-    return self.new_widget.event(ev, x, y, st)  # E1101
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 998, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 998, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 714, in event
-    rv = self.child.event(ev, x, y, st)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 998, in event
-    rv = i.event(ev, x - xo, y - yo, cst)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 244, in event
-    rv = d.event(ev, x - xo, y - yo, st)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 244, in event
-    rv = d.event(ev, x - xo, y - yo, st)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\behavior.py", line 962, in event
-    return handle_click(self.clicked)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\behavior.py", line 897, in handle_click
-    rv = run(action)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\behavior.py", line 313, in run
-    new_rv = run(i, *args, **kwargs)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\behavior.py", line 320, in run
-    return action(*args, **kwargs)
-  File "renpy/common/00action_other.rpy", line 537, in __call__
-    rv = self.callable(*self.args, **self.kwargs)
-TypeError: 'unicode' object is not callable
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3094, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 430, in visit_all
+    callback(self)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3094, in <lambda>
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 440, in per_interact
+    self.update()
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 625, in update
+    self.screen.function(**self.scope)
+  File "game/game_map.rpy", line 144, in execute
+    screen game_map_movecontrol(lst):
+  File "game/game_map.rpy", line 144, in execute
+    screen game_map_movecontrol(lst):
+  File "game/game_map.rpy", line 148, in execute
+    if renpy.get_screen("game_map_main") and player_newsgrade!=5:
+  File "game/game_map.rpy", line 150, in execute
+    grid 7 4:
+  File "game/game_map.rpy", line 154, in execute
+    for i in game_map_list:
+  File "game/game_map.rpy", line 155, in execute
+    frame:
+  File "game/game_map.rpy", line 158, in execute
+    if i.position[0]==palyer_currpos[0] and i.position[1]==palyer_currpos[1]:
+  File "game/game_map.rpy", line 161, in execute
+    imagebutton:
+  File "game/game_map.rpy", line 161, in keywords
+    imagebutton:
+  File "game/game_map.rpy", line 163, in keywords
+    if i.obj_type=="news":
+  File "game/game_map.rpy", line 166, in keywords
+    elif i.obj_type=="None":
+  File "<screen language>", line 167, in <module>
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 847, in __getitem__
+    rv = list.__getitem__(self, index)
+IndexError: list index out of range
 
 Windows-8-6.2.9200
 Ren'Py 7.3.5.606
 YiZiQianJun 1.0
-Wed Jan 01 12:19:34 2020
+Wed Jan 01 14:24:21 2020
