@@ -4,6 +4,16 @@
 
 init offset = -2
 
+## temp data
+
+define police_map_dic = {"obj_type"="police", "times"=9999, "hot"=-1,
+                        "requirement"=-1, "obj_action"=None, "position"=}
+
+# define map_dic = [ {"obj_type"="", "times"=, "hot"=,
+#                         "requirement"=, "obj_action"=, "position"=},
+#                     {},
+#                     {}]
+
 ################################################################################
 ## Local Variables
 ################################################################################
@@ -14,31 +24,28 @@ init -3 python:
 
     class GameMap_ObjLocation:
 
-        obj_type = ""
-        times = 0
-        hot = 0
-        requirement = ""
-        obj_action = ""
-        position = [0, 0]
+        # obj_type = ""
+        # times = 0
+        # hot = 0
+        # requirement = ""
+        # obj_action = ""
+        # position = [0, 0]
 
-        def __init__(self, obj_type, times, hot,
-                    requirement, obj_action, position):
-            if obj_type == "police":
-                self.obj_type = "building"
-                # self.obj_action = Show("game_map_police", transition=Dissolve(0.5))
-            else:
-                self.obj_type = obj_type
-                self.times = 5
-                self.hot = hot
-                self.requirement = requirement
-                self.obj_action = obj_action
-                self.position = position
+        # def __init__(self, obj_type, times, hot,
+        #             requirement, obj_action, position):
+        def __init__(self, dic):
+            self.obj_type = dic["obj_type"]
+            self.times = dic["times"]
+            self.hot = dic["hot"]
+            self.requirement = dic["requirement"]
+            self.obj_action = dic["obj_action"]
+            self.position = dic["position"]
 
     class GameMap_Creator:
 
         def __init__(self, dic):
             matrix = [
-                [ "police" , None , "home" , None , None , "news" , None],
+                [ "police_map_dic" , None , "home" , None , None , "news" , None],
                 [ None , None , None , None , None , None , None],
                 [ None , None , "fountain" , None , None , None , None],
                 [ "shop" , None , None , "interview" , None , None , "rich"]
@@ -97,6 +104,7 @@ screen game_map_main(dic):
         add "gui/game_screen/棋盘/indi.png" zoom 1.5
 
         grid 7 4:
+            $ game_map = GameMap_Creator(dic).toList
             for i in GameMap_Creator(dic).toList:
                 if i.obj_type == None:
                     fixed:
