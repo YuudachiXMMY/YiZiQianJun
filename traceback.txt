@@ -1,77 +1,34 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/gui_gallery.rpy", line 124, in execute
-    screen cg_relationship_extends():
-  File "game/gui_gallery.rpy", line 124, in execute
-    screen cg_relationship_extends():
-  File "game/gui_gallery.rpy", line 132, in execute
-    grid 6 1:
-  File "game/gui_gallery.rpy", line 136, in execute
-    for i in [u"列文斯顿", u"德怀特", None, None, None, None]:
-  File "game/gui_gallery.rpy", line 137, in execute
-    frame:
-  File "game/gui_gallery.rpy", line 137, in keywords
-    frame:
-  File "game/gui_gallery.rpy", line 141, in keywords
-    if i==None:
-  File "game/gui_gallery.rpy", line 144, in keywords
-    else:
-NameError: name 'Imgae' is not defined
+  File "game/script.rpy", line 43, in script
+    $ game_map = GameMap_Creator(dic)
+  File "game/script.rpy", line 43, in <module>
+    $ game_map = GameMap_Creator(dic)
+  File "game/game_map_datas.rpy", line 86, in __init__
+    self.matrix[row][col] = GameMap_ObjLocation( {"obj_type":"None", "pos":[row, col], "explore_point":-1} )
+  File "game/game_map_datas.rpy", line 37, in __init__
+    self.hot = dic["hot"]
+KeyError: u'hot'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
-    python hide:
+  File "game/script.rpy", line 43, in script
+    $ game_map = GameMap_Creator(dic)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 914, in execute
     renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 2028, in py_exec_bytecode
     exec bytecode in globals, locals
-  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in <module>
-    python hide:
-  File "renpy/common/_layout/screen_main_menu.rpym", line 35, in _execute_python_hide
-    ui.interact()
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ui.py", line 297, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 2702, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, **kwargs)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3094, in interact_core
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
-    d.visit_all(callback, seen)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
-    d.visit_all(callback, seen)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
-    d.visit_all(callback, seen)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 430, in visit_all
-    callback(self)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3094, in <lambda>
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 440, in per_interact
-    self.update()
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 625, in update
-    self.screen.function(**self.scope)
-  File "game/gui_gallery.rpy", line 124, in execute
-    screen cg_relationship_extends():
-  File "game/gui_gallery.rpy", line 124, in execute
-    screen cg_relationship_extends():
-  File "game/gui_gallery.rpy", line 132, in execute
-    grid 6 1:
-  File "game/gui_gallery.rpy", line 136, in execute
-    for i in [u"列文斯顿", u"德怀特", None, None, None, None]:
-  File "game/gui_gallery.rpy", line 137, in execute
-    frame:
-  File "game/gui_gallery.rpy", line 137, in keywords
-    frame:
-  File "game/gui_gallery.rpy", line 141, in keywords
-    if i==None:
-  File "game/gui_gallery.rpy", line 144, in keywords
-    else:
-  File "<screen language>", line 145, in <module>
-NameError: name 'Imgae' is not defined
+  File "game/script.rpy", line 43, in <module>
+    $ game_map = GameMap_Creator(dic)
+  File "game/game_map_datas.rpy", line 86, in __init__
+    self.matrix[row][col] = GameMap_ObjLocation( {"obj_type":"None", "pos":[row, col], "explore_point":-1} )
+  File "game/game_map_datas.rpy", line 37, in __init__
+    self.hot = dic["hot"]
+KeyError: u'hot'
 
 Windows-8-6.2.9200
 Ren'Py 7.3.5.606
 YiZiQianJun 1.0
-Thu Dec 26 13:19:19 2019
+Wed Jan 01 09:09:44 2020

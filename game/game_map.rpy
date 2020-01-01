@@ -4,81 +4,15 @@
 
 init offset = -2
 
-## temp data
-
-define police_map_dic = {"obj_type"="police", "times"=9999, "hot"=-1,
-                        "requirement"=-1, "obj_action"=None, "position"=}
-
-# define map_dic = [ {"obj_type"="", "times"=, "hot"=,
-#                         "requirement"=, "obj_action"=, "position"=},
-#                     {},
-#                     {}]
-
-################################################################################
-## Local Variables
-################################################################################
-
-init -3 python:
-
-    import random
-
-    class GameMap_ObjLocation:
-
-        # obj_type = ""
-        # times = 0
-        # hot = 0
-        # requirement = ""
-        # obj_action = ""
-        # position = [0, 0]
-
-        # def __init__(self, obj_type, times, hot,
-        #             requirement, obj_action, position):
-        def __init__(self, dic):
-            self.obj_type = dic["obj_type"]
-            self.times = dic["times"]
-            self.hot = dic["hot"]
-            self.requirement = dic["requirement"]
-            self.obj_action = dic["obj_action"]
-            self.position = dic["position"]
-
-    class GameMap_Creator:
-
-        def __init__(self, dic):
-            matrix = [
-                [ "police_map_dic" , None , "home" , None , None , "news" , None],
-                [ None , None , None , None , None , None , None],
-                [ None , None , "fountain" , None , None , None , None],
-                [ "shop" , None , None , "interview" , None , None , "rich"]
-            ]
-            # 随机生成新闻
-            for i in range(dic):
-                col = random.randint(0, 6)
-                row = random.randint(0, 3)
-                while matrix[row][col] != None:
-                    col = random.randint(0, 6)
-                    row = random.randint(0, 3)
-                # 二次检查
-                if matrix[row][col] != None:
-                    matrix[row][col] = GameMap_ObjLocation("news", dic[i]["times"], dic[i]["hot"],
-                                                            dic[i]["requirement"], dic[i]["obj_action"], dic[i]["position"])
-            
-            self.matrix = matrix
-
-
-        def toList(self):
-            lst = []
-            for i in range(len(self.matrix)):
-                for j in range(len(self.matrix[0])):
-                    lst.append(self.matrix[i][j])
-            return lst
-
 
 ################################################################################
 ## 棋盘界面
 ################################################################################
 
 # 主
-screen game_map_main(dic):
+screen game_map_main(lst):
+
+    zorder 101
 
     fixed:
 
@@ -100,22 +34,85 @@ screen game_map_main(dic):
         text _("[explore_money]"):
             size 40 xalign 1.0 yalign 0.5 xpos 330 ypos 55 color "#fff" bold True
 
-        # 玩家位置
-        add "gui/game_screen/棋盘/indi.png" zoom 1.5
+        # # 玩家位置
+        # add "gui/game_screen/棋盘/indi.png" zoom 1.5
 
-        grid 7 4:
-            $ game_map = GameMap_Creator(dic).toList
-            for i in GameMap_Creator(dic).toList:
-                if i.obj_type == None:
-                    fixed:
-                        pass
+        # 干死移动
+        imagebutton:
+            xalign 0.87 yalign 0.85
+            auto "map_gui_movebutton_%s"
+            action Show("game_map_movecontrol", lst=lst, transition=Dissolve(0.5))
+
+    grid 7 4:
+        xpos 25 yalign 0.7
+        xspacing 0 yspacing 40
+        
+        for i in lst:
+            frame:
+                background None
+                if i.obj_type=="news":
+                    imagebutton:
+                        auto str(i.obj_type)+"_smallbutton_%s"
+                        action Show("game_map_news", lst=lst, hot=i.hot, explore_point=i.explore_point, times=i.times, transition=Dissolve(0.5))
                 else:
-                    fixed:
-                        pass
+                    imagebutton:
+                        auto str(i.obj_type)+"_smallbutton_%s"
+                        action NullAction()
 
 # 简介
-screen game_map_detail():
-    pass
+screen game_map_news(lst, hot, explore_point, times):
+
+    tag game_map_main
+
+    zorder 102
+
+    use game_map_main(lst)
+
+    if renpy.get_screen("game_map_main"):
+
+        fixed:
+
+            add "gui/game_screen/棋盘/业绩-1_03.png" zoom 1.5 xanchor 1.0 xalign 1.0 yalign 0.5
+            text _("0 / 5"):
+                size 45 xpos 1450 ypos 95 bold True
+            text _(str(explore_point)):
+                size 45 xalign 0.5 xpos 1690 ypos 605 bold True
+            text _(str(times)):
+                size 40 xalign 0.5 xpos 1690 ypos 675 bold True
+            text _(str("Explore")):
+                size 40 xalign 0.5 xpos 1690 ypos 740 bold True
+
+            # 热度显示
+            grid hot 1:
+                pos(1490, 490)
+                xspacing 7
+                
+                for i in range(hot):
+                    add "gui/game_screen/棋盘/专栏裁切_22.png" zoom 1.5
+
+
+# 移动控制
+screen game_map_movecontrol(lst):
+
+    zorder 105
+
+    if renpy.get_screen("game_map_main"):
+
+        grid 7 4:
+            xpos 25 yalign 0.7
+            xspacing 0 yspacing 40
+            
+            for i in lst:
+                frame:
+                    background None
+                    if i.obj_type=="news":
+                        imagebutton:
+                            auto str(i.obj_type)+"_smallbutton_%s"
+                            action Show("game_map_news", lst=lst, hot=i.hot, explore_point=i.explore_point, times=i.times, transition=Dissolve(0.5))
+                    else:
+                        imagebutton:
+                            auto str(i.obj_type)+"_smallbutton_%s"
+                            action NullAction()
 
 
 ################################################################################
