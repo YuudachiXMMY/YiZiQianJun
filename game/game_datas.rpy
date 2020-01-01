@@ -15,7 +15,7 @@ init offset = -2
 
 default persistent.Round1 = False
 
-default explore_point = 10
+default explore_point = 100
 define explore_money = 1234
 
 ################################################################################

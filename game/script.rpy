@@ -36,13 +36,16 @@ label start:
 
     oej normal "当您完善了故事、图片和音乐之后，您就可以向全世界发布了！"
 
+    $ explore_point = 50
+
     $ dic = [   {"times":5, "hot":2, "requirement":None, "explore_point":16},
                 {"times":4, "hot":3, "requirement":None, "explore_point":9}
             ]
     
     $ game_map = GameMap_Creator(dic)
+    $ game_map_list = game_map.toList()
 
-    call screen game_map_main(game_map.toList())
+    call screen game_map_main(game_map_list)
 
     # 此处为游戏结尾。
 

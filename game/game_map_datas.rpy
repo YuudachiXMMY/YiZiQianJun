@@ -1,27 +1,49 @@
 ################################################################################
+## 初始化
+################################################################################
+
+init offset = -2
+
+################################################################################
 ## Game_Map 数据
 ################################################################################
 
-init -99 python:
+define game_map_building_shortdescription = {   "police":u"警察局是了解警务新闻的最好去处。犯罪新闻永远是给读者提供刺激的法宝，谁不想成为下一个名侦探呢！",
+                                                "home":u"甜蜜的家，在这里可以做很多事情，尽情地享受生活吧！",
+                                                "news_shop":u"报社所在处，在这里可以向同事们讨教工作上的难题，练习写作提高表达能力。",
+                                                "fountain":"车水马龙的广场，总是聚集着不少人，时常会有人在此举行聚会。小偷因此很喜欢这里。",
+                                                "shop":u"三教九流都会光顾的商业街，能打听到不少八卦，了解新闻的时尚潮流。",
+                                                "interview":u"采访点，你可以获取线索，并有机会在这里采访到线索中的人物。",
+                                                "rich":u"上流住宅区，富人和名流们聚集之处。说不定哪一天就能结识些大人物，挖出一条劲爆独家新闻！"}
 
-    police_map_dic = {"obj_type":"police", "pos":[0, 0]}
+default palyer_currpos = [2,6]
+default player_newsgrade = 0
+
+# init -99 python:
+
+#     police_map_dic = {"obj_type":"police", "pos":[0, 0]}
     
-    home_map_dic = {"obj_type":"home", "pos":[0, 2]}
+#     home_map_dic = {"obj_type":"home", "pos":[0, 2]}
     
-    news_map_dic = {"obj_type":"news", "pos":[0, 5]}
+#     news_map_dic = {"obj_type":"news_shop", "pos":[0, 5]}
     
-    fountain_map_dic = {"obj_type":"fountain", "pos":[2, 2]}
+#     fountain_map_dic = {"obj_type":"fountain", "pos":[2, 2]}
     
-    shop_map_dic = {"obj_type":"police", "pos":[3, 0]}
+#     shop_map_dic = {"obj_type":"shop", "pos":[3, 0]}
     
-    interview_map_dic = {"obj_type":"interview", "pos":[3, 3]}
+#     interview_map_dic = {"obj_type":"interview", "pos":[3, 3]}
     
-    rich_map_dic = {"obj_type":"rich", "pos":[3, 6]}
+#     rich_map_dic = {"obj_type":"rich", "pos":[3, 6]}
 
 
 ################################################################################
 ## Game_Map 数据结构
 ################################################################################
+
+init -3 python:
+    
+    def resetNews(dic, position):
+        dic[position[0]*7+position[1]] = GameMap_ObjLocation( {"obj_type":"None", "times":99999, "hot":0, "requirement":None, "pos":[position[0], position[1]], "explore_point":-1})
 
 init -99 python:
 
@@ -78,7 +100,8 @@ init -99 python:
             for i in range(len(dic)):
                 col = random.randint(0, 6)
                 row = random.randint(0, 3)
-                while self.matrix[row][col] != None:
+                # default palyer_currpos = [2,6]
+                while self.matrix[row][col] != None or (row==2 and col==6):
                     col = random.randint(0, 6)
                     row = random.randint(0, 3)
                 # # 二次检查

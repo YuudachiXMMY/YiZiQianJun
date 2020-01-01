@@ -1,34 +1,64 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 43, in script
-    $ game_map = GameMap_Creator(dic)
-  File "game/script.rpy", line 43, in <module>
-    $ game_map = GameMap_Creator(dic)
-  File "game/game_map_datas.rpy", line 86, in __init__
-    self.matrix[row][col] = GameMap_ObjLocation( {"obj_type":"None", "pos":[row, col], "explore_point":-1} )
-  File "game/game_map_datas.rpy", line 37, in __init__
-    self.hot = dic["hot"]
-KeyError: u'hot'
+  File "game/script.rpy", line 48, in script
+    call screen game_map_main(game_map_list)
+  File "renpy/common/000statements.rpy", line 531, in execute_call_screen
+    store._return = renpy.call_screen(name, *args, **kwargs)
+  File "renpy/common/00action_other.rpy", line 537, in __call__
+    rv = self.callable(*self.args, **self.kwargs)
+TypeError: 'unicode' object is not callable
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 43, in script
-    $ game_map = GameMap_Creator(dic)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 914, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 2028, in py_exec_bytecode
-    exec bytecode in globals, locals
-  File "game/script.rpy", line 43, in <module>
-    $ game_map = GameMap_Creator(dic)
-  File "game/game_map_datas.rpy", line 86, in __init__
-    self.matrix[row][col] = GameMap_ObjLocation( {"obj_type":"None", "pos":[row, col], "explore_point":-1} )
-  File "game/game_map_datas.rpy", line 37, in __init__
-    self.hot = dic["hot"]
-KeyError: u'hot'
+  File "game/script.rpy", line 48, in script
+    call screen game_map_main(game_map_list)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 1949, in execute
+    self.call("execute")
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 1937, in call
+    return renpy.statements.call(method, parsed, *args, **kwargs)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\statements.py", line 277, in call
+    return method(parsed, *args, **kwargs)
+  File "renpy/common/000statements.rpy", line 531, in execute_call_screen
+    store._return = renpy.call_screen(name, *args, **kwargs)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\exports.py", line 2905, in call_screen
+    rv = renpy.ui.interact(mouse="screen", type="screen", roll_forward=roll_forward)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ui.py", line 297, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 2702, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, **kwargs)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3518, in interact_core
+    rv = root_widget.event(ev, x, y, 0)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 998, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\transition.py", line 47, in event
+    return self.new_widget.event(ev, x, y, st)  # E1101
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 998, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 998, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 714, in event
+    rv = self.child.event(ev, x, y, st)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 998, in event
+    rv = i.event(ev, x - xo, y - yo, cst)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 244, in event
+    rv = d.event(ev, x - xo, y - yo, st)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 244, in event
+    rv = d.event(ev, x - xo, y - yo, st)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\behavior.py", line 962, in event
+    return handle_click(self.clicked)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\behavior.py", line 897, in handle_click
+    rv = run(action)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\behavior.py", line 313, in run
+    new_rv = run(i, *args, **kwargs)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\behavior.py", line 320, in run
+    return action(*args, **kwargs)
+  File "renpy/common/00action_other.rpy", line 537, in __call__
+    rv = self.callable(*self.args, **self.kwargs)
+TypeError: 'unicode' object is not callable
 
 Windows-8-6.2.9200
 Ren'Py 7.3.5.606
 YiZiQianJun 1.0
-Wed Jan 01 09:09:44 2020
+Wed Jan 01 12:19:34 2020

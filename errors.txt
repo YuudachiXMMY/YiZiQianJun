@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/game_map.rpy", line 69: keyword argument u'xalign' appears more than once in a text statement.
-    size 45 xalign 0.5 xalign 0.8 ypos 670 bold True
-                             ^
+File "game/game_map_datas.rpy", line 43: expected ':' not found.
+    init -3 python
+                  ^
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Wed Jan 01 09:03:30 2020
+Wed Jan 01 12:15:55 2020
