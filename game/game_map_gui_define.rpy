@@ -34,21 +34,21 @@ image map_gui_endwork_hover:
     zoom 1.5
     "gui/game_screen/棋盘/下班_选中.png"
 
-image map_gui_publicnews_hover:
+image map_gui_publnews_idle:
     zoom 1.5
-    "gui/game_screen/棋盘/1发表_未选.png"
+    "gui/game_screen/棋盘/发表_未选.png"
 
-image map_gui_publicnews_idle:
+image map_gui_publnews_hover:
     zoom 1.5
-    "gui/game_screen/棋盘/1发表_选中.png"
+    "gui/game_screen/棋盘/发表_选中.png"
 
-image map_gui_deletenews_hover:
+image map_gui_deletenews_idle:
     zoom 1.5
     "gui/game_screen/棋盘/废弃_未选.png"
 
-image map_gui_publicnews_idle:
+image map_gui_deletenews_hover:
     zoom 1.5
-    "gui/game_screen/棋盘/废弃__选中.png"
+    "gui/game_screen/棋盘/废弃_选中.png"
 
 # Map SmallButton
 image news_smallbutton_idle:
@@ -119,3 +119,12 @@ image rich_smallbutton_idle:
 image rich_smallbutton_hover:
     zoom 1.5
     "gui/game_screen/棋盘/特殊事件_豪宅.png"
+
+#News
+image map_gui_publishnews_idle:
+    zoom 1.5
+    "gui/game_screen/棋盘/弹出框_未选.png"
+
+image map_gui_publishnews_hover:
+    zoom 1.5
+    "gui/game_screen/棋盘/弹出框_已选.png"

@@ -1,39 +1,17 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While running game code:
-  File "game/randomEvents.rpy", line 3, in script
-    call screen game_map_main(game_map_list)
+While processing the align property of anonymous style:
+  File "game/script.rpy", line 37, in script
+    call screen game_map_main(game_map_list, cur_month)
   File "renpy/common/000statements.rpy", line 531, in execute_call_screen
     store._return = renpy.call_screen(name, *args, **kwargs)
-  File "game/game_map.rpy", line 144, in execute
-    screen game_map_movecontrol(lst):
-  File "game/game_map.rpy", line 144, in execute
-    screen game_map_movecontrol(lst):
-  File "game/game_map.rpy", line 148, in execute
-    if renpy.get_screen("game_map_main") and player_newsgrade!=5:
-  File "game/game_map.rpy", line 150, in execute
-    grid 7 4:
-  File "game/game_map.rpy", line 154, in execute
-    for i in game_map_list:
-  File "game/game_map.rpy", line 155, in execute
-    frame:
-  File "game/game_map.rpy", line 158, in execute
-    if i.position[0]==palyer_currpos[0] and i.position[1]==palyer_currpos[1]:
-  File "game/game_map.rpy", line 161, in execute
-    imagebutton:
-  File "game/game_map.rpy", line 161, in keywords
-    imagebutton:
-  File "game/game_map.rpy", line 163, in keywords
-    if i.obj_type=="news":
-  File "game/game_map.rpy", line 166, in keywords
-    elif i.obj_type=="None":
-IndexError: list index out of range
+TypeError: 'float' object has no attribute '__getitem__'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/randomEvents.rpy", line 3, in script
-    call screen game_map_main(game_map_list)
+  File "game/script.rpy", line 37, in script
+    call screen game_map_main(game_map_list, cur_month)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 1949, in execute
     self.call("execute")
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 1937, in call
@@ -58,42 +36,27 @@ Full traceback:
     d.visit_all(callback, seen)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
     d.visit_all(callback, seen)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 430, in visit_all
-    callback(self)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3094, in <lambda>
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 440, in per_interact
-    self.update()
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 625, in update
-    self.screen.function(**self.scope)
-  File "game/game_map.rpy", line 144, in execute
-    screen game_map_movecontrol(lst):
-  File "game/game_map.rpy", line 144, in execute
-    screen game_map_movecontrol(lst):
-  File "game/game_map.rpy", line 148, in execute
-    if renpy.get_screen("game_map_main") and player_newsgrade!=5:
-  File "game/game_map.rpy", line 150, in execute
-    grid 7 4:
-  File "game/game_map.rpy", line 154, in execute
-    for i in game_map_list:
-  File "game/game_map.rpy", line 155, in execute
-    frame:
-  File "game/game_map.rpy", line 158, in execute
-    if i.position[0]==palyer_currpos[0] and i.position[1]==palyer_currpos[1]:
-  File "game/game_map.rpy", line 161, in execute
-    imagebutton:
-  File "game/game_map.rpy", line 161, in keywords
-    imagebutton:
-  File "game/game_map.rpy", line 163, in keywords
-    if i.obj_type=="news":
-  File "game/game_map.rpy", line 166, in keywords
-    elif i.obj_type=="None":
-  File "<screen language>", line 167, in <module>
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\python.py", line 847, in __getitem__
-    rv = list.__getitem__(self, index)
-IndexError: list index out of range
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 434, in visit_all
+    self.child.visit_all(callback, seen=None)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
+    d.visit_all(callback, seen)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 531, in visit_all
+    for d in self.visit():
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 1068, in visit
+    self.style._visit_window(rv.append)
+  File "style.pyx", line 541, in renpy.style.StyleCore._visit_window
+  File "style.pyx", line 528, in renpy.style.StyleCore._get_unoffset
+  File "style.pyx", line 493, in renpy.style.StyleCore._get
+  File "style.pyx", line 709, in renpy.style.build_style
+  File "style.pyx", line 706, in renpy.style.build_style
+  File "gen/style_functions.pyx", line 1830, in style_functions.align_property
+  File "include/style_common.pxi", line 30, in style_functions.index_0
+    return v[0]
+TypeError: 'float' object has no attribute '__getitem__'
 
 Windows-8-6.2.9200
 Ren'Py 7.3.5.606
 YiZiQianJun 1.0
-Wed Jan 01 14:24:21 2020
+Mon Jan 06 13:44:15 2020

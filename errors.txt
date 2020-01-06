@@ -2,9 +2,8 @@
 errors listed below, and try again.
 
 
-File "game/game_map.rpy", line 163: expected a keyword argument or child statement.
-    $ r = random.randint(0, 99)
-    ^
+File "game/game_map_3_0.rpy", line 7: is not terminated with a newline. (Check strings and parenthesis.)
+    define Game_Map_MONTH_0or1_1982_templete = {"2": { "short_description":"",
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Wed Jan 01 14:18:17 2020
+Mon Jan 06 14:00:38 2020

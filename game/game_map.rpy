@@ -9,7 +9,7 @@ init offset = -2
 ################################################################################
 
 # 主
-screen game_map_main(lst):
+screen game_map_main(lst, month):
 
     zorder 101
 
@@ -34,122 +34,31 @@ screen game_map_main(lst):
             size 40 xalign 1.0 yalign 0.5 xpos 330 ypos 55 color "#fff" bold True
 
         # For Testing
-        text _("测试用\n[palyer_currpos]"):
+        text _("测试用坐标\n[palyer_currpos]"):
             size 40 xalign 0.35 yalign 0.05 color "#fff" bold True
 
         # 加班
         imagebutton:
             xalign 0.45 yalign 0.05
             auto "map_gui_overwork_%s"
-            action Show("game_map_main")
+            action Show("game_map_main", transition=Dissolve(0.5))
 
         # 下班
         imagebutton:
             xalign 0.6 yalign 0.05
             auto "map_gui_endwork_%s"
-            action Show("game_map_main")
+            action Show("game_map_main", transition=Dissolve(0.5))
 
         # 干死移动控制
         imagebutton:
             xalign 0.87 yalign 0.85
             auto "map_gui_movebutton_%s"
-            action Show("game_map_movecontrol", lst=lst, transition=Dissolve(0.5))
+            action Show("game_map_movecontrol", lst=lst, month=month, transition=Dissolve(0.5))
 
         grid 7 4:
-            xpos 25 yalign 0.7
-            xspacing 0 yspacing 40
-            
-            for i in game_map_list:
-                frame:
-                    background None
-
-                    if i.position[0]==palyer_currpos[0] and i.position[1]==palyer_currpos[1]:
-                        add "gui/game_screen/棋盘/indi.png" zoom 3.5 align(0.5, 0.5)
-                    else:
-                        imagebutton:
-                            auto str(i.obj_type)+"_smallbutton_%s"
-                            if i.obj_type=="news":
-                                action Show("game_map_news", lst=lst, hot=i.hot, explore_point=i.explore_point, times=i.times, transition=Dissolve(0.5))
-                            elif i.obj_type!="None":
-                                action Show("game_map_building_detail", lst=lst, type=i.obj_type, transition=Dissolve(0.5))
-                            else:
-                                action NullAction()
-                    
-
-# News简介
-screen game_map_news(lst, hot, explore_point, times):
-
-    tag game_map_main
-
-    zorder 102
-
-    use game_map_main(lst)
-
-    if renpy.get_screen("game_map_main") and player_newsgrade!=5:
-
-        fixed:
-
-            add "gui/game_screen/棋盘/业绩-1_03.png" zoom 1.5 xanchor 1.0 xalign 1.0 yalign 0.5
-            text _("[player_newsgrade] / 5"):
-                size 45 xpos 1450 ypos 95 bold True
-            text _(str(explore_point)):
-                size 45 xalign 0.5 xpos 1690 ypos 605 bold True
-            text _(str(times)):
-                size 40 xalign 0.5 xpos 1690 ypos 675 bold True
-            text _(str("Explore")):
-                size 40 xalign 0.5 xpos 1690 ypos 740 bold True
-
-            # 热度显示
-            grid hot 1:
-                pos(1490, 490)
-                xspacing 7
-                
-                for i in range(hot):
-                    add "gui/game_screen/棋盘/专栏裁切_22.png" zoom 1.5
-
-            # 干死移动控制
-            imagebutton:
-                xalign 0.87 yalign 0.85
-                auto "map_gui_movebutton_%s"
-                action Show("game_map_movecontrol", lst=lst, transition=Dissolve(0.5))
-
-# Building简介
-screen game_map_building_detail(lst, type):
-
-    tag game_map_main
-
-    zorder 102
-
-    use game_map_main(lst)
-
-    if renpy.get_screen("game_map_main") and player_newsgrade!=5:
-
-        fixed:
-
-            add "gui/game_screen/棋盘/底纹_业绩.png" zoom 1.5 xanchor 1.0 xalign 1.0 yalign 0.5
-
-        window:
-            background None
-            
-            text _(str(game_map_building_shortdescription[type])):
-                xmaximum 50 size 40 bold True
-
-        # 干死移动控制
-        imagebutton:
-            xalign 0.87 yalign 0.85
-            auto "map_gui_movebutton_%s"
-            action Show("game_map_movecontrol", lst=lst, transition=Dissolve(0.5))
-
-# 移动控制
-screen game_map_movecontrol(lst):
-
-    zorder 105
-
-    if renpy.get_screen("game_map_main") and player_newsgrade!=5:
-
-        grid 7 4:
-            xpos 25 yalign 0.7
-            xspacing 0 yspacing 40
+            # xpos 30
+            xalign 0.05 yalign 0.67
+            xspacing 47 yspacing 40
             
             for i in game_map_list:
                 frame:
@@ -161,7 +70,262 @@ screen game_map_movecontrol(lst):
                         imagebutton:
                             auto str(i.obj_type)+"_smallbutton_%s"
                             if i.obj_type=="news":
-                                action SetVariable("palyer_currpos", i.position), SetVariable("explore_point", explore_point - i.explore_point - abs(palyer_currpos[0]-i.position[0]) - abs(palyer_currpos[1]-i.position[1])), SetVariable("player_newsgrade", player_newsgrade+1), Function(resetNews, dic=game_map_list, position=i.position), Hide("game_map_movecontrol")
+                                action Show("game_map_news", lst=lst, month=month, title=i.title, transition=Dissolve(0.5))
+                            elif i.obj_type!="None":
+                                action Show("game_map_building_detail", lst=lst, month=month, type=i.obj_type, transition=Dissolve(0.5))
+                            else:
+                                action NullAction()
+                    
+
+# News简介
+screen game_map_news(lst, month, title):
+
+    tag game_map_main
+
+    zorder 102
+
+    use game_map_main(lst, month)
+
+    if renpy.get_screen("game_map_main") and player_newsgrade!=5:
+
+        fixed:
+
+            add "gui/game_screen/棋盘/业绩-1_03.png" zoom 1.5 xanchor 1.0 xalign 1.0 yalign 0.5
+            text _("[player_newsgrade] / 5"):
+                size 45 xpos 1450 ypos 95 bold True
+            text _(str(month[title]["explore_point"])):
+                size 45 xalign 0.5 xpos 1690 ypos 605 bold True
+            text _(str(month[title]["times"])):
+                size 40 xalign 0.5 xpos 1690 ypos 675 bold True
+            text _(str("Explore")):
+                size 40 xalign 0.5 xpos 1690 ypos 740 bold True
+
+            window:
+                background None
+                xfill True
+                xalign 0.94 xsize 420
+                yalign 0.35 ysize 500
+
+                text _(month[title]["short_description"]):
+                    size 40 bold True
+
+            # 热度显示
+            grid month[title]["hot"] 1:
+                pos(1490, 490)
+                xspacing 7
+                
+                for i in range(month[title]["hot"]):
+                    add "gui/game_screen/棋盘/专栏裁切_22.png" zoom 1.5
+
+            # 干死移动控制
+            imagebutton:
+                xalign 0.87 yalign 0.85
+                auto "map_gui_movebutton_%s"
+                action Show("game_map_movecontrol", lst=lst, month=month, transition=Dissolve(0.5))
+
+
+# 新闻详细动作框架
+screen game_map_news_action(lst, month, title):
+
+    tag game_map_main
+
+    zorder 106
+
+    use game_map_main(lst, month)
+
+    if renpy.get_screen("game_map_main") and player_newsgrade!=5:
+
+        fixed:
+
+            # use game_map_news_action_decision(lst,month,title)
+
+            use game_map_news_action_detail(lst, month, title, 0)
+
+
+# 新闻详细
+screen game_map_news_action_detail(lst, month, title, page):
+
+    tag game_map_news_action
+
+    zorder 107
+    
+    if page<len(month[title]["detail"]) and renpy.get_screen("game_map_news_action") and player_newsgrade!=5:
+
+        add "gui/game_screen/棋盘/底纹_业绩.png" zoom 1.5 xanchor 1.0 xalign 1.0 yalign 0.5
+
+        text _(str([page])) pos (500,500)
+
+        window:
+            background None
+            xfill True
+            xalign 0.93 xsize 450
+            yalign 0.5 ysize 700
+            
+            text _(month[title]["detail"][page]):
+                size 40 bold True
+
+            imagebutton:
+                xalign 1.0 yalign 1.0
+                auto "map_gui_publnews_%s"
+                if page==3:
+                    action Show("game_map_news_action_decision", lst=lst, month=month, title=title, transition=Dissolve(0.5))
+                elif page<len(month[title]["detail"]):
+                    action Show("game_map_news_action_detail", lst=lst, month=month, title=title, page=page+1, transition=Dissolve(0.5))
+            imagebutton:
+                xalign 0.0 yalign 1.0
+                auto "map_gui_deletenews_%s"
+                if page>0:
+                    action Show("game_map_news_action_detail", lst=lst, month=month, title=title, page=page-1, transition=Dissolve(0.5))
+
+
+# 新闻抉择Main
+screen game_map_news_action_decision(lst, month, title):
+
+    tag game_map_news_action
+
+    zorder 107
+
+    if renpy.get_screen("game_map_news_action") and player_newsgrade!=5:
+
+        fixed:
+
+            # add "gui/game_screen/棋盘/业绩-1_02.png" zoom 1.5 xanchor 1.0 xalign 1.0 yalign 0.5
+            add "gui/game_screen/棋盘/底纹_业绩.png" zoom 1.5 xanchor 1.0 xalign 1.0 yalign 0.5
+            text _("[player_newsgrade] / 5"):
+                size 45 xpos 1450 ypos 95 bold True
+
+            # 选项1
+            window:
+                background None
+                xfill True
+                xalign 0.93 xsize 450
+                yalign 0.3 ysize 300
+                text _(month[title]["opt1"]):
+                    size 40 bold True
+                imagebutton:
+                    xalign 0.5 ypos -20
+                    auto "map_gui_publishnews_%s"
+                    if renpy.get_screen("game_map_news_action_decision_publish"):
+                        action NullAction()
+                    elif renpy.get_screen("game_map_news_action_decision_delete"):
+                        action NullAction()
+                    else:
+                        action NullAction()
+
+            # 选项2
+            window:
+                background None
+                xfill True
+                xalign 0.93 xsize 450
+                yalign 0.65 ysize 300
+                text _(month[title]["opt2"]):
+                    size 40 bold True
+                imagebutton:
+                    xalign 0.5 ypos -20
+                    auto "map_gui_publishnews_%s"
+                    if renpy.get_screen("game_map_news_action_decision_publish"):
+                        action NullAction()
+                    elif renpy.get_screen("game_map_news_action_decision_delete"):
+                        action NullAction()
+                    else:
+                        action NullAction()
+            
+            window:
+                background None
+                xfill True
+                xalign 0.93 xsize 450
+                yalign 0.5 ysize 700
+                # 发布新闻
+                imagebutton:
+                    xalign 1.0 yalign 1.0
+                    auto "map_gui_publnews_%s"
+                    action Show("game_map_news_action_decision_publish", lst=lst, month=month, title=title)
+
+                # 废弃新闻
+                imagebutton:
+                    xalign 0.0 yalign 1.0
+                    auto "map_gui_deletenews_%s"
+                    action Show("game_map_news_action_decision_delete", lst=lst, month=month, title=title)
+
+
+# 发布新闻
+screen game_map_news_action_decision_publish(lst, month, title):
+
+    tag game_map_news_action_decision
+
+    zorder 107
+
+    if renpy.get_screen("game_map_news_action_decision") and player_newsgrade!=5:
+
+        pass
+
+
+# 废弃新闻
+screen game_map_news_action_decision_delete(lst, month, title):
+
+    tag game_map_news_action_decision
+
+    zorder 107
+
+    if renpy.get_screen("game_map_news_action_decision") and player_newsgrade!=5:
+        
+        pass
+
+
+# Building简介
+screen game_map_building_detail(lst, month, type):
+
+    tag game_map_main
+
+    zorder 102
+
+    use game_map_main(lst, month)
+
+    if renpy.get_screen("game_map_main") and player_newsgrade!=5:
+
+        fixed:
+
+            add "gui/game_screen/棋盘/底纹_业绩.png" zoom 1.5 xanchor 1.0 xalign 1.0 yalign 0.5
+            text _("[player_newsgrade] / 5"):
+                size 45 xpos 1450 ypos 95 bold True
+
+            window:
+                background None
+                xfill True
+                xalign 0.93 xsize 450
+                yalign 0.5 ysize 700
+                
+                text _(game_map_building_shortdescription[type]):
+                    size 40 bold True
+
+        # 干死移动控制
+        imagebutton:
+            xalign 0.87 yalign 0.85
+            auto "map_gui_movebutton_%s"
+            action Show("game_map_movecontrol", lst=lst, month=month, transition=Dissolve(0.5))
+
+# 移动控制
+screen game_map_movecontrol(lst, month):
+
+    zorder 105
+
+    if renpy.get_screen("game_map_main") and player_newsgrade!=5:
+
+        grid 7 4:
+            xalign 0.05 yalign 0.67
+            xspacing 47 yspacing 40
+            
+            for i in game_map_list:
+                frame:
+                    background None
+
+                    if i.position[0]==palyer_currpos[0] and i.position[1]==palyer_currpos[1]:
+                        add "gui/game_screen/棋盘/indi.png" zoom 1.5
+                    else:
+                        imagebutton:
+                            auto str(i.obj_type)+"_smallbutton_%s"
+                            if i.obj_type=="news":
+                                action SetVariable("palyer_currpos", i.position), SetVariable("explore_point", explore_point - month[i.title]["explore_point"] - abs(palyer_currpos[0]-i.position[0]) - abs(palyer_currpos[1]-i.position[1])), SetVariable("player_newsgrade", player_newsgrade+1), Function(resetNews, dic=game_map_list, position=i.position), Show("game_map_news_action", lst=lst, month=month, title=i.title, transition=Dissolve(0.5)),  Hide("game_map_movecontrol")
                             # 空白处随机事件
                             elif i.obj_type=="None" and len(game_map_randomevent_None)>0 and random.randint(0, 99) <= 10:
                                     action SetVariable("palyer_currpos", i.position), SetVariable("explore_point", explore_point - abs(palyer_currpos[0]-i.position[0]) - abs(palyer_currpos[1]-i.position[1])), Jump(game_map_randomevent_None[random.randint(0, len(game_map_randomevent_None)-1)]), Hide("game_map_movecontrol")
@@ -176,12 +340,3 @@ screen game_map_movecontrol(lst):
 screen beginner_leading_textbox(dia):
 
     pass
-
-    # window:
-    #     xsize 500 xfill True
-    #     ysize 280
-    #     xalign 0.5 yalign 0.5
-    #     ## TODO
-    #     background "textbox"
-
-    #     text dia
