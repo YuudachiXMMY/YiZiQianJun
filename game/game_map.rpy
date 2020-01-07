@@ -232,7 +232,7 @@ screen game_map_news_action_decision(lst, month, title):
                     if renpy.get_screen("game_map_news_action_decision_publish"):
                         action Function(publishNewsINMonth, month=month, key=title, opt="opt1_result"), Show("game_map_main", lst=lst, month=month, transition=Dissolve(0.5))
                     elif renpy.get_screen("game_map_news_action_decision_delete"):
-                        action Function(round_deletenews, month=month, key=title, opt="opt1_result"), Show("game_map_main", lst=lst, month=month, transition=Dissolve(0.5))
+                        action Function(deleteNewsINMonth, month=month, key=title, opt="opt1_result"), Show("game_map_main", lst=lst, month=month, transition=Dissolve(0.5))
                     else:
                         action NullAction()
 
@@ -250,7 +250,7 @@ screen game_map_news_action_decision(lst, month, title):
                     if renpy.get_screen("game_map_news_action_decision_publish"):
                         action Function(publishNewsINMonth, month=month, key=title, opt="opt2_result"), Show("game_map_main", lst=lst, month=month, transition=Dissolve(0.5))
                     elif renpy.get_screen("game_map_news_action_decision_delete"):
-                        action Function(round_deletenews, month=month, key=title, opt="opt2_result"), Show("game_map_main", lst=lst, month=month, transition=Dissolve(0.5))
+                        action Function(deleteNewsINMonth, month=month, key=title, opt="opt2_result"), Show("game_map_main", lst=lst, month=month, transition=Dissolve(0.5))
                     else:
                         action NullAction()
             

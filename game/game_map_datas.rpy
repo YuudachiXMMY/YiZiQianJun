@@ -43,8 +43,10 @@ init -3 python:
 
     # 合并数据
     def addDIC1toDIC2(dic1, dic2):
-        for i in dic1:
-            dic2[i] += dic1[i]
+        # check len
+        if len(dic1)==len(dic2):
+            for i in dic1:
+                dic2[i] += dic1[i]
     
     # 杀掉已完成新闻
     def resetNews(dic, position):
