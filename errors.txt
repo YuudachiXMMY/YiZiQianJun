@@ -2,8 +2,10 @@
 errors listed below, and try again.
 
 
-File "game/game_map_3_0.rpy", line 7: is not terminated with a newline. (Check strings and parenthesis.)
-    define Game_Map_MONTH_0or1_1982_templete = {"2": { "short_description":"",
+File "game/game_map_datas.rpy", line 34: invalid syntax
+        global.round_publishnews[month][key] = opt
+               ^
+    
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Mon Jan 06 14:00:38 2020
+Tue Jan  7 13:36:35 2020

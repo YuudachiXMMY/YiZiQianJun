@@ -15,6 +15,17 @@ init offset = -2
 
 define personal_infodata = {"洞察":0, "潮流":0, "博识":0, "应变":0, "沟通":0}
 
+define round_publishnews = {"month1":{  "num1":"opt1",
+                                        "num2":"opt1"},
+                            "month2":{  "num4":"opt1",
+                                        "num6":"opt2"}
+                            }
+define round_deletenews = {"month1":{  "num1":"opt1",
+                                        "num2":"opt1"},
+                            "month2":{  "num4":"opt1",
+                                        "num6":"opt2"}
+                            }
+
 default persistent.Round1 = False
 
 define explore_point = 300

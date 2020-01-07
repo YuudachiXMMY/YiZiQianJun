@@ -29,6 +29,18 @@ default player_newsgrade = 0
 
 init -3 python:
 
+    # News publish record
+    def publishNewsINMonth(month, key, opt):
+        if not round_publishnews.has_key(month):
+            round_publishnews[month] = {}
+        round_publishnews[month][key] = opt
+
+    # News delete record
+    def deleteNewsINMonth(month, key, opt):
+        if not round_deletenews.has_key(month):
+            round_deletenews[month] = {}
+        round_deletenews[month][key] = opt
+
     # 合并数据
     def addDIC1toDIC2(dic1, dic2):
         for i in dic1:
