@@ -8,6 +8,8 @@ init offset = -2
 ## Game_Map 数据
 ################################################################################
 
+define game_map_round_Newsdata = {}
+
 define game_map_randomevent_None = ["randomEvent_1", "randomEvent_2", "randomEvent_3"]
 
 define game_map_building_shortdescription = {   "police":"警察局是了解警务新闻的最好去处。犯罪新闻永远是给读者提供刺激的法宝，谁不想成为下一个名侦探呢！",
@@ -26,12 +28,15 @@ default player_newsgrade = 0
 ################################################################################
 
 init -3 python:
+
+    # 合并数据
+    def addDIC1toDIC2(dic1, dic2):
+        for i in dic1:
+            dic2[i] += dic1[i]
     
+    # 杀掉已完成新闻
     def resetNews(dic, position):
         dic[position[0]*7+position[1]] = GameMap_ObjLocation({ "obj_type":"None", "pos":[position[0], position[1]], "title":None })
-
-    def resetRandomevent_None(set, inde):
-        pass
 
 init -99 python:
 
@@ -43,7 +48,6 @@ init -99 python:
             self.obj_type = dic["obj_type"]
             self.position = dic["pos"]
             self.title = str(dic["title"])
-
 
     class GameMap_Creator:
 

@@ -33,10 +33,6 @@ screen game_map_main(lst, month):
         text _("[explore_money]"):
             size 40 xalign 1.0 yalign 0.5 xpos 330 ypos 55 color "#fff" bold True
 
-        # For Testing
-        text _("测试用坐标\n[palyer_currpos]"):
-            size 40 xalign 0.35 yalign 0.05 color "#fff" bold True
-
         # 加班
         imagebutton:
             xalign 0.45 yalign 0.05
@@ -75,7 +71,11 @@ screen game_map_main(lst, month):
                                 action Show("game_map_building_detail", lst=lst, month=month, type=i.obj_type, transition=Dissolve(0.5))
                             else:
                                 action NullAction()
-                    
+
+
+################################################################################
+## 新闻界面 ####################################################################
+##
 
 # News简介
 screen game_map_news(lst, month, title):
@@ -123,7 +123,6 @@ screen game_map_news(lst, month, title):
                 auto "map_gui_movebutton_%s"
                 action Show("game_map_movecontrol", lst=lst, month=month, transition=Dissolve(0.5))
 
-
 # 新闻详细动作框架
 screen game_map_news_action(lst, month, title):
 
@@ -141,7 +140,6 @@ screen game_map_news_action(lst, month, title):
 
             use game_map_news_action_detail(lst, month, title, 0)
 
-
 # 新闻详细
 screen game_map_news_action_detail(lst, month, title, page):
 
@@ -152,8 +150,6 @@ screen game_map_news_action_detail(lst, month, title, page):
     if page<len(month[title]["detail"]) and renpy.get_screen("game_map_news_action") and player_newsgrade!=5:
 
         add "gui/game_screen/棋盘/底纹_业绩.png" zoom 1.5 xanchor 1.0 xalign 1.0 yalign 0.5
-
-        text _(str([page])) pos (500,500)
 
         window:
             background None
@@ -176,7 +172,6 @@ screen game_map_news_action_detail(lst, month, title, page):
                 auto "map_gui_deletenews_%s"
                 if page>0:
                     action Show("game_map_news_action_detail", lst=lst, month=month, title=title, page=page-1, transition=Dissolve(0.5))
-
 
 # 新闻抉择Main
 screen game_map_news_action_decision(lst, month, title):
@@ -247,7 +242,6 @@ screen game_map_news_action_decision(lst, month, title):
                     auto "map_gui_deletenews_%s"
                     action Show("game_map_news_action_decision_delete", lst=lst, month=month, title=title)
 
-
 # 发布新闻
 screen game_map_news_action_decision_publish(lst, month, title):
 
@@ -258,7 +252,6 @@ screen game_map_news_action_decision_publish(lst, month, title):
     if renpy.get_screen("game_map_news_action_decision") and player_newsgrade!=5:
 
         pass
-
 
 # 废弃新闻
 screen game_map_news_action_decision_delete(lst, month, title):
@@ -271,6 +264,10 @@ screen game_map_news_action_decision_delete(lst, month, title):
         
         pass
 
+
+################################################################################
+## 建筑界面 ####################################################################
+##
 
 # Building简介
 screen game_map_building_detail(lst, month, type):
@@ -304,7 +301,11 @@ screen game_map_building_detail(lst, month, type):
             auto "map_gui_movebutton_%s"
             action Show("game_map_movecontrol", lst=lst, month=month, transition=Dissolve(0.5))
 
-# 移动控制
+
+################################################################################
+## 移动控制 ####################################################################
+##
+
 screen game_map_movecontrol(lst, month):
 
     zorder 105

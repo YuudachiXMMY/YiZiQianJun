@@ -1,11 +1,11 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While processing the align property of anonymous style:
+While running game code:
   File "game/script.rpy", line 37, in script
     call screen game_map_main(game_map_list, cur_month)
   File "renpy/common/000statements.rpy", line 531, in execute_call_screen
     store._return = renpy.call_screen(name, *args, **kwargs)
-TypeError: 'float' object has no attribute '__getitem__'
+Exception: Required parameter lst has no value.
 
 -- Full Traceback ------------------------------------------------------------
 
@@ -36,27 +36,21 @@ Full traceback:
     d.visit_all(callback, seen)
   File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
     d.visit_all(callback, seen)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 434, in visit_all
-    self.child.visit_all(callback, seen=None)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
-    d.visit_all(callback, seen)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 541, in visit_all
-    d.visit_all(callback, seen)
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 531, in visit_all
-    for d in self.visit():
-  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\layout.py", line 1068, in visit
-    self.style._visit_window(rv.append)
-  File "style.pyx", line 541, in renpy.style.StyleCore._visit_window
-  File "style.pyx", line 528, in renpy.style.StyleCore._get_unoffset
-  File "style.pyx", line 493, in renpy.style.StyleCore._get
-  File "style.pyx", line 709, in renpy.style.build_style
-  File "style.pyx", line 706, in renpy.style.build_style
-  File "gen/style_functions.pyx", line 1830, in style_functions.align_property
-  File "include/style_common.pxi", line 30, in style_functions.index_0
-    return v[0]
-TypeError: 'float' object has no attribute '__getitem__'
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 430, in visit_all
+    callback(self)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\core.py", line 3094, in <lambda>
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 440, in per_interact
+    self.update()
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\display\screen.py", line 625, in update
+    self.screen.function(**self.scope)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 158, in apply_arguments
+    return parameters.apply(args, kwargs, ignore_errors)
+  File "W:\GamePython\renpy-7.3.2-sdk\renpy\ast.py", line 122, in apply
+    raise Exception("Required parameter %s has no value." % name)
+Exception: Required parameter lst has no value.
 
 Windows-8-6.2.9200
 Ren'Py 7.3.5.606
 YiZiQianJun 1.0
-Mon Jan 06 13:44:15 2020
+Mon Jan 06 14:15:09 2020
