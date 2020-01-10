@@ -40,7 +40,7 @@ label Game_march_00_1982:
     $ palyer_currpos = [2,6]
 
     # 三月上 第一回合
-    $ game_map_global_time = 0
+    $ game_map_global_time = 4
     $ cur_month = Game_Map_march_0_1982
     $ month_round = persistent.month_0
 
@@ -51,7 +51,12 @@ label Game_march_00_1982:
 
     call screen game_map_main(game_map_list, cur_month)
 
+    if _return==1:
+        jump Game_march_01_1982
+
 label Game_march_01_1982:
+
+    "march 2"
 
     # 三月上 第二回合
     $ game_map_global_time = 0

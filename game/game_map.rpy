@@ -11,10 +11,15 @@ init offset = -2
 # 主
 screen game_map_main(lst, month):
 
+    # tag menu
+
     zorder 101
 
+    # 结束回合
     if game_map_global_time>=5:
-        on "show" action Jump(next_label)
+        # on "show" action [Jump(next_label), Return()]
+        on "show" action Return(1)
+
 
     else:
 
@@ -172,7 +177,7 @@ screen game_map_news_action(lst, month, title, page):
                 if page>0:
                     action Show("game_map_news_action", lst=lst, month=month, title=title, page=page-1, transition=Dissolve(0.5))
 
-
+    # 新闻详细 旧版
     # if renpy.get_screen("game_map_main") and player_newsgrade!=5:
 
     #     fixed:
@@ -181,7 +186,7 @@ screen game_map_news_action(lst, month, title, page):
 
     #         use game_map_news_action_detail(lst, month, title, 0)
 
-# # 新闻详细
+# # 新闻详细 旧版
 # screen game_map_news_action_detail(lst, month, title, page):
 
 #     tag game_map_news_action
@@ -374,14 +379,14 @@ screen game_map_movecontrol(lst, month):
                                 auto str(i.obj_type)+"_smallbutton_%s"
                             if i.obj_type=="news":
                                 if month[str(i.title)]["times"]<=0:
-                                    action SetVariable("palyer_currpos", i.position), SetVariable("explore_point", explore_point - abs(palyer_currpos[0]-i.position[0]) - abs(palyer_currpos[1]-i.position[1])), Function(changeGlobalTime, month=month), Hide("game_map_movecontrol", transition=Dissolve(0.5))
+                                    action SetVariable("palyer_currpos", i.position), SetVariable("explore_point", explore_point - abs(palyer_currpos[0]-i.position[0]) - abs(palyer_currpos[1]-i.position[1])), SetVariable("game_map_global_time", game_map_global_time+1), Function(changeGlobalTime, month=month), Hide("game_map_movecontrol", transition=Dissolve(0.5))
                                 else:
-                                    action SetVariable("palyer_currpos", i.position), SetVariable("explore_point", explore_point - month[i.title]["explore_point"] - abs(palyer_currpos[0]-i.position[0]) - abs(palyer_currpos[1]-i.position[1])), SetVariable("player_newsgrade", player_newsgrade+1), Function(resetNews, dic=game_map_list, position=i.position), Show("game_map_news_action", lst=lst, month=month, title=i.title, page=0, transition=Dissolve(0.5)), Function(changeGlobalTime, month=month),  Hide("game_map_movecontrol", transition=Dissolve(0.5))
+                                    action SetVariable("palyer_currpos", i.position), SetVariable("explore_point", explore_point - month[i.title]["explore_point"] - abs(palyer_currpos[0]-i.position[0]) - abs(palyer_currpos[1]-i.position[1])), SetVariable("player_newsgrade", player_newsgrade+1), Function(resetNews, dic=game_map_list, position=i.position), Show("game_map_news_action", lst=lst, month=month, title=i.title, page=0, transition=Dissolve(0.5)), SetVariable("game_map_global_time", game_map_global_time+1), Function(changeGlobalTime, month=month),  Hide("game_map_movecontrol", transition=Dissolve(0.5))
                             # 空白处随机事件
                             elif i.obj_type=="None" and len(game_map_randomevent_None)>0 and random.randint(0, 99) <= 10:
-                                    action SetVariable("palyer_currpos", i.position), SetVariable("explore_point", explore_point - abs(palyer_currpos[0]-i.position[0]) - abs(palyer_currpos[1]-i.position[1])), Jump(game_map_randomevent_None[random.randint(0, len(game_map_randomevent_None)-1)]), Function(changeGlobalTime, month=month), Hide("game_map_movecontrol", transition=Dissolve(0.5))
+                                    action SetVariable("palyer_currpos", i.position), SetVariable("explore_point", explore_point - abs(palyer_currpos[0]-i.position[0]) - abs(palyer_currpos[1]-i.position[1])), SetVariable("game_map_global_time", game_map_global_time+1), Function(changeGlobalTime, month=month), Jump(game_map_randomevent_None[random.randint(0, len(game_map_randomevent_None)-1)]), Hide("game_map_movecontrol", transition=Dissolve(0.5))
                             else:
-                                action SetVariable("palyer_currpos", i.position), SetVariable("explore_point", explore_point - abs(palyer_currpos[0]-i.position[0]) - abs(palyer_currpos[1]-i.position[1])), Function(changeGlobalTime, month=month), Hide("game_map_movecontrol", transition=Dissolve(0.5))
+                                action SetVariable("palyer_currpos", i.position), SetVariable("explore_point", explore_point - abs(palyer_currpos[0]-i.position[0]) - abs(palyer_currpos[1]-i.position[1])), SetVariable("game_map_global_time", game_map_global_time+1), Function(changeGlobalTime, month=month), Hide("game_map_movecontrol", transition=Dissolve(0.5))
 
 
 ################################################################################

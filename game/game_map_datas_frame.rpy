@@ -6,7 +6,8 @@ init -3 python:
 
     # 所有新闻时效-1, 总时效+1
     def changeGlobalTime(month):
-        game_map_global_time += 1
+        # 移动到Game_map 用 action SetVariable()
+        # game_map_global_time += 1
         for i in month_round:
             month[str(i)]["times"] -= 1
 

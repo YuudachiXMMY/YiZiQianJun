@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/game_map.rpy", line 374: imagebutton expects a non-empty block.
-    if month[str(i.title)]["times"]<=0:
-                                       ^
+File "game/game_map.rpy", line 50: keyword argument u'xpos' appears more than once in a textbutton statement.
+    xpos 200 xpos 200
+                 ^
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Tue Jan 07 22:34:07 2020
+Fri Jan 10 15:23:27 2020
