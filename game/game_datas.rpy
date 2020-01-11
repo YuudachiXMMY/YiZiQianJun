@@ -17,7 +17,7 @@ define personal_infodata = {"洞察":0, "潮流":0, "博识":0, "应变":0, "沟
 
 default persistent.Round1 = False
 
-define explore_point = 300
+default explore_point = 300
 define explore_money = 1145
 
 ################################################################################
