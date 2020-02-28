@@ -23,7 +23,7 @@ define game_map_building_shortdescription = {   "police":"警察局是了解警�
 define palyer_currpos = [2,6]
 define player_newsgrade = 0
 
-default round_publishnews = {"":{}}
-default round_deletenews = {}
+default round_publishnews = {'':{}}
+default round_deletenews = {'':{}}
 
 default game_map_global_time = 0

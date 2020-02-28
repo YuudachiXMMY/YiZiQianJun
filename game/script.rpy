@@ -21,7 +21,10 @@ label start:
 
     $ explore_point = 50
 
-    scene bg room
+    $ aci_die_rate = 0
+    $ aci_die = False
+
+    # scene bg room
 
     jump Game_march_00_1982
 
@@ -66,6 +69,9 @@ label Game_march_01_1982:
 
 label Game_march_10_1982:
 
+    # 结算上个月
+    call screen game_map_endround('Game_Map_march_0') 
+
     $ explore_point = 50
 
     show oej normal:
@@ -106,6 +112,11 @@ label Game_march_11_1982:
     call screen game_map_main(game_map_list, cur_month)
 
 label END_1982:
+
+    if aci_die:
+        "猝死"
+    else:
+        "游戏结束"
 
     # 游戏结束
     return

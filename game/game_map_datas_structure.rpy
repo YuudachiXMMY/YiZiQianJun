@@ -23,13 +23,17 @@ init -3 python:
             round_deletenews[month] = {}
         round_deletenews[month][key] = opt
 
-    # 合并两字典数据
-    def addDIC1toDIC2(dic1, dic2):
+    # 合并两字典数据 用于结算界面
+    def changeElementaryData():
         # check len
-        if len(dic1)==len(dic2):
-            for i in dic1:
-                dic2[i] += dic1[i]
-    
+        for i in round_deletenews[cur_month]:
+            personalData[i] += cur_month[i][round_deletenews[cur_month][i]]
+        round_deletenews = {'':{}}
+
+        for i in round_publishnews:
+            personalData[i] += cur_month[i][round_publishnews[cur_month][i]]
+        round_publishnews = {'':{}}
+
     # 杀掉已完成新闻
     def resetNews(dic, position):
         dic[position[0]*7+position[1]] = GameMap_ObjLocation({ "obj_type":"None", "pos":[position[0], position[1]], "title":None })

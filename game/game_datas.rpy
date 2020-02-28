@@ -13,12 +13,15 @@ init offset = -2
 ## 游戏数据
 ################################################################################
 
-define personal_infodata = {"洞察":0, "潮流":0, "博识":0, "应变":0, "沟通":0}
+define personalData = {"洞察":0, "潮流":0, "博识":0, "应变":0, "沟通":0}
 
 default persistent.Round1 = False
 
 default explore_point = 300
 define explore_money = 1145
+
+define aci_die_rate = 0
+define aci_die = False
 
 ################################################################################
 ## cha_info

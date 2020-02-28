@@ -686,10 +686,10 @@ screen file_slots(title):
                 # Each file slot is a button.
                 button:
                     action FileAction(i)
-                    add "gui/main_screen/saving/存档底纹_中间.png" align(0.5,0) zoom 1.61
-                    add FileScreenshot(i) align(0.5,0) zoom 1.1
+                    add "gui/main_screen/saving/存档底纹_中间.png" align(0.5,0.15) zoom 1.3
+                    add FileScreenshot(i) align(0.5,0.15) zoom 0.9
                     text FileTime(i, format=_("{#file_time}%Y年%B%d日  %H:%M"), empty=_("")):
-                        color "#fff" xalign 0.5 ypos 240
+                        color "#fff" xalign 0.5 ypos 240 size 30
                     text FileSaveName(i)
                     key "save_delete" action FileDelete(i)
 
